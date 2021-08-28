@@ -3,12 +3,12 @@ import cv2
 import sys
 import numpy as np
 
-import stuck
-import calibration
 from sensor.camera import capture
 from sensor.communication import xbee
 from sensor.axis import mag, bmc050
 from sensor.motor import motor
+import stuck
+import calibration
 import other
 import gpsrunning
 
