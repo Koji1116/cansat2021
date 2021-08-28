@@ -136,7 +136,7 @@ def get_center(contour):
     return cx, cy
 
 
-def GoalDetection(imgpath, H_min, H_max, S_thd, G_thd):
+def goal_detection(imgpath, H_min, H_max, S_thd, G_thd):
 	try:
 		imgname = imgpath
 		img = cv2.imread(imgname)
@@ -190,7 +190,7 @@ if __name__ == "__main__":
         # photoName = 'photostorage/practice13.png'
         while 1:
             photoName = take.picture(path, 320, 240)
-            goalflug, goalarea, gap, imgname = GoalDetection(photoName, 200, 20, 80, 50)
+            goalflug, goalarea, gap, imgname = goal_detection(photoName, 200, 20, 80, 50)
             print(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}')
             time.sleep(1)
             # Xbee.str_trans('goalflug', goalflug, ' goalarea', goalarea, ' goalGAP', goalGAP)

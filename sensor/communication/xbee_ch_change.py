@@ -10,7 +10,7 @@ port = serial.Serial(
 	    )
 
 #現在使用中のチャンネルを別のチャンネルに変更する関数
-def Change_Channel():
+def change_channel():
     print('Status  : Start ATmode')
     Enter_ATmode = '+++'
     Enter_ATmode = Enter_ATmode.encode()
@@ -34,5 +34,6 @@ def Change_Channel():
                 print('Status  : Failed')
                 break
     port.close()
-    
-Change_Channel()
+
+if __name__ == '__main__':
+    change_channel()

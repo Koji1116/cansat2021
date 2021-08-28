@@ -47,7 +47,7 @@ def bmc050_setup():
         i2c.write_byte_data(MAG_ADDRESS, 0x52, 0x0F)
         time.sleep(0.1)
 
-def mag_dataRead():
+def mag_read():
     # --- Read Mag Data --- #
     while 1:
         magData = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -83,7 +83,7 @@ if __name__ == '__main__':
         time.sleep(0.2)
         startTime = time.time()
         while 1:
-            magData = mag_dataRead()
+            magData = mag_read()
             print(magData)
             time.sleep(1)
 

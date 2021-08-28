@@ -5,21 +5,14 @@ import pigpio
 
 pi = pigpio.pi()
 
-#port = serial.Serial(
-#    port="/dev/ttyAMA0",
-#    baudrate=57600,
-#    parity=serial.PARITY_NONE,
-#    stopbits=serial.STOPBITS_ONE,
-#    bytesize=serial.EIGHTBITS,
-#    timeout=5
-#)
-
-def ImageToByte(img1):
+def image_to_byte(img1):
     img = Image.open(img1)
     with io.BytesIO() as output:
         img.save(output, format="JPEG")
         ImgTobyte = output.getvalue()
         return ImgTobyte
+
+
 def img_trans(string):
     port = serial.Serial(
         port="/dev/ttyAMA0",
@@ -31,6 +24,7 @@ def img_trans(string):
     )
     port.write(string)
     port.close()
+
 
 def str_trans(string):
     ser = serial. Serial(
@@ -63,8 +57,10 @@ def str_receive():
     received_str = received.decode()
     return received_str
 
+
 def on():
     pi.write(12, 1)
+
 
 def off():
     pi.write(12, 0)
@@ -76,7 +72,7 @@ if __name__ == '__main__':
     # str_trans('HELLO!')
     img1 = "/home/pi/Desktop/Cansat2021ver/dst_panorama/"+ a +".jpg"
     # img_string = convert_string(img1)
-    img_string = ImageToByte(img1)
+    img_string = image_to_byte(img1)
 
     # # img_trans(img_string)
     # img1 = "/home/pi/Desktop/Cansat2021ver/dst_panorama/0.jpg"

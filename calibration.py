@@ -25,7 +25,7 @@ def get_data():
 	MBC050からデータを得る
 	"""
     try:
-        magData = mag.mag_dataRead()
+        magData = mag.mag_read()
     except KeyboardInterrupt:
         print()
     except Exception as e:
@@ -43,7 +43,7 @@ def get_data_offset(magx_off, magy_off, magz_off):
 	MBC050からオフセットを考慮して磁気データを得る関数
 	"""
     try:
-        magData = mag.mag_dataRead()
+        magData = mag.mag_read()
     except KeyboardInterrupt:
         print()
     except Exception as e:
@@ -178,15 +178,15 @@ def angle(magx, magy, magx_off=0, magy_off=0):
 def calculate_direction(lon2, lat2):
     # --- read gps data ---#
     try:
-        gps.openGPS()
-        utc, lat, lon, sHeight, gHeight = gps.GPSdata_read()
+        gps.open_gps()
+        utc, lat, lon, sHeight, gHeight = gps.gps_data_read()
         lat1 = lat
         lon1 = lon
     except KeyboardInterrupt:
-        gps.closeGPS()
+        gps.close_gps()
         print("\r\nKeyboard Intruppted, Serial Closed")
     except:
-        gps.closeGPS()
+        gps.close_gps()
         print(traceback.format_exc())
     # --- calculate angle to goal ---#
     direction = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)

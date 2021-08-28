@@ -31,7 +31,7 @@ def bmc050_setup():
         time.sleep(0.1)
         return False
 
-def acc_dataRead():
+def acc_read():
     # --- Read Acc Data --- #
     accData = [0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         time.sleep(0.2)
         startTime = time.time()
         while 1:
-            accData = acc_dataRead()
+            accData = acc_read()
             norm = (accData[0]^2 + accData[1]^2 + accData[2]^2) ** 0.5
             print(f'x:{accData[0]}\ty:{accData[1]}\tz:{accData[2]}\tnorm:{norm}')
             other.log('BMC050test', datetime.datetime.now(), startTime - time.time(), accData[0], accData[1], accData[2])

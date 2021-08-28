@@ -141,8 +141,8 @@ except:
 
 print('---gps---')
 try:
-    gps.openGPS()
-    data = gps.GPSdata_read()
+    gps.open_gps()
+    data = gps.gps_data_read()
     print(data)
 except:
     print('error : gps')

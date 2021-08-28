@@ -10,7 +10,7 @@ port = serial.Serial(
 	    )
 
 #現在使用中のチャンネルを確認する関数
-def Check_Channel():
+def check_channel():
     print('Status  : Start ATmode')
     Enter_ATmode = '+++'
     Enter_ATmode = Enter_ATmode.encode()
@@ -33,6 +33,7 @@ def Check_Channel():
                 break
     port.close()
 
-Check_Channel()
+if __name__ == '__main__':
+    check_channel()
 
 

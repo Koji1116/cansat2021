@@ -112,13 +112,13 @@ def goal_detection(imgpath, G_thd):
 def adjustment_mag(strength, t, magx_off, magy_off):
     count_bmc050_erro = 0
     t_start = time.time()
-    magdata = mag.mag_dataRead()
+    magdata = mag.mag_read()
     mag_x_old = magdata[0]
     mag_y_old = magdata[1]
     theta_old = calibration.angle(mag_x_old, mag_y_old, magx_off, magy_off)
     while time.time() - t_start <= t:
         strength_adj = strength
-        magdata = mag.mag_dataRead()
+        magdata = mag.mag_read()
         mag_x = magdata[0]
         mag_y = magdata[1]
         if mag_x == mag_x_old and mag_y == mag_y_old:

@@ -68,7 +68,7 @@ def bme280_calib_param():
 #--　気圧データ読み込み　--#
 
 
-def compensate_P(adc_P):
+def compensate_p(adc_P):
     global t_fine
     pressure = 0.0
 
@@ -94,7 +94,7 @@ def compensate_P(adc_P):
     return pressure/100
 
 
-def compensate_T(adc_T):
+def compensate_t(adc_T):
     '''
     温度データ読み込み
     '''
@@ -107,7 +107,7 @@ def compensate_T(adc_T):
     return temperature
 
 
-def compensate_H(adc_H):
+def compensate_h(adc_H):
     '''
     湿度データ読み込み
     '''
@@ -158,9 +158,9 @@ def bme280_read():
         temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
         hum_raw = (data[6] << 8) | data[7]
 
-        temp = compensate_T(temp_raw)
-        pres = compensate_P(pres_raw)
-        hum = compensate_H(hum_raw)
+        temp = compensate_t(temp_raw)
+        pres = compensate_p(pres_raw)
+        hum = compensate_h(hum_raw)
 
         SeaLevelPres = 1013
         alt = ((temp+273.15)/0.0065) * \

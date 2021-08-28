@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 import math
 import time
 import pigpio
@@ -28,7 +26,7 @@ GEODETIC_DATUM = {
 ITERATION_LIMIT = 1000
 
 
-def openGPS():
+def open_gps():
     try:
         pi.set_mode(RX, pigpio.INPUT)
         pi.bb_serial_read_open(RX, 9600, 8)
@@ -39,7 +37,7 @@ def openGPS():
         pi.bb_serial_read_open(RX, 9600, 8)
 
 
-def readGPS():
+def read_gps():
     utc = -1.0
     Lat = -1.0
     Lon = 0.0
@@ -154,12 +152,12 @@ def readGPS():
     return value
 
 
-def closeGPS():
+def close_gps():
     pi.bb_serial_read_close(RX)
     pi.stop()
 
 
-def Cal_RhoAng(lat_a, lon_a, lat_b, lon_b):
+def cal_rhoang(lat_a, lon_a, lat_b, lon_b):
     if(lat_a == lat_b and lon_a == lon_b):
         return 0.0, 0.0
     ra = 6378.140  # equatorial radius (km)
@@ -181,7 +179,7 @@ def Cal_RhoAng(lat_a, lon_a, lat_b, lon_b):
     return rho, angle
 
 
-def vincentyInverse(lat1, lon1, lat2, lon2, ellipsoid=None):
+def vincenty_inverse(lat1, lon1, lat2, lon2, ellipsoid=None):
     if lat1 == lat2 and lon1 == lon2:
         return 0.0, 0.0
 
@@ -247,45 +245,43 @@ def vincentyInverse(lat1, lon1, lat2, lon2, ellipsoid=None):
     # return s(distance), and alpha(angle)
     return s, math.degrees(alpha)
 
-def GPSdata_read():
+
+def gps_data_read():
     '''
-    GPSを読み込むまでデータを撮り続けル関数
+    GPSを読み込むまでデータをとり続ける関数
     '''
     try:
         while True:
-            utc, lat, lon, sHeight, gHeight = readGPS()
+            utc, lat, lon, sHeight, gHeight = read_gps()
             print('gps reading')
             if utc != -1.0 and lat != -1.0:
                 break
             time.sleep(1)
         return utc, lat, lon, sHeight, gHeight
     except KeyboardInterrupt:
-        closeGPS()
+        close_gps()
         print("\r\nKeyboard Intruppted, Serial Closed")
+
 
 def location():
     try:
         while True:
-            utc, lat, lon, sHeight, gHeight = readGPS()
+            utc, lat, lon, sHeight, gHeight = read_gps()
             if utc != -1.0 and lat != -1.0:
                 break
             time.sleep(1)
         return lat, lon
     except KeyboardInterrupt:
-        closeGPS()
+        close_gps()
         print("\r\nKeyboard Intruppted, Serial Closed")
 
 
-
-
 if __name__ == '__main__':
-    
-    
     try:
-        openGPS()
+        open_gps()
         t_start = time.time()
         while True:
-            utc, lat, lon, sHeight, gHeight = readGPS()
+            utc, lat, lon, sHeight, gHeight = read_gps()
             if utc == -1.0:
                 if lat == -1.0:
                     print("Reading gps Error")
@@ -298,20 +294,8 @@ if __name__ == '__main__':
                 print(utc, lat, lon, sHeight, gHeight)
             time.sleep(1)
     except KeyboardInterrupt:
-        closeGPS()
+        close_gps()
         print("\r\nKeyboard Intruppted, Serial Closed")
     except:
-        closeGPS()
+        close_gps()
         print(traceback.format_exc())
-    # try:
-    #     openGPS()
-    #     while True:
-    #         utc, lat, lon, sHeight, gHeight = read()
-    #         print(utc, lat, lon, sHeight, gHeight)
-    #         time.sleep(1)
-    # except KeyboardInterrupt:
-    #     closeGPS()
-    #     print("\r\nKeyboard Intruppted, Serial Closed")
-    # except:
-    #     closeGPS()
-    #     print(traceback.format_exc())

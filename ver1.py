@@ -75,14 +75,14 @@ path_paradete = '/home/pi/Desktop/cansat2021/photostorage/paradete'
 def setup():
     global phaseChk
     xbee.on()
-    gps.openGPS()
+    gps.open_gps()
     bmc050.bmc050_setup()
     bme280.bme280_setup()
     bme280.bme280_calib_param()
 
 
 def close():
-    gps.closeGPS()
+    gps.close_gps()
     xbee.off()
 
 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
                 print(f'loop_release\t {i}')
                 press_count_release, press_judge_release = release.pressdetect_release(thd_press_release, t_delta_release)
                 print(f'count:{press_count_release}\tjudge{press_judge_release}')
-                other.log(log_release, dateTime, time.time() - t_start, gps.GPSdata_read(),
+                other.log(log_release, dateTime, time.time() - t_start, gps.gps_data_read(),
                           bme280.bme280_read(), press_count_release, press_judge_release)
                 if press_judge_release == 1:
                     print('Release\n \n')
@@ -166,11 +166,11 @@ if __name__ == '__main__':
                     break
                 else:
                     print('Not Landed\n \n')
-                other.log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read())
+                other.log(log_landing, dateTime, time.time() - t_start, gps.gps_data_read(), bme280.bme280_read())
                 i += 1
             else:
                 print('Landed Timeout')
-            other.log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read(),
+            other.log(log_landing, dateTime, time.time() - t_start, gps.gps_data_read(), bme280.bme280_read(),
                           'Land judge finished')
             print('######-----Landed-----######\n \n')
     except Exception as e:
@@ -187,9 +187,9 @@ if __name__ == '__main__':
     phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     if phaseChk == 4:
-        other.log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Start")
+        other.log(log_melting, dateTime, time.time() - t_start, gps.gps_data_read(), "Melting Start")
         escape.escape()
-        other.log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Finished")
+        other.log(log_melting, dateTime, time.time() - t_start, gps.gps_data_read(), "Melting Finished")
     print('########-----Melted-----#######\n \n')
     # except Exception as e:
     #     tb = sys.exc_info()[2]
@@ -210,7 +210,7 @@ if __name__ == '__main__':
             flug, area, gap, photoname = paradetection.para_detection(
                 path_paradete, 320, 240, 200, 10, 120, 1)
             print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-            other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
+            other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
             paraavoidance.parachute_avoidance(flug, gap)
             time.sleep(1)
             if flug == -1 or flug == 0:
@@ -251,7 +251,7 @@ if __name__ == '__main__':
         flug, area, gap, photoname = paradetection.para_detection(
             path_paradete, 320, 240, 200, 10, 120, 1)
         print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-        other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
+        other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
         time.sleep(1)
         if flug == -1 or flug == 0:
@@ -301,7 +301,7 @@ if __name__ == '__main__':
             img1 = panorama.composition(path_src_panorama)
             print(time.time() - t_composition_start)
             # Sending a panoramic photo
-            img_string = xbee.ImageToByte(img1)
+            img_string = xbee.image_to_byte(img1)
             xbee.img_trans(img_string)
     except Exception as e:
         tb = sys.exc_info()[2]

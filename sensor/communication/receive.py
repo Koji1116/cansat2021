@@ -26,18 +26,6 @@ def convert_img(img_bytes):
     ByteToImg.save('decoded_img_01.jpg')
 
 
-# while True:
-#     Check＿transfer_1 = ser.readline().strip().decode('utf-8')
-#     if Check＿transfer_1 == 'Ready?':
-#         Check＿transfer_2 = ser.write(b'Ready!')
-#         break
-
-# img_bytes = bytes_receive()
-# print('Receive Complete')
-# img = convert_img(img_bytes)
-# print('Convert Complete')
-# print('All Complete')
-
 def receive_str():
     ser = serial.Serial(
         port="/dev/ttyAMA0",
@@ -53,12 +41,8 @@ def receive_str():
 
 
 
-if result == 'A':
-    print('trans')
-
-
-# a = bytes_receive()
-# print(a)
-
-    # if a == 'a':
-    #     print('Hello World')
+if __name__ == '__main__':
+    a = bytes_receive()
+    print(a)
+    if a == 'a':
+        print('Hello World')

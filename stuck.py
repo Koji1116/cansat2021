@@ -18,7 +18,7 @@ def ue_jug():
     while 1:
         za = []
         for i in range(3):
-            accdata = acc.acc_dataRead()
+            accdata = acc.acc_read()
             za.append(accdata[2])
             time.sleep(0.2)
         z = max(za)
