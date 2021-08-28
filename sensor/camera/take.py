@@ -1,13 +1,26 @@
-import sys
-
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 import picamera
 import time
 import traceback
-from parts import other
+import os
 
 
 def picture(path, width=320, height=240):
+    def filename(f, ext):
+        i = 0
+        while 1:
+            num = ""
+            if len(str(i)) <= 4:
+                for j in range(4 - len(str(i))):
+                    num = num + "0"
+                num = num + str(i)
+            else:
+                num = str(i)
+            if not (os.path.exists(f + num + "." + ext)):
+                break
+            i = i + 1
+        f = f + num + "." + ext
+        return f
+
     try:
         with picamera.PiCamera() as camera:
             camera.rotation = 270
@@ -15,7 +28,7 @@ def picture(path, width=320, height=240):
             camera.resolution = (width, height)
             # 取得する画像の解像度を設定→どのような基準で設定するのか
             # 使用するカメラの解像度は静止画解像度で3280×2464
-            filepath = other.fileName(path, "jpg")
+            filepath = filename(path, "jpg")
             # 指定したパスを持つファイルを作成
 
             camera.capture(filepath)
