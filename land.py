@@ -49,6 +49,8 @@ if __name__ == "__main__":
         print(f'count:{landcount}\tjudge:{presslandjudge}')
         if presslandjudge == 1:
             print('Press')
+            print('##--landed--##')
+            break
         else:
             print('Press unfulfilled')
 
