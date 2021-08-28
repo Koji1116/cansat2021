@@ -3,7 +3,9 @@ sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 from smbus import SMBus
 import time
 import pigpio
+import datetime
 pi = pigpio.pi()
+
 
 
 ACC_ADDRESS = 0x19
@@ -148,35 +150,26 @@ def bmc050_error():
     """
     6軸センサエラー起きたらこの関数使ってね。
     """
-<<<<<<< HEAD:sensor/axis/bmc050.py
     bmc050_off()
-=======
     print('------mag error------switch start')
     BMC050_off()
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205:SensorModule/6-axis/BMC050.py
     time.sleep(0.1)
     bmc050_setup()
 
 if __name__ == '__main__':
     try:
-<<<<<<< HEAD:sensor/axis/bmc050.py
         bmc050_setup()
-=======
         a = float(input('何秒おきにデータとる？'))
         BMC050_setup()
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205:SensorModule/6-axis/BMC050.py
         time.sleep(0.2)
         t_start = time.time()
         while 1:
             bmcData = bmc050_read()
             print(bmcData)
-<<<<<<< HEAD:sensor/axis/bmc050.py
             other.saveLog('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
             time.sleep(0.1)
-=======
             Other.saveLog('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
             time.sleep(a)
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205:SensorModule/6-axis/BMC050.py
 
     except KeyboardInterrupt:
         print()
