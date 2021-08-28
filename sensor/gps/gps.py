@@ -2,11 +2,9 @@ import sys
 sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 import math
 import time
-import datetime
 import pigpio
 import numpy as np
 import traceback
-from parts import other
 
 RX = 20
 pi = pigpio.pi()
@@ -298,7 +296,6 @@ if __name__ == '__main__':
             else:
                 # pass
                 print(utc, lat, lon, sHeight, gHeight)
-                other.saveLog('GPStest', datetime.datetime.now(), time.time() - t_start, utc, lat, lon, sHeight, gHeight)
             time.sleep(1)
     except KeyboardInterrupt:
         closeGPS()

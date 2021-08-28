@@ -1,8 +1,3 @@
-import sys
-sys.path.append('/home/pi/desktop/Cansat2021ver/sensor/axis')
-# sys.path.append('/home/pi/desktop/Cansat2021ver/sensor/motor')
-sys.path.append('/home/pi/desktop/Cansat2021ver/sensor/communication')
-sys.path.append('/home/pi/desktop/Cansat2021ver/sensor/motor')
 import time
 from gpiozero import Motor
 

@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 # coding:utf-8
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
-from parts import other
-import datetime
 import time
 from smbus import SMBus
 
@@ -187,11 +183,7 @@ if __name__ == '__main__':
     try:
         while 1:
             temp, pres, hum, alt = bme280_read()
-            # print(str(pres) + "\t" + str(alt) + "\t" + str(temp) + "\t" + str(hum))
             print(f'Press:{str(pres)}	Alt:{str(alt)}	Temp:{str(temp)}	Hum:{str(hum)}')
-            other.saveLog('BME280test2', datetime.datetime.now(), time.time() - startTime, pres, alt, temp, hum)
-            # with open("preslog.txt","w")as f:
-            #	f.write(str(pres)+ "\t" + str(alt) + "\t"+str(temp) + "\t" + str(hum) + "\n")
             time.sleep(0.8)
     except KeyboardInterrupt:
         print("\r\n")
