@@ -6,11 +6,11 @@ import time
 import shutil
 import random
 
+from calibration import calibration
 from sensor.camera import capture
 from sensor.motor import motor
 from sensor.communication import xbee
 from sensor.axis import bmc050
-from calibration import calibration
 from detection import paraavoidance
 from detection import paradetection
 from other import other
