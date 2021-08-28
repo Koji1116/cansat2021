@@ -152,24 +152,19 @@ def bmc050_error():
     """
     bmc050_off()
     print('------mag error------switch start')
-    BMC050_off()
+    bmc050_off()
     time.sleep(0.1)
     bmc050_setup()
 
 if __name__ == '__main__':
     try:
         bmc050_setup()
-        a = float(input('何秒おきにデータとる？'))
-        BMC050_setup()
         time.sleep(0.2)
         t_start = time.time()
         while 1:
             bmcData = bmc050_read()
             print(bmcData)
-            other.save_log('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
             time.sleep(0.1)
-            Other.save_log('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
-            time.sleep(a)
 
     except KeyboardInterrupt:
         print()
