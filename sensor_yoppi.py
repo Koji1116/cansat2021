@@ -13,12 +13,13 @@ from sensor.camera import take
 pi = pigpio.pi()
 
 meltPin = 17
-camerapath = '/home/pi/Desktop/Cansat2021ver/test/img_falltest/falltest'
+camerapath = '/home/pi/Desktop/cansat2021/photostrage/sensor_test'
 
 ##### for only acc
 ACC_ADDRESS = 0x19
 ACC_REGISTER_ADDRESS = 0x02
 i2c = SMBus(1)
+
 
 def bmc050_setup():
     # --- BMC050Setup --- #
@@ -40,24 +41,25 @@ def bmc050_setup():
         i2c.write_byte_data(ACC_ADDRESS, 0x11, 0x00)
         time.sleep(0.1)
 
-def acc_dataRead():
+
+def acc_data_read():
     # --- Read Acc Data --- #
     accData = [0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
     for i in range(6):
         try:
             accData[i] = i2c.read_byte_data(
-                ACC_ADDRESS, ACC_REGISTER_ADDRESS+i)
+                ACC_ADDRESS, ACC_REGISTER_ADDRESS + i)
         except:
             pass
-            # print("error")
 
     for i in range(3):
-        value[i] = (accData[2*i+1] * 16) + (int(accData[2*i] & 0xF0) / 16)
+        value[i] = (accData[2 * i + 1] * 16) + (int(accData[2 * i] & 0xF0) / 16)
         value[i] = value[i] if value[i] < 2048 else value[i] - 4096
         value[i] = value[i] * 0.0098 * 1
 
     return value
+
 
 print('----i2cdetect----')
 os.system('i2cdetect -y 1')
@@ -80,7 +82,6 @@ try:
 except:
     print('error : env')
 
-
 # print('---melt----')
 # try:
 # 	melt.down()
@@ -88,14 +89,9 @@ except:
 # 	pi.write(meltPin, 0)
 
 
-
-
 print('---motor---')
 motor.setup()
-motor.move(20,20,2)
-
-
-
+motor.move(20, 20, 2)
 
 print('---mag---')
 try:
@@ -106,36 +102,23 @@ try:
         time.sleep(0.2)
 except:
     print('error : mag')
- 
+
 print('---acc---')
 try:
     bmc050_setup()
     for _ in range(5):
-        acc_data = acc_dataRead()
+        acc_data = acc_data_read()
         print(acc_data)
         time.sleep(0.2)
 except:
     print('error : acc')
 
 
-
-
-
-
-
-# print('---illuminance---')
-# try:
-#     for _ in range(5):
-#         ill_data = TSL2572.main()
-#         print(ill_data)
-# except:
-#     print('error : TSL2572')
-
 print('---xbee---')
 try:
     xbee.on()
     for i in range(10):
-        xbee.str_trans(str(i)+'  : reseive?')
+        xbee.str_trans(str(i) + '  : reseive?')
 except:
     print('error : xbee')
 
@@ -146,6 +129,3 @@ try:
     print(data)
 except:
     print('error : gps')
-
-
-
