@@ -12,8 +12,6 @@ from sensor.motor import motor
 from . import stuck
 from . import other
 
-
-
 path_log = '/home/pi/Desktop/Cansat2021ver/log/calibration.txt'
 
 
