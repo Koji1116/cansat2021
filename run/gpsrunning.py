@@ -130,7 +130,6 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
                     magdata = bmc050.mag_dataRead()
                     mag_x = magdata[0]
                     mag_y = magdata[1]
-<<<<<<< HEAD
                     if mag_x == mag_x_old and mag_y == mag_y_old:
                         count_bmc050_erro += 1
                         if count_bmc050_erro >= 3:
@@ -143,7 +142,6 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
                     else:
                         count_bmc050_erro = 0
                     theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
-=======
                     # if mag_x == mag_x_old and mag_y == mag_y_old:
                     #     count_bmc050_erro += 1
                     #     if count_bmc050_erro >= 3:
@@ -157,8 +155,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
                     #         count_bmc050_erro = 0
                     # else:
                     #     count_bmc050_erro = 0
-                    theta = Calibration.angle(mag_x, mag_y, magx_off, magy_off)
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205
+                    theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
                     angle_relative = azimuth - theta
                     if angle_relative >= 0:
                         angle_relative = angle_relative if angle_relative <= 180 else angle_relative - 360
@@ -221,15 +218,12 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     lat2 = 35.868631
     lon2 = 139.924717
     gps.openGPS()
-=======
     lat2 = 35.9185205
     lon2 = 139.9085615
-    GPS.openGPS()
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205
+    gps.openGPS()
     acc.bmc050_setup()
     mag.bmc050_setup()
     motor.setup()
