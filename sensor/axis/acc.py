@@ -10,6 +10,9 @@ ACC_REGISTER_ADDRESS = 0x02
 i2c = SMBus(1)
 
 def bmc050_setup():
+    """
+    6軸センサのセットアップをするための関数
+    """
     # --- BMC050Setup --- #
     # Initialize ACC
     try:
@@ -32,6 +35,9 @@ def bmc050_setup():
         return False
 
 def acc_read():
+    """
+    加速度を読み込むための関数
+    """
     # --- Read Acc Data --- #
     accData = [0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]

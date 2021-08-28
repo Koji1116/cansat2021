@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     while True:
         presslandjudge = 0
-        landcount, presslandjudge = pressdetect_land(0.1)                                            #調整するところ
+        landcount, presslandjudge = pressdetect_land(0.1)
         print(f'count:{landcount}\tjudge:{presslandjudge}')
         if presslandjudge == 1:
             print('Press')

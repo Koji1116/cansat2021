@@ -6,7 +6,7 @@ import numpy as np
 from sensor.camera import take
 from sensor.communication import xbee
 from sensor.axis import mag, bmc050
-from sensor.motor import motor
+import motor
 import stuck
 import calibration
 import other
@@ -53,7 +53,7 @@ def mosaic(src, ratio):
 #     cv2.imwrite(path_detection, red_img_gry)
 
 
-def goal_detection(imgpath, G_thd):
+def goal_detection(imgpath: str, G_thd: float):
     try:
         img = cv2.imread(imgpath)
         hig, wid, _ = img.shape
@@ -96,17 +96,17 @@ def goal_detection(imgpath, G_thd):
         centers = get_center(contours[max_area_contour])
 
         if max_area_contour == -1:
-            return [-1, 0, 1000, imgpath, path_detection]
+            return (-1, 0, 1000, imgpath, path_detection)
         elif max_area <= 0.1:
-            return [-1, max_area, 1000000, imgpath, path_detection]
+            return (-1, max_area, 1000000, imgpath, path_detection)
         elif max_area >= G_thd:
             GAP = (centers[0] - wid / 2) / (wid / 2) * 100
-            return [1, max_area, GAP, imgpath, path_detection]
+            return (1, max_area, GAP, imgpath, path_detection)
         else:
             GAP = (centers[0] - wid / 2) / (wid / 2) * 100
-            return [0, max_area, GAP, imgpath, path_detection]
+            return (0, max_area, GAP, imgpath, path_detection)
     except:
-        return [1000, 1000, 1000, imgpath, path_detection]
+        return (1000, 1000, 1000, imgpath, path_detection)
 
 
 def adjustment_mag(strength, t, magx_off, magy_off):
@@ -124,7 +124,6 @@ def adjustment_mag(strength, t, magx_off, magy_off):
         if mag_x == mag_x_old and mag_y == mag_y_old:
             count_bmc050_erro += 1
             if count_bmc050_erro >= 3:
-
                 print('-------mag_x mag_y error-----修復開始')
                 bmc050.bmc050_error()
                 magdata = bmc050.mag_read()

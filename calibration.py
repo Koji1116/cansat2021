@@ -8,7 +8,7 @@ import numpy as np
 from sensor.axis import mag
 from sensor.gps import gps
 from sensor.gps import gps_navigate
-from sensor.motor import motor
+import motor
 import stuck
 import other
 

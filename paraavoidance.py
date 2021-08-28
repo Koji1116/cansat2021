@@ -4,10 +4,9 @@
 # そこでキャリブレーションを行い、ローバーをゴール方向に向かせる。
 # そのあとにもう一度パラシュート回避を同じ判定方法で行ってGPS走行に移行する。
 
-import time
 import traceback
 
-from sensor.motor import motor
+import motor
 import paradetection
 
 

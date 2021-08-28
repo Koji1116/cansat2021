@@ -2,10 +2,11 @@ import time
 import random
 
 from sensor.communication import xbee
-from sensor.motor import motor
+import motor
 from sensor.gps import gps_navigate
 from sensor.gps import gps
 from sensor.axis import acc
+
 
 def ue_jug():
     ue_count = 0
@@ -22,8 +23,8 @@ def ue_jug():
             za.append(accdata[2])
             time.sleep(0.2)
         z = max(za)
-        
-        if z >= 7.5 :
+
+        if z >= 7.5:
             xbee.str_trans('Upward')
             print('上だよ')
             break
@@ -33,7 +34,7 @@ def ue_jug():
             print(f'acc: {z}')
             if ue_count > 2:
                 motor.move(30, 30, 0.008, False)
-            elif ue_count >8:
+            elif ue_count > 8:
                 motor.move(70, 70, 0.008, False)
             else:
                 motor.move(12, 12, 0.2, False)
@@ -41,7 +42,7 @@ def ue_jug():
             ue_count += 1
 
 
-def stuck_jug(lat1, lon1, lat2, lon2, thd = 1.0 ):
+def stuck_jug(lat1, lon1, lat2, lon2, thd=1.0):
     data_stuck = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
     if data_stuck['distance'] <= thd:
         print(str(data_stuck['distance']) + '----スタックした')
@@ -50,6 +51,7 @@ def stuck_jug(lat1, lon1, lat2, lon2, thd = 1.0 ):
         print(str(data_stuck['distance']) + '----スタックしてないよ')
         return True
 
+
 def random(a, b, k):
     ns = []
     while len(ns) < k:
@@ -57,6 +59,7 @@ def random(a, b, k):
         if not n in ns:
             ns.append(n)
     return ns
+
 
 def stuck_avoid_move(x):
     if x == 0:
@@ -94,7 +97,6 @@ def stuck_avoid_move(x):
         print('sutck_avoid_move():6')
         motor.move(100, -100, 3)
         motor.move(100, 100, 3)
-
 
 
 def stuck_avoid():
@@ -153,7 +155,6 @@ def stuck_avoid():
 if __name__ == '__main__':
     motor.setup()
     while 1:
-        
         a = int(input('出力入力しろ'))
         b = float(input('時間入力しろ'))
         motor.move(a, a, b)

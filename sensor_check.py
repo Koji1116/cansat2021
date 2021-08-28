@@ -7,7 +7,7 @@ from sensor.envirionmental import bme280
 from sensor.axis import mag
 from sensor.gps import gps
 from sensor.communication import xbee
-from sensor.motor import motor
+import motor
 from sensor.camera import take
 
 pi = pigpio.pi()
@@ -112,7 +112,6 @@ try:
         time.sleep(0.2)
 except:
     print('error : acc')
-
 
 print('---xbee---')
 try:

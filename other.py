@@ -1,20 +1,29 @@
 import os
 import linecache
 
-def is_dir(path):
+def dir(path):
     """
-    /home/pi/Desktop/Cansat
-    以降のディレクトリが存在するかを調べる関数
+    /dir/dir/dir/fileの時にfileの前にディレクトリが存在するか調べる関数
+    引数は/dir/dir/dir/fileの形のパス
     """
-    rfd = 0
-    t_rfd = []
-    i = -1
-    while rfd > 0:
-        rfd = path.rfind('/', 17, t_rfd[i])
-        print(rfd)
-        t_rfd.append(rfd)
-        i += 1
-    return t_rfd
+    fd = path.rfind('/')
+    dir = path[:fd]
+
+    is_dir = os.path.isdir(dir)
+    return is_dir
+
+
+def make_dir(path):
+    """
+    dir関数で調べた結果ディレクトリが存在しない場合はそのディレクトリを作成する
+    """
+    if not dir(path):
+        fd = path.rfind('/')
+        dir = path[:fd]
+        os.mkdir(dir)
+        print('******Directory is maked******')
+    else:
+        print('**Directory is exist')
 
 
 def log(path, *data):
@@ -23,14 +32,14 @@ def log(path, *data):
     前半はgit管理でログ作成用
     後半はgit管理外でログ作成用(git操作間違えてもログを残すため)
     """
-    with open(path, "a") as f:
+    with open(path, 'a') as f:
         for i in range(len(data)):
             if isinstance(data[i], list):
                 for j in range(len(data[i])):
                     f.write(str(data[i][j]) + "\t")
             else:
                 f.write(str(data[i]) + "\t")
-        f.write("\n")
+        f.write('\n')
 
     # for log outside of git management
     rfd = path.rfind('/')
@@ -55,17 +64,17 @@ def filename(f, ext):
     """
     i = 0
     while 1:
-        num = ""
+        num = ''
         if len(str(i)) <= 4:
             for j in range(4 - len(str(i))):
-                num = num + "0"
+                num = num + '0'
             num = num + str(i)
         else:
             num = str(i)
-        if not (os.path.exists(f + num + "." + ext)):
+        if not (os.path.exists(f + num + '.' + ext)):
             break
         i = i + 1
-    f = f + num + "." + ext
+    f = f + num + '.' + ext
     return f
 
 
@@ -85,4 +94,4 @@ def phase(path):
 
 
 if __name__ == "__main__":
-    print(is_dir('/home/pi/Desktop/Cansat2021ver/log/phaseLog'))
+    print(dir('/home/pi/Desktop/cansat2021/log/phaseLog'))

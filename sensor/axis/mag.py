@@ -11,8 +11,10 @@ MAG_REGISTER_ADDRESS = 0x42
 i2c = SMBus(1)
 
 def bmc050_setup():
+    """
+    6軸センサのセットアップをするための関数
+    """
     # --- BMC050Setup --- #
-
     # Initialize MAG
     try:
         data = i2c.read_byte_data(MAG_ADDRESS, 0x4B)
@@ -48,6 +50,9 @@ def bmc050_setup():
         time.sleep(0.1)
 
 def mag_read():
+    """
+    磁気を読み取るための関数
+    """
     # --- Read Mag Data --- #
     while 1:
         magData = [0, 0, 0, 0, 0, 0, 0, 0]

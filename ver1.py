@@ -5,7 +5,7 @@ import sys
 from sensor.axis import bmc050
 from sensor.communication import xbee
 from sensor.gps import gps
-from sensor.motor import motor
+import motor
 from sensor.envirionmental import bme280
 import release
 import paradetection
@@ -69,7 +69,7 @@ path_src_panorama1 = '/home/pi/Desktop/cansat2021/src_panorama1/panoramaShooting
 path_src_panorama2 = '/home/pi/Desktop/cansat2021/src_panorama2/panoramaShooting'
 path_src_panorama3 = '/home/pi/Desktop/cansat2021/src_panorama3/panoramaShooting'
 path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3)
-path_paradete = '/home/pi/Desktop/cansat2021/photostorage/paradete'
+path_paradete = '/home/pi/Desktop/cansat2021/photo_paradete/paradete'
 
 
 def setup():
@@ -206,13 +206,12 @@ if __name__ == '__main__':
     print(f'Phase:\t{phaseChk}')
     count_paraavo = 0
     if phaseChk == 5:
-        while count_paraavo < 2:
+        while count_paraavo < 3:
             flug, area, gap, photoname = paradetection.para_detection(
                 path_paradete, 320, 240, 200, 10, 120, 1)
             print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
             other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
             paraavoidance.parachute_avoidance(flug, gap)
-            time.sleep(1)
             if flug == -1 or flug == 0:
                 count_paraavo += 1
     print('#####-----ParaAvo Phase ended-----##### \n \n')
@@ -247,13 +246,12 @@ if __name__ == '__main__':
     magx_off, magy_off = calibration.cal(40, -40, 30)
     gpsrunning.adjust_direction(gpsrunning.angle_goal(magx_off, magy_off, lon2, lat2), magx_off, magy_off, lon2, lat2)
     count_paraavo2 = 0
-    while count_paraavo2 < 3:
+    while count_paraavo2 < 4:
         flug, area, gap, photoname = paradetection.para_detection(
             path_paradete, 320, 240, 200, 10, 120, 1)
         print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
         other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
-        time.sleep(1)
         if flug == -1 or flug == 0:
             count_paraavo2 += 1
 

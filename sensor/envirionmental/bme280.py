@@ -24,8 +24,6 @@ def writeReg(reg_address, data):
 
 
 def bme280_calib_param():
-    '''
-    '''
     calib = []
 
     for i in range(0x88, 0x88+24):

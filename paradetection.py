@@ -22,6 +22,10 @@ def get_center(contour):
 
 
 def para_detection(imgpath, width, height, H_min, H_max, S_thd, para_thd):
+    """
+    パラシュートを検出するための関数
+
+    """
     try:
         imgname = take.picture(imgpath, width, height)
         img = cv2.imread(imgname)
@@ -47,19 +51,19 @@ def para_detection(imgpath, width, height, H_min, H_max, S_thd, para_thd):
         centers = get_center(contours[max_area_contour])
 
         if max_area_contour == -1:
-            return [-1, 0, -1, imgname]
+            return (-1, 0, -1, imgname)
         elif max_area >= para_thd:
             max_area /= hig * wid
             max_area *= 100
             gap = (centers[0] - wid / 2) / (wid / 2) * 100
-            return [1, max_area, gap, imgname]
+            return (1, max_area, gap, imgname)
         else:
             max_area /= hig * wid
             max_area *= 100
             gap = (centers[0] - wid / 2) / (wid / 2) * 100
-            return [0, max_area, gap, imgname]
+            return (0, max_area, gap, imgname)
     except:
-        return [0, 100, 100, imgname]
+        return (0, 100, 100, imgname)
 
 
 if __name__ == "__main__":

@@ -5,7 +5,15 @@ import os
 
 
 def picture(path, width=320, height=240):
+    """写真を取るための関数"""
     def filename(f, ext):
+        """
+        ファイル名に番号をつけるための関数
+        引数f:つけたいファイル名
+        引数ext:ファイルの拡張子
+        戻り値f:ファイル名+0000.拡張子
+        戻り値の番号は増えていく
+        """
         i = 0
         while 1:
             num = ""
@@ -28,7 +36,7 @@ def picture(path, width=320, height=240):
             camera.resolution = (width, height)
             # 取得する画像の解像度を設定→どのような基準で設定するのか
             # 使用するカメラの解像度は静止画解像度で3280×2464
-            filepath = filename(path, "jpg")
+            filepath = filename(path, 'jpg')
             # 指定したパスを持つファイルを作成
 
             camera.capture(filepath)
@@ -45,9 +53,9 @@ def picture(path, width=320, height=240):
     return filepath
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     try:
-        photoName = picture("photo/photo", 320, 240)
+        photoName = picture('photo/photo', 320, 240)
     except KeyboardInterrupt:
         print('stop')
     except:

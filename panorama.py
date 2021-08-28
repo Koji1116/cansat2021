@@ -7,7 +7,7 @@ import shutil
 import random
 
 from sensor.camera import take
-from sensor.motor import motor
+import motor
 from sensor.axis import bmc050
 import calibration
 import paraavoidance
@@ -151,7 +151,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         if srcdir:
             print(f'directory:\t{srcdir}')
             break
-        power = random.randint(30, 70)
+        power = random.randint(25, 75)
         strength_l_pano = power
         strength_r_pano = power * -1
         motor.move(strength_l_pano, strength_r_pano, t_rotation_pano, ue=False)
@@ -205,7 +205,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         print('\n')
         print(dict_angle[2])
         other.log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
-
+        time.sleep(0.2)
     return srcdir
 
 
@@ -240,12 +240,12 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
 
     else:
         print('##--Composition failed--##')
-    cv2.imwrite('/home/pi/Desktop/Cansat2021ver/dst_panorama/' + str(resultcount) + '.jpg', result)
-    img_name = '/home/pi/Desktop/Cansat2021ver/dst_panorama/' + str(resultcount) + '.jpg'
-    print('################################')
-    print(f'Panorama name:\t{img_name}')
-    print('################################')
-    return img_name
+    path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama/dst', 'jpg')
+    cv2.imwrite(path_dst, result)
+    print('################################################################')
+    print(f'Panorama name:\t{path_dst}')
+    print('################################################################')
+    return path_dst
 
 
 if __name__ == "__main__":

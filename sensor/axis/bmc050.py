@@ -6,8 +6,6 @@ import pigpio
 import datetime
 pi = pigpio.pi()
 
-
-
 ACC_ADDRESS = 0x19
 ACC_REGISTER_ADDRESS = 0x02
 MAG_ADDRESS = 0x13
@@ -23,6 +21,9 @@ def bmc050_off():
     pi.write(27, 0)
 
 def bmc050_setup():
+    """
+    6軸センサのセットアップをするための関数
+    """
     # --- BMC050Setup --- #
     # Initialize ACC
     bmc050_on()
@@ -79,8 +80,10 @@ def bmc050_setup():
         time.sleep(0.1)
 
 
-
 def acc_read():
+    """
+    加速度を読み込むための関数
+    """
     # --- Read Acc Data --- #
     accData = [0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
@@ -101,6 +104,9 @@ def acc_read():
 
 
 def mag_read():
+    """
+    磁気を読み取るための関数
+    """
     # --- Read Mag Data --- #
     magData = [0, 0, 0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
@@ -132,6 +138,9 @@ def mag_read():
 
 
 def bmc050_read():
+    """
+    加速度と磁気を同時に読み取るための関数
+    """
     # --- Read BMC050 Data --- #
     accx, accy, accz = acc_read()
     magx, magy, magz = mag_read()
@@ -148,7 +157,7 @@ def bmc050_read():
 
 def bmc050_error():
     """
-    6軸センサエラー起きたらこの関数使ってね。
+    6軸センサエラー起きたら使う関数
     """
     bmc050_off()
     print('------mag error------switch start')

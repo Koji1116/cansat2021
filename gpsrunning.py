@@ -4,7 +4,7 @@ import time
 from sensor.gps import gps_navigate
 from sensor.gps import gps
 from sensor.axis import acc, mag, bmc050
-from sensor.motor import motor
+import motor
 from sensor.communication import xbee
 import calibration
 import stuck
