@@ -2,21 +2,21 @@ import time
 import datetime
 import sys
 
-import release
-import paradetection
-import land
-import paraavoidance
 from sensor.axis import bmc050
 from sensor.communication import xbee
 from sensor.gps import gps
 from sensor.motor import motor
 from sensor.envirionmental import bme280
+import release
+import paradetection
+import land
+import paraavoidance
 import panorama
 import other
 import escape
 import gpsrunning
 import photorunning
-from . import calibration
+import calibration
 
 dateTime = datetime.datetime.now()
 
