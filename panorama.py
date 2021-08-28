@@ -6,10 +6,10 @@ import time
 import shutil
 import random
 
-import calibration
 from sensor.camera import capture
 from sensor.motor import motor
 from sensor.axis import bmc050
+import calibration
 import paraavoidance
 import paradetection
 import other
