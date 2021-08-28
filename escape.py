@@ -1,5 +1,5 @@
-import melt
 from sensor.motor import motor
+import melt
 import stuck
 
 
