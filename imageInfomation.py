@@ -1,12 +1,8 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/camera')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/communication')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/motor')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 import cv2
 import numpy as np
 import datetime
 import time
+import sys
 
 from sensor.camera import capture
 
@@ -17,9 +13,6 @@ from sensor.camera import capture
 area_short = 20
 area_middle = 6
 area_long = 1
-
-
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/communication')
 
 
 #
