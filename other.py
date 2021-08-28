@@ -1,6 +1,18 @@
 import os
 import linecache
 
+from sensor.communication import xbee
+
+
+def print_xbee(word, com=True):
+    """
+    printによる出力とxbeeによる送信を一緒に行うための関数
+    """
+    print(word)
+    if com:
+        xbee.str_trans(word)
+
+
 def dir(path):
     """
     /dir/dir/dir/fileの時にfileの前にディレクトリが存在するか調べる関数

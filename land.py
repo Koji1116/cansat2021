@@ -1,6 +1,7 @@
 import time
 
 from sensor.envirionmental import bme280
+from other import print_xbee
 
 def pressdetect_land(thd_press_land):
     """
@@ -17,14 +18,14 @@ def pressdetect_land(thd_press_land):
         latestpress = pressdata[1]
         delta_p = abs(latestpress - Prevpress)
         if 0.0 in pressdata:
-            print("bme280error!")
+            print_xbee("bme280error!")
             press_count_land = 0
             press_judge_land = 2
         elif delta_p < thd_press_land:
             press_count_land += 1
             if press_count_land > 4:
                 press_judge_land = 1
-                print("presslandjudge")
+                print_xbee("presslandjudge")
         else:
             press_count_land = 0
             press_judge_land = 0
@@ -35,7 +36,7 @@ def pressdetect_land(thd_press_land):
 
 
 if __name__ == "__main__":
-    print("Start")
+    print_xbee("Start")
 
     bme280.bme280_setup()
     bme280.bme280_calib_param()
@@ -46,10 +47,10 @@ if __name__ == "__main__":
     while True:
         presslandjudge = 0
         landcount, presslandjudge = pressdetect_land(0.1)
-        print(f'count:{landcount}\tjudge:{presslandjudge}')
+        print_xbee(f'count:{landcount}\tjudge:{presslandjudge}')
         if presslandjudge == 1:
-            print('Press')
-            print('##--landed--##')
+            print_xbee('Press')
+            print_xbee('##--landed--##')
             break
         else:
-            print('Press unfulfilled')
+            print_xbee('Press unfulfilled')

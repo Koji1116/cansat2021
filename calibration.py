@@ -8,6 +8,7 @@ import numpy as np
 from sensor.axis import mag
 from sensor.gps import gps
 from sensor.gps import gps_navigate
+from other import print_xbee
 import motor
 import stuck
 import other
@@ -65,7 +66,7 @@ def magdata_matrix(l, r, n):
         stuck.ue_jug()
         magx, magy, magz = get_data()
         magdata = np.array([[magx, magy, magz]])
-        for _ in range(n-1):
+        for _ in range(n - 1):
             motor.motor_continue(l, r)
             magx, magy, magz = get_data()
             print(magx, magy)
@@ -114,9 +115,9 @@ def magdata_matrix_offset(l, r, t, magx_off, magy_off, magz_off):
             # --- multi dimention matrix ---#
             magdata = np.append(magdata, np.array([[magx, magy, magz]]), axis=0)
     except KeyboardInterrupt:
-        print('Interrupt')
+        print_xbee('Interrupt')
     except Exception as e:
-        print(e.message())
+        print_xbee(e.message())
     return magdata
 
 
@@ -144,7 +145,7 @@ def calculate_offset(magdata):
     magz_off = (magz_max + magz_min) / 2
 
     # --- save offset --- #
-    other.log('/home/pi/Desktop/Cansat2021ver/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
+    other.log('/home/pi/Desktop/cansat2021/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
 
     return magx_array, magy_array, magz_array, magx_off, magy_off, magz_off
 
@@ -184,10 +185,10 @@ def calculate_direction(lon2, lat2):
         lon1 = lon
     except KeyboardInterrupt:
         gps.close_gps()
-        print("\r\nKeyboard Intruppted, Serial Closed")
+        print_xbee("\r\nKeyboard Intruppted, Serial Closed")
     except:
         gps.close_gps()
-        print(traceback.format_exc())
+        print_xbee(traceback.format_exc())
     # --- calculate angle to goal ---#
     direction = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
     return direction
@@ -214,11 +215,11 @@ if __name__ == "__main__":
         magz_array_new = magdata_new[:, 2]
         for i in range(len(magx_array_new)):
             other.log(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
-        print("success")
+        print_xbee("success")
 
 
     except KeyboardInterrupt:
-        print("Interrupted")
+        print_xbee("Interrupted")
 
     finally:
-        print("End")
+        print_xbee("End")

@@ -1,6 +1,6 @@
 import time
-
 from sensor.envirionmental import bme280
+from other import print_xbee
 
 def pressdetect_release(thd_press_release, t_delta_release):
     '''
@@ -16,14 +16,14 @@ def pressdetect_release(thd_press_release, t_delta_release):
         latestpress = pressdata[1]
         deltP = latestpress - prevpress
         if 0.0 in pressdata:
-            print("bme280rror!")
+            print_xbee("##--bme280rror!--##")
             press_count_release = 0
             press_judge_release = 2
         elif deltP > thd_press_release:
             press_count_release += 1
             if press_count_release > 1:
                 press_judge_release = 1
-                print("pressreleasejudge")
+                print_xbee("##--pressreleasejudge--##")
         else:
             press_count_release = 0
             press_judge_release = 0
@@ -31,9 +31,6 @@ def pressdetect_release(thd_press_release, t_delta_release):
         press_count_release = 0
         press_judge_release = 2
     return press_count_release, press_judge_release
-
-
-# def releasejudge(thd_p_release):
 
 
 if __name__ == "__main__":
@@ -46,8 +43,8 @@ if __name__ == "__main__":
 
     while True:
         press_count_release, press_judge_release = pressdetect_release(thd_press_release, t_delta_release)
-        print(f'count:{pressreleasecount}\tjudge{pressreleasejudge}')
+        print_xbee(f'count:{pressreleasecount}\tjudge{pressreleasejudge}')
         if pressreleasejudge == 1:
-            print('Press')
+            print_xbee('Press')
         else:
-            print('unfulfilled')
+            print_xbee('unfulfilled')

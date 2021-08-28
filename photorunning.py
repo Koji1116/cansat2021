@@ -6,6 +6,7 @@ import numpy as np
 from sensor.camera import take
 from sensor.communication import xbee
 from sensor.axis import mag, bmc050
+from other import print_xbee
 import motor
 import stuck
 import calibration
@@ -74,13 +75,13 @@ def goal_detection(imgpath: str, G_thd: float):
         if len(contours) > 0:
             radius_frame = ()
             for (i, cnt) in zip(range(0, len(contours)), contours):
-                print(f'i:{i}')
+                print_xbee(f'i:{i}')
                 # 赤色検知した部分に最小外接円を書く
                 (x, y), radius = cv2.minEnclosingCircle(cnt)
                 center = (int(x), int(y))
                 radius = int(radius)
                 radius_frame = cv2.circle(img, center, radius, (0, 0, 255), 2)
-                print(radius_frame)
+                print_xbee(radius_frame)
                 # 検知した赤色の面積の中で最大のものを探す
                 area = cv2.contourArea(contours[i])
                 if max_area < area:
@@ -124,10 +125,10 @@ def adjustment_mag(strength, t, magx_off, magy_off):
         if mag_x == mag_x_old and mag_y == mag_y_old:
             count_bmc050_erro += 1
             if count_bmc050_erro >= 3:
-                print('-------mag_x mag_y error-----修復開始')
+                print_xbee('-------mag_x mag_y error-----修復開始')
                 bmc050.bmc050_error()
                 magdata = bmc050.mag_read()
-                print('-------mag_x mag_y error----switch start')
+                print_xbee('-------mag_x mag_y error----switch start')
                 motor.motor_stop(0.5)
                 bmc050.BMC050_error()
                 stuck.ue_jug()
@@ -157,9 +158,9 @@ def adjustment_mag(strength, t, magx_off, magy_off):
                 adj = strength * -0.25
             else:
                 adj = strength_adj * -0.4
-        print(f'angle ----- {angle_relative}')
+        print_xbee(f'angle ----- {angle_relative}')
         strength_l, strength_r = strength_adj + adj, strength_adj - adj + 5
-        print(f'motor power:\t{strength_l}\t{strength_r}')
+        print_xbee(f'motor power:\t{strength_l}\t{strength_r}')
         motor.motor_continue(strength_l, strength_r)
         time.sleep(0.1)
         mag_x_old = mag_x
@@ -179,58 +180,58 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
             path_photo = '/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-'
             photoName = take.picture(path_photo)
             goalflug, goalarea, gap, imgname, imgname2 = goal_detection(photoName, 50)
-            print(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
+            print_xbee(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
             other.log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
             if goalflug == 1:
                 break
             if goalflug == -1 or goalflug == 1000:
-                print('Nogoal detected')
+                print_xbee('Nogoal detected')
                 motor.move(40, -40, 0.1)
             elif goalarea <= area_long:
                 if -100 <= gap and gap <= -65:
-                    print('Turn left')
+                    print_xbee('Turn left')
                     motor.move(-40, 40, 0.1)
                 elif 65 <= gap and gap <= 100:
-                    print('Turn right')
+                    print_xbee('Turn right')
                     motor.move(40, -40, 0.1)
                 else:
-                    print('Go straight long')
+                    print_xbee('Go straight long')
                     adjustment_mag(40, 1.4, magx_off, magy_off)
             elif goalarea <= area_middle:
                 if -100 <= gap and gap <= -65:
-                    print('Turn left')
+                    print_xbee('Turn left')
                     motor.move(-25, 25, 0.1)
                 elif 65 <= gap and gap <= 100:
-                    print('Turn right')
+                    print_xbee('Turn right')
                     motor.move(25, -25, 0.1)
                 else:
-                    print('Go straight middle')
+                    print_xbee('Go straight middle')
                     adjustment_mag(40, 1.1, magx_off, magy_off)
             elif goalarea <= area_short:
                 if -100 <= gap and gap <= -65:
-                    print('Turn left')
+                    print_xbee('Turn left')
                     count_short_l += 1
                     adj_short = 0
                     if count_short_r % 4 == 0:
                         adj_short += 3
-                        print('#-Power up-#')
+                        print_xbee('#-Power up-#')
                     motor.move(-20 - adj_short, 20 + adj_short, 0.1)
                 elif 65 <= gap and gap <= 100:
-                    print('Turn right')
+                    print_xbee('Turn right')
                     count_short_r += 1
                     if count_short_r % 4 == 0:
                         adj_short += 3
-                        print('#-Power up-#')
+                        print_xbee('#-Power up-#')
                     motor.move(20 + adj_short, -20 - adj_short, 0.1)
                 else:
-                    print('Go stright short')
+                    print_xbee('Go stright short')
                     adjustment_mag(40, 0.7, magx_off, magy_off)
                     count_short_l = 0
                     count_short_r = 0
                     adj_short = 0
             elif goalarea >= G_thd:
-                print('###---Goal---###')
-                print('###---Goal---###')
+                print_xbee('###---Goal---###')
+                print_xbee('###---Goal---###')
                 break
 
             # ゴールから離れた場合GPS誘導に移行
@@ -241,10 +242,10 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
                     gpsrunning.drive(lon2, lat2, thd_distance, t_adj_gps,
                                      logpath='/home/pi/Desktop/Cansat2021ver/log/gpsrunning(image)Log', t_start=0)
     except KeyboardInterrupt:
-        print('stop')
+        print_xbee('stop')
     except Exception as e:
         tb = sys.exc_info()[2]
-        print("message:{0}".format(e.with_traceback(tb)))
+        print_xbee("message:{0}".format(e.with_traceback(tb)))
 
 
 if __name__ == "__main__":
@@ -258,18 +259,18 @@ if __name__ == "__main__":
         motor.setup()
 
         # calibration
-        print('##--calibration Start--##\n')
+        print_xbee('##--calibration Start--##\n')
         magx_off, magy_off = calibration.cal(40, -40, 30)
-        print(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
-        print('##--calibration end--##')
+        print_xbee(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
+        print_xbee('##--calibration end--##')
 
         # Image Guide
         image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2, thd_distance=5, t_adj_gps=60)
 
     except KeyboardInterrupt:
-        print('stop')
+        print_xbee('stop')
         xbee.off()
     except Exception as e:
         xbee.off()
         tb = sys.exc_info()[2]
-        print("message:{0}".format(e.with_traceback(tb)))
+        print_xbee("message:{0}".format(e.with_traceback(tb)))

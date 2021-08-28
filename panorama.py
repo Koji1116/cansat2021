@@ -7,11 +7,12 @@ import shutil
 import random
 
 from sensor.camera import take
-import motor
 from sensor.axis import bmc050
+from other import print_xbee
 import calibration
 import paraavoidance
 import paradetection
+import motor
 import other
 
 
@@ -74,9 +75,9 @@ def check(dict_angle, path_src_panorama):
     number_photos2 = list(dict_angle2.values()).count(True)
     number_photos3 = list(dict_angle3.values()).count(True)
     # Print number_photos
-    print(f'number_photo1:\t{number_photos1}')
-    print(f'number_photo2:\t{number_photos2}')
-    print(f'number_photo3:\t{number_photos3}')
+    print_xbee(f'number_photo1:\t{number_photos1}')
+    print_xbee(f'number_photo2:\t{number_photos2}')
+    print_xbee(f'number_photo3:\t{number_photos3}')
     # Find a directory/file_name with 12 photos
     srcdir = path_src_panorama1 if number_photos1 == 12 else srcdir
     srcdir = path_src_panorama2 if number_photos2 == 12 else srcdir
@@ -142,14 +143,14 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
     sumθ = 0
 
     # xbee.str_trans('whileスタート preθ:{0}'.format(preθ))
-    print(f'whileスタート　preθ:{preθ}')
+    print_xbee(f'whileスタート　preθ:{preθ}')
 
     # Loop for taking pictures
     while 1:
         dict_angle = shooting_angle(preθ, path_src_panorama, dict_angle, wid, hig)
         srcdir = check(dict_angle, path_src_panorama)
         if srcdir:
-            print(f'directory:\t{srcdir}')
+            print_xbee(f'directory:\t{srcdir}')
             break
         power = random.randint(25, 75)
         strength_l_pano = power
@@ -174,10 +175,10 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
                     break
                 count_stuck = 0
                 # xbee.str_trans('Stuck')
-                print(f'Stuck: {deltaθ}')
+                print_xbee(f'Stuck: {deltaθ}')
                 motor.move(60, 60, 0.5, ue=True)
                 flug, area, gap, photoname = paradetection.para_detection(path_paradete, 320, 240, 200, 10, 120, 1)
-                print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
+                print_xbee(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
                 paraavoidance.parachute_avoidance(flug, gap)
                 # ----Initialize-----#
                 count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
@@ -187,7 +188,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
                 preθ = calibration.angle(magx, magy, magx_off, magy_off)
                 sumθ = 0
                 # xbee.str_trans('whileスタート preθ:{0}'.format(preθ))
-                print(f'whileスタート　preθ:{preθ}')
+                print_xbee(f'whileスタート　preθ:{preθ}')
                 continue
 
         deltaθ = latestθ - preθ
@@ -198,12 +199,12 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         preθ2 = preθ
         preθ = latestθ
         # xbee.str_trans(f'sumθ: {sumθ}  latestθ: {latestθ}  preθ: {preθ2}  deltaθ: {deltaθ}')
-        print(f'sumθ:\t{sumθ}\tlatestθ\t{latestθ}\tpreθ\t{preθ2}\tdeltaθ\t{deltaθ}\n')
-        print(dict_angle[0])
-        print('\n')
-        print(dict_angle[1])
-        print('\n')
-        print(dict_angle[2])
+        print_xbee(f'sumθ:\t{sumθ}\tlatestθ\t{latestθ}\tpreθ\t{preθ2}\tdeltaθ\t{deltaθ}\n')
+        print_xbee(dict_angle[0])
+        print_xbee('\n')
+        print_xbee(dict_angle[1])
+        print_xbee('\n')
+        print_xbee(dict_angle[2])
         other.log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
         time.sleep(0.2)
     return srcdir
@@ -220,8 +221,8 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
     resultcount = len(glob.glob1('/home/pi/Desktop/Cansat2021ver/dst_panorama', '*' + dstext))
-    print(f'srcfilecount:\t{srcfilecount}')
-    print(f'resultcount:\t{resultcount}')
+    print_xbee(f'srcfilecount:\t{srcfilecount}')
+    print_xbee(f'resultcount:\t{resultcount}')
 
     photos = []
 
@@ -231,20 +232,20 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
         else:
             photos.append(cv2.imread(srcdir + '/panoramaShooting00' + str(i) + srcext))
 
-    print(f'Imreaded photo:\t{len(photos)}')
+    print_xbee(f'Imreaded photo:\t{len(photos)}')
 
     stitcher = cv2.Stitcher.create()
     status, result = stitcher.stitch(photos)
     if status == 0:
-        print('##--Composition succeed--##')
+        print_xbee('##--Composition succeed--##')
 
     else:
-        print('##--Composition failed--##')
+        print_xbee('##--Composition failed--##')
     path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama/dst', 'jpg')
     cv2.imwrite(path_dst, result)
-    print('################################################################')
-    print(f'Panorama name:\t{path_dst}')
-    print('################################################################')
+    print_xbee('################################################################')
+    print_xbee(f'Panorama name:\t{path_dst}')
+    print_xbee('################################################################')
     return path_dst
 
 
@@ -264,9 +265,9 @@ if __name__ == "__main__":
     t_rotation_pano = 0.1
     t_start = time.time()
     srcdir = shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
-    print(t_start - time.time())
+    print_xbee(t_start - time.time())
     if input('Composition y/n \t') == 'y':
         t_start = time.time()  # プログラムの開始時刻
         composition(srcdir)
         runTime = time.time() - t_start
-        print(runTime)
+        print_xbee(runTime)
