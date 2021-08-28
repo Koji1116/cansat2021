@@ -1,28 +1,7 @@
-import time
 import cv2
 import numpy as np
 
 from sensor.camera import capture
-from sensor.illuminance import TSL2572
-
-
-def parajudge(LuxThd):
-    '''
-    パラシュート被っているかを照度センサを用いて判定する関数
-    引数は照度の閾値
-    '''
-    lux = TSL2572.read()
-    # print("lux1: "+str(lux[0]))
-
-    # --- rover is covered with parachute ---#
-    if lux < LuxThd:  # LuxThd: 照度センサの閾値
-        time.sleep(1)
-        return [0, lux]
-
-    # --- rover is not covered with parachute ---#
-    else:
-        return [1, lux]
-
 
 def get_center(contour):
     """
