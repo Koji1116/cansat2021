@@ -58,7 +58,7 @@ if __name__ == '__main__':
             accData = acc_dataRead()
             norm = (accData[0]^2 + accData[1]^2 + accData[2]^2) ** 0.5
             print(f'x:{accData[0]}\ty:{accData[1]}\tz:{accData[2]}\tnorm:{norm}')
-            other.saveLog('BMC050test', datetime.datetime.now(), startTime - time.time(), accData[0], accData[1], accData[2])
+            other.save_log('BMC050test', datetime.datetime.now(), startTime - time.time(), accData[0], accData[1], accData[2])
             time.sleep(1)
 
     except KeyboardInterrupt:

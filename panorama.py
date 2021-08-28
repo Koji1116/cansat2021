@@ -6,7 +6,7 @@ import time
 import shutil
 import random
 
-from sensor.camera import capture
+from sensor.camera import take
 from sensor.motor import motor
 from sensor.axis import bmc050
 import calibration
@@ -33,21 +33,21 @@ def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):
     if switch:
         for i in range(12):
             if 30 * i <= theta and theta <= 10 + 30 * i and not dict_angle1[i + 1]:
-                capture.Capture(path_src_panorama1, wid, hig)
+                take.picture(path_src_panorama1, wid, hig)
                 dict_angle1[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(12):
             if 10 + 30 * i <= theta and theta <= 20 + 30 * i and not dict_angle2[i + 1]:
-                capture.Capture(path_src_panorama2, wid, hig)
+                take.picture(path_src_panorama2, wid, hig)
                 dict_angle2[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(12):
             if 20 + 30 * i <= theta and theta <= 30 + 30 * i and not dict_angle3[i + 1]:
-                capture.Capture(path_src_panorama3, wid, hig)
+                take.picture(path_src_panorama3, wid, hig)
                 dict_angle3[i + 1] = True
                 break
     return [dict_angle1, dict_angle2, dict_angle3]
@@ -176,9 +176,9 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
                 # xbee.str_trans('Stuck')
                 print(f'Stuck: {deltaθ}')
                 motor.move(60, 60, 0.5, ue=True)
-                flug, area, gap, photoname = paradetection.paradetection(path_paradete, 320, 240, 200, 10, 120, 1)
+                flug, area, gap, photoname = paradetection.para_detection(path_paradete, 320, 240, 200, 10, 120, 1)
                 print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-                paraavoidance.Parachute_Avoidance(flug, gap)
+                paraavoidance.parachute_avoidance(flug, gap)
                 # ----Initialize-----#
                 count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
                 magdata = bmc050.mag_dataRead()
@@ -204,7 +204,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         print(dict_angle[1])
         print('\n')
         print(dict_angle[2])
-        other.saveLog(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
+        other.save_log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
 
     return srcdir
 

@@ -166,9 +166,9 @@ if __name__ == '__main__':
         while 1:
             bmcData = bmc050_read()
             print(bmcData)
-            other.saveLog('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
+            other.save_log('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
             time.sleep(0.1)
-            Other.saveLog('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
+            Other.save_log('BMC050test', datetime.datetime.now(), t_start - time.time(), bmcData[0], bmcData[1], bmcData[2], bmcData[3], bmcData[4], bmcData[5])
             time.sleep(a)
 
     except KeyboardInterrupt:

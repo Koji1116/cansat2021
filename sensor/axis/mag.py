@@ -88,7 +88,7 @@ if __name__ == '__main__':
         while 1:
             magData = mag_dataRead()
             print(magData)
-            other.saveLog('BMC050_mag_test', datetime.datetime.now(), time.time() - startTime, magData[0], magData[1], magData[2])
+            other.save_log('BMC050_mag_test', datetime.datetime.now(), time.time() - startTime, magData[0], magData[1], magData[2])
             time.sleep(1)
 
     except KeyboardInterrupt:

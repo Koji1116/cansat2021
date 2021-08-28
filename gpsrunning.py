@@ -1,7 +1,6 @@
 import datetime
 import time
 
-
 from sensor.gps import gps_navigate
 from sensor.gps import gps
 from sensor.axis import acc, mag, bmc050
@@ -111,7 +110,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
             azimuth, goal_distance = direction["azimuth1"], direction["distance"]
             print(f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
             xbee.str_trans(f'lat: {lat1}\tlon: {lon1}\tdistance: {direction["distance"]}\ttheta: {theta}')
-            other.saveLog(logpath, datetime.datetime.now(), time.time() - t_start, lat1, lon1, direction['distance'], azimuth)
+            other.save_log(logpath, datetime.datetime.now(), time.time() - t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 2):
                     pass

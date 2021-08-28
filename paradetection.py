@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from sensor.camera import capture
+from sensor.camera import take
 
 
 def get_center(contour):
@@ -21,9 +21,9 @@ def get_center(contour):
     return cx, cy
 
 
-def paradetection(imgpath, width, height, H_min, H_max, S_thd, para_thd):
+def para_detection(imgpath, width, height, H_min, H_max, S_thd, para_thd):
     try:
-        imgname = capture.Capture(imgpath, width, height)
+        imgname = take.picture(imgpath, width, height)
         img = cv2.imread(imgname)
         hig, wid, _ = img.shape
 
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         while 1:
             flug = -1
             while flug != 1:
-                f, a, g, p = paradetection("photostorage/photostorage_paradete/para", 320, 240, 200, 10, 120, 1)
+                f, a, g, p = para_detection("photostorage/photostorage_paradete/para", 320, 240, 200, 10, 120, 1)
                 print(f'flug:{f}	area:{a}	gap:{g}	photoname:{p}')
             print('ParaDetected')
             print(f'flug:{f}	area:{a}	gap:{g}	photoname:{p}')

@@ -17,7 +17,7 @@ def is_dir(path):
     return t_rfd
 
 
-def saveLog(path, *data):
+def save_log(path, *data):
     """
     制御ログのための関数
     前半はgit管理でログ作成用
@@ -46,8 +46,14 @@ def saveLog(path, *data):
 
 
 def fileName(f, ext):
+    """
+    ファイル名に番号をつけるための関数
+    引数f:つけたいファイル名
+    引数ext:ファイルの拡張子
+    戻り値f:ファイル名+0000.拡張子
+    戻り値の番号は増えていく
+    """
     i = 0
-    num = ""
     while 1:
         num = ""
         if len(str(i)) <= 4:
@@ -64,6 +70,10 @@ def fileName(f, ext):
 
 
 def phaseCheck(path):
+    """
+    フェーズ番号を取得するための関数
+    フェーズを記録するファイルの一番最後のフェーズ番号を取得する
+    """
     num_lines = sum(1 for line in open(path))
     lastLine = linecache.getline(path, num_lines)
     if not lastLine:
@@ -72,19 +82,6 @@ def phaseCheck(path):
     linecache.clearcache()
     return int(phase)
 
-
-def positionCheck(path):
-    num_lines = sum(1 for line in open(path))
-    # print(num_lines)
-    pos = [0.0, 0.0]
-    for i in range(num_lines):
-        line = linecache.getline(path, i + 1)
-        posStr = line.split("\t")
-        # print(line)
-        if (posStr[0] == "Start"):
-            pos = [posStr[1], posStr[2]]
-            break
-    return pos
 
 
 if __name__ == "__main__":

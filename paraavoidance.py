@@ -8,55 +8,10 @@ import time
 import traceback
 
 from sensor.motor import motor
-from sensor.gps import gps
-from sensor.gps import gps_navigate
 import paradetection
 
 
-
-def land_point_save():
-    try:
-        while True:
-            value = gps.readGPS()
-            latitude_land = value[1]
-            longitude_land = value[2]
-            time.sleep(1)
-            if latitude_land != -1.0 and longitude_land != 0.0:
-                break
-    except KeyboardInterrupt:
-        gps.closeGPS()
-        print("\r\nKeyboard Intruppted, Serial Closed")
-    except:
-        gps.closeGPS()
-        print(traceback.format_exc())
-    return longitude_land, latitude_land
-
-
-def Parachute_area_judge(longitude_land, latitude_land):
-    try:
-        while True:
-            value = gps.readGPS()
-            latitude_new = value[1]
-            longitude_new = value[2]
-            print(value)
-            print('longitude = ' + str(longitude_new))
-            print('latitude = ' + str(latitude_new))
-            time.sleep(1)
-            if latitude_new != -1.0 and longitude_new != 0.0:
-                break
-    except KeyboardInterrupt:
-        gps.closeGPS()
-        print("\r\nKeyboard Intruppted, Serial Closed")
-
-    except:
-        gps.closeGPS()
-        print(traceback.format_exc())
-    direction = gps_navigate.vincenty_inverse(longitude_land, latitude_land, longitude_new, latitude_new)
-    distance = direction["distance"]
-    return distance
-
-
-def Parachute_Avoidance(flug, goalGAP):
+def parachute_avoidance(flug, goalGAP):
     # --- There is Parachute around rover ---#
 
     if flug == 1:
@@ -107,16 +62,16 @@ if __name__ == '__main__':
 
         print("START: Parachute avoidance")
 
-        flug, area, gap, photoname = paradetection.paradetection("photostorage/photostorage_paradete/para", 320, 240,
-                                                                 200, 10, 120, 1)
+        flug, area, gap, photoname = paradetection.para_detection("photostorage/photostorage_paradete/para", 320, 240,
+                                                                  200, 10, 120, 1)
         print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}')
         print("paradetection phase success")
         count_paraavo = 0
         while count_paraavo < 3:
-            flug, area, gap, photoname = paradetection.paradetection("photostorage/photostorage_paradete/para", 320,
-                                                                     240, 200, 10, 120, 1)
+            flug, area, gap, photoname = paradetection.para_detection("photostorage/photostorage_paradete/para", 320,
+                                                                      240, 200, 10, 120, 1)
             print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}')
-            Parachute_Avoidance(flug, gap)
+            parachute_avoidance(flug, gap)
             print(flug)
             if flug == -1 or flug == 0:
                 count_paraavo += 1

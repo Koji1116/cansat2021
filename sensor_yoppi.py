@@ -8,7 +8,7 @@ from sensor.axis import mag
 from sensor.gps import gps
 from sensor.communication import xbee
 from sensor.motor import motor
-from sensor.camera import capture
+from sensor.camera import take
 
 pi = pigpio.pi()
 
@@ -65,7 +65,7 @@ os.system('i2cdetect -y 1')
 print('\n----camera----')
 os.system('vcgencmd get_camera')
 try:
-    capture.Capture(camerapath)
+    take.picture(camerapath)
 except:
     print('error : camera\n')
 

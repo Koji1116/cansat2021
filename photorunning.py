@@ -3,7 +3,7 @@ import cv2
 import sys
 import numpy as np
 
-from sensor.camera import capture
+from sensor.camera import take
 from sensor.communication import xbee
 from sensor.axis import mag, bmc050
 from sensor.motor import motor
@@ -53,7 +53,7 @@ def mosaic(src, ratio):
 #     cv2.imwrite(path_detection, red_img_gry)
 
 
-def GoalDetection(imgpath, G_thd):
+def goal_detection(imgpath, G_thd):
     try:
         img = cv2.imread(imgpath)
         hig, wid, _ = img.shape
@@ -178,10 +178,10 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
         while 1:
             stuck.ue_jug()
             path_photo = '/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-'
-            photoName = capture.Capture(path_photo)
-            goalflug, goalarea, gap, imgname, imgname2 = GoalDetection(photoName, 50)
+            photoName = take.picture(path_photo)
+            goalflug, goalarea, gap, imgname, imgname2 = goal_detection(photoName, 50)
             print(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
-            other.saveLog(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
+            other.save_log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
             if goalflug == 1:
                 break
             if goalflug == -1 or goalflug == 1000:

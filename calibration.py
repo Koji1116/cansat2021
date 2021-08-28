@@ -40,7 +40,7 @@ def get_data():
 
 def get_data_offset(magx_off, magy_off, magz_off):
     """
-	MBC050からオフセットを考慮して磁気データをえる
+	MBC050からオフセットを考慮して磁気データを得る関数
 	"""
     try:
         magData = mag.mag_dataRead()
@@ -58,7 +58,8 @@ def get_data_offset(magx_off, magy_off, magz_off):
 
 def magdata_matrix(l, r, n):
     """
-	モータ連続的に動かして磁気データ取るよう
+	キャリブレーション用の地磁気データを得るための関数。
+	モータを連続的に動かして回転して地磁気データを得る。
 	"""
     try:
         stuck.ue_jug()
@@ -143,7 +144,7 @@ def calculate_offset(magdata):
     magz_off = (magz_max + magz_min) / 2
 
     # --- save offset --- #
-    other.saveLog('/home/pi/Desktop/Cansat2021ver/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
+    other.save_log('/home/pi/Desktop/Cansat2021ver/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
 
     return magx_array, magy_array, magz_array, magx_off, magy_off, magz_off
 
@@ -212,7 +213,7 @@ if __name__ == "__main__":
         magy_array_new = magdata_new[:, 1]
         magz_array_new = magdata_new[:, 2]
         for i in range(len(magx_array_new)):
-            other.saveLog(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
+            other.save_log(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
         print("success")
 
 
