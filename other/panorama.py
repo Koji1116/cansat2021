@@ -6,8 +6,8 @@ import time
 import shutil
 import random
 
-from sensor.motor import motor
 from sensor.camera import capture
+from sensor.motor import motor
 from sensor.communication import xbee
 from sensor.axis import bmc050
 from calibration import calibration
