@@ -1,12 +1,9 @@
-<<<<<<< HEAD:sensor/axis/mag.py
-=======
 import sys
 sys.path.append('/home/pi/Desktop/Cansat2021ver/Other')
 sys.path.append('/home/pi/Desktop/Cansat2021ver/SensorModule/6-axis')
 from smbus import SMBus
 import time
 import BMC050
->>>>>>> 750264f8679bb62d140db0d7faa7e1643937f205:SensorModule/6-axis/mag.py
 import datetime
 
 from parts.other import other
