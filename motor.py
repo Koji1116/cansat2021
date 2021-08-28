@@ -40,18 +40,20 @@ def motor_continue(strength_l, strength_r):
 
 
 def motor_stop(x=1):
-    '''motor_move()とセットで使用'''
+    """
+    motor_move()とセットで使用
+    """
     motor_r.stop()
     motor_l.stop()
     time.sleep(x)
 
 
 def motor_move(strength_l, strength_r, t_moving):
-    '''
+    """
     引数は左のmotorの強さ、右のmotorの強さ、走る時間。
     strength_l、strength_rは-1~1で表す。負の値だったら後ろ走行。
     必ずmotor_stop()セットで用いる。めんどくさかったら下にあるmotor()を使用
-    '''
+    """
     strength_l = strength_l / 100
     strength_r = strength_r / 100
     # 前進するときのみスタック判定
