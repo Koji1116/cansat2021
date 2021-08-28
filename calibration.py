@@ -9,10 +9,10 @@ from sensor.axis import mag
 from sensor.gps import gps
 from sensor.gps import gps_navigate
 from sensor.motor import motor
-from . import stuck
-from . import other
+import stuck
+import other
 
-path_log = '/home/pi/Desktop/Cansat2021ver/log/calibration.txt'
+path_log = '/home/pi/Desktop/cansat2021/log/calibration.txt'
 
 
 # filecount = len(glob.glob1(path_log, '*' + '.txt'))
