@@ -1,6 +1,6 @@
 import time
 
-from .sensor.envirionmental import bme280
+from sensor.envirionmental import bme280
 
 
 
