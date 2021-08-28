@@ -1,6 +1,7 @@
 import time
 
-from sensor.envirionmental import bme280
+from ..sensor.envirionmental import bme280
+
 
 
 def pressdetect_land(thd_press_land):
