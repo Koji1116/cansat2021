@@ -80,7 +80,7 @@ def bmc050_setup():
 
 
 
-def acc_dataRead():
+def acc_read():
     # --- Read Acc Data --- #
     accData = [0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
@@ -100,7 +100,7 @@ def acc_dataRead():
     return value
 
 
-def mag_dataRead():
+def mag_read():
     # --- Read Mag Data --- #
     magData = [0, 0, 0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
@@ -133,8 +133,8 @@ def mag_dataRead():
 
 def bmc050_read():
     # --- Read BMC050 Data --- #
-    accx, accy, accz = acc_dataRead()
-    magx, magy, magz = mag_dataRead()
+    accx, accy, accz = acc_read()
+    magx, magy, magz = mag_read()
 
     value = [accx, accy, accz, magx, magy, magz]
 

@@ -17,7 +17,7 @@ def angle_goal(magx_off, magy_off, lon2, lat2):
 
     -180~180度
     """
-    magdata = bmc050.mag_dataRead()
+    magdata = bmc050.mag_read()
     mag_x = magdata[0]
     mag_y = magdata[1]
     theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
@@ -110,7 +110,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
             azimuth, goal_distance = direction["azimuth1"], direction["distance"]
             print(f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
             xbee.str_trans(f'lat: {lat1}\tlon: {lon1}\tdistance: {direction["distance"]}\ttheta: {theta}')
-            other.save_log(logpath, datetime.datetime.now(), time.time() - t_start, lat1, lon1, direction['distance'], azimuth)
+            other.log(logpath, datetime.datetime.now(), time.time() - t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 2):
                     pass
@@ -124,7 +124,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
             else:                
                 for _ in range(50):
                     #theta = angle_goal(magx_off, magy_off)
-                    magdata = bmc050.mag_dataRead()
+                    magdata = bmc050.mag_read()
                     mag_x = magdata[0]
                     mag_y = magdata[1]
                     if mag_x == mag_x_old and mag_y == mag_y_old:
@@ -132,7 +132,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
                         if count_bmc050_erro >= 3:
                             print('-------mag_x mag_y error-----修復開始')
                             bmc050.bmc050_error()
-                            magdata = bmc050.mag_dataRead()
+                            magdata = bmc050.mag_read()
                             mag_x = magdata[0]
                             mag_y = magdata[1]
                             count_bmc050_erro = 0

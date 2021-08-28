@@ -144,7 +144,7 @@ def calculate_offset(magdata):
     magz_off = (magz_max + magz_min) / 2
 
     # --- save offset --- #
-    other.save_log('/home/pi/Desktop/Cansat2021ver/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
+    other.log('/home/pi/Desktop/Cansat2021ver/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
 
     return magx_array, magy_array, magz_array, magx_off, magy_off, magz_off
 
@@ -213,7 +213,7 @@ if __name__ == "__main__":
         magy_array_new = magdata_new[:, 1]
         magz_array_new = magdata_new[:, 2]
         for i in range(len(magx_array_new)):
-            other.save_log(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
+            other.log(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
         print("success")
 
 

@@ -135,7 +135,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
     count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
     # Calculate the angle
     _, _, _, magx_off, magy_off, _ = calibration.calculate_offset(mag_mat)
-    magdata = bmc050.mag_dataRead()
+    magdata = bmc050.mag_read()
     magx = magdata[0]
     magy = magdata[1]
     preθ = calibration.angle(magx, magy, magx_off, magy_off)
@@ -155,7 +155,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         strength_l_pano = power
         strength_r_pano = power * -1
         motor.move(strength_l_pano, strength_r_pano, t_rotation_pano, ue=False)
-        magdata = bmc050.mag_dataRead()
+        magdata = bmc050.mag_read()
         magx = magdata[0]
         magy = magdata[1]
         latestθ = calibration.angle(magx, magy, magx_off, magy_off)
@@ -181,7 +181,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
                 paraavoidance.parachute_avoidance(flug, gap)
                 # ----Initialize-----#
                 count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
-                magdata = bmc050.mag_dataRead()
+                magdata = bmc050.mag_read()
                 magx = magdata[0]
                 magy = magdata[1]
                 preθ = calibration.angle(magx, magy, magx_off, magy_off)
@@ -204,7 +204,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         print(dict_angle[1])
         print('\n')
         print(dict_angle[2])
-        other.save_log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
+        other.log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
 
     return srcdir
 
@@ -258,7 +258,7 @@ if __name__ == "__main__":
     path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3)
     path_dst_panoraam = '/home/pi/Desktop/Cansat2021ver/dst_panorama'
     path_paradete = '/home/pi/Desktop/Cansat2021ver/photostorage/paradete'
-    log_panoramashooting = other.fileName('/home/pi/Desktop/Cansat2021ver/log/panoramaLog', 'txt')
+    log_panoramashooting = other.filename('/home/pi/Desktop/Cansat2021ver/log/panoramaLog', 'txt')
 
     mag_mat = calibration.magdata_matrix(40, -40, 60)
     t_rotation_pano = 0.1

@@ -61,7 +61,7 @@ def goal_detection(imgpath, G_thd):
         img_hsv = cv2.cvtColor(img_mosaic, cv2.COLOR_BGR2HSV)
 
         # 最小外接円を描いた写真の保存先
-        path_detection = other.fileName('/home/pi/Desktop/Cansat2021ver/detected/Detected-', 'jpg')
+        path_detection = other.filename('/home/pi/Desktop/Cansat2021ver/detected/Detected-', 'jpg')
 
         red_min = np.array([120, 120, 120], np.uint8)
         red_max = np.array([255, 255, 255], np.uint8)
@@ -127,12 +127,12 @@ def adjustment_mag(strength, t, magx_off, magy_off):
 
                 print('-------mag_x mag_y error-----修復開始')
                 bmc050.bmc050_error()
-                magdata = bmc050.mag_dataRead()
+                magdata = bmc050.mag_read()
                 print('-------mag_x mag_y error----switch start')
                 motor.motor_stop(0.5)
                 bmc050.BMC050_error()
                 stuck.ue_jug()
-                magdata = bmc050.mag_dataRead()
+                magdata = bmc050.mag_read()
                 mag_x = magdata[0]
                 mag_y = magdata[1]
                 count_bmc050_erro = 0
@@ -181,7 +181,7 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
             photoName = take.picture(path_photo)
             goalflug, goalarea, gap, imgname, imgname2 = goal_detection(photoName, 50)
             print(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
-            other.save_log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
+            other.log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
             if goalflug == 1:
                 break
             if goalflug == -1 or goalflug == 1000:

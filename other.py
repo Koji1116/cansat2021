@@ -17,7 +17,7 @@ def is_dir(path):
     return t_rfd
 
 
-def save_log(path, *data):
+def log(path, *data):
     """
     制御ログのための関数
     前半はgit管理でログ作成用
@@ -45,7 +45,7 @@ def save_log(path, *data):
         f.write("\n")
 
 
-def fileName(f, ext):
+def filename(f, ext):
     """
     ファイル名に番号をつけるための関数
     引数f:つけたいファイル名
@@ -69,7 +69,7 @@ def fileName(f, ext):
     return f
 
 
-def phaseCheck(path):
+def phase(path):
     """
     フェーズ番号を取得するための関数
     フェーズを記録するファイルの一番最後のフェーズ番号を取得する

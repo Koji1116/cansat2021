@@ -1,11 +1,8 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/Other')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/SensorModule/6-axis')
 from smbus import SMBus
 import time
-import BMC050
 import datetime
 
+import bmc050
 import other
 
 MAG_ADDRESS = 0x13
@@ -73,7 +70,7 @@ def mag_dataRead():
                 if value[i] > 16383:
                     value[i] = value[i] - 32768
         if value == [0.0, 0.0, 0.0] :
-            BMC050.BMC050_error()
+            bmc050.bmc050_error()
         else:
             break
     return value
@@ -88,7 +85,6 @@ if __name__ == '__main__':
         while 1:
             magData = mag_dataRead()
             print(magData)
-            other.save_log('BMC050_mag_test', datetime.datetime.now(), time.time() - startTime, magData[0], magData[1], magData[2])
             time.sleep(1)
 
     except KeyboardInterrupt:

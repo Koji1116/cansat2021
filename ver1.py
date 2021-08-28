@@ -54,15 +54,15 @@ G_thd = 80
 path_photo_imagerun = f'photostorage/ImageGuidance_{dateTime.month}-{dateTime.day}-{dateTime.hour}-{dateTime.minute}'
 
 # variable for log
-log_phase = other.fileName('/home/pi/Desktop/cansat2021/log/phaseLog', 'txt')
-log_release = other.fileName('/home/pi/Desktop/cansat2021/log/releaselog', 'txt')
-log_landing = other.fileName('/home/pi/Desktop/cansat2021/log/landingLog', 'txt')
-log_melting = other.fileName('/home/pi/Desktop/cansat2021/log/meltingLog', 'txt')
-log_paraavoidance = other.fileName('/home/pi/Desktop/cansat2021/log/paraAvoidanceLog', 'txt')
-log_panoramashooting = other.fileName('/home/pi/Desktop/cansat2021/log/panoramaLog', 'txt')
-log_gpsrunning = other.fileName('/home/pi/Desktop/cansat2021/log/gpsrunningLog', 'txt')
-log_photorunning = other.fileName('/home/pi/Desktop/cansat2021/log/photorunning', 'txt')
-log_panoramacom = other.fileName('/home/pi/Desktop/cansat2021/log/panoramacomLog', 'txt')
+log_phase = other.filename('/home/pi/Desktop/cansat2021/log/phaseLog', 'txt')
+log_release = other.filename('/home/pi/Desktop/cansat2021/log/releaselog', 'txt')
+log_landing = other.filename('/home/pi/Desktop/cansat2021/log/landingLog', 'txt')
+log_melting = other.filename('/home/pi/Desktop/cansat2021/log/meltingLog', 'txt')
+log_paraavoidance = other.filename('/home/pi/Desktop/cansat2021/log/paraAvoidanceLog', 'txt')
+log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021/log/panoramaLog', 'txt')
+log_gpsrunning = other.filename('/home/pi/Desktop/cansat2021/log/gpsrunningLog', 'txt')
+log_photorunning = other.filename('/home/pi/Desktop/cansat2021/log/photorunning', 'txt')
+log_panoramacom = other.filename('/home/pi/Desktop/cansat2021/log/panoramacomLog', 'txt')
 
 # photo path
 path_src_panorama1 = '/home/pi/Desktop/cansat2021/src_panorama1/panoramaShooting'
@@ -104,8 +104,8 @@ if __name__ == '__main__':
     try:
         t_start = time.time()
         print('#####-----Setup Phase start-----#####')
-        other.save_log(log_phase, "1", "Setup phase", dateTime, time.time() - t_start)
-        phaseChk = other.phaseCheck(log_phase)
+        other.log(log_phase, "1", "Setup phase", dateTime, time.time() - t_start)
+        phaseChk = other.phase(log_phase)
         if phaseChk == 1:
             print(f'Phase:\t{phaseChk}')
             setup()
@@ -119,8 +119,8 @@ if __name__ == '__main__':
 
     #######--------------------------Release--------------------------#######
     print('#####-----Release Phase start-----#####')
-    other.save_log(log_phase, "2", "Release Phase Started", dateTime, time.time() - t_start)
-    phaseChk = other.phaseCheck(log_phase)
+    other.log(log_phase, "2", "Release Phase Started", dateTime, time.time() - t_start)
+    phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     if phaseChk == 2:
         t_release_start = time.time()
@@ -130,8 +130,8 @@ if __name__ == '__main__':
                 print(f'loop_release\t {i}')
                 press_count_release, press_judge_release = release.pressdetect_release(thd_press_release, t_delta_release)
                 print(f'count:{press_count_release}\tjudge{press_judge_release}')
-                other.save_log(log_release, dateTime, time.time() - t_start, gps.GPSdata_read(),
-                               bme280.bme280_read(), press_count_release, press_judge_release)
+                other.log(log_release, dateTime, time.time() - t_start, gps.GPSdata_read(),
+                          bme280.bme280_read(), press_count_release, press_judge_release)
                 if press_judge_release == 1:
                     print('Release\n \n')
                     break
@@ -150,8 +150,8 @@ if __name__ == '__main__':
     #######--------------------------Landing--------------------------#######
     try:
         print('#####-----Landing phase start-----#####')
-        other.save_log(log_phase, '3', 'Landing phase', dateTime, time.time() - t_start)
-        phaseChk = other.phaseCheck(log_phase)
+        other.log(log_phase, '3', 'Landing phase', dateTime, time.time() - t_start)
+        phaseChk = other.phase(log_phase)
         print(f'Phase:\t{phaseChk}')
         if phaseChk == 3:
             print(f'Landing Judgement Program Start\t{time.time() - t_start}')
@@ -166,11 +166,11 @@ if __name__ == '__main__':
                     break
                 else:
                     print('Not Landed\n \n')
-                other.save_log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read())
+                other.log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read())
                 i += 1
             else:
                 print('Landed Timeout')
-            other.save_log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read(),
+            other.log(log_landing, dateTime, time.time() - t_start, gps.GPSdata_read(), bme280.bme280_read(),
                           'Land judge finished')
             print('######-----Landed-----######\n \n')
     except Exception as e:
@@ -183,13 +183,13 @@ if __name__ == '__main__':
     #######--------------------------Escape--------------------------#######
 
     print('#####-----Melting phase start#####')
-    other.save_log(log_phase, '4', 'Melting phase start', dateTime, time.time() - t_start)
-    phaseChk = other.phaseCheck(log_phase)
+    other.log(log_phase, '4', 'Melting phase start', dateTime, time.time() - t_start)
+    phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     if phaseChk == 4:
-        other.save_log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Start")
+        other.log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Start")
         escape.escape()
-        other.save_log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Finished")
+        other.log(log_melting, dateTime, time.time() - t_start, gps.GPSdata_read(), "Melting Finished")
     print('########-----Melted-----#######\n \n')
     # except Exception as e:
     #     tb = sys.exc_info()[2]
@@ -201,8 +201,8 @@ if __name__ == '__main__':
     #######--------------------------Paraavo--------------------------#######
 
     print('#####-----Para avoid start-----#####')
-    other.save_log(log_phase, '5', 'Melting phase start', dateTime, time.time() - t_start)
-    phaseChk = other.phaseCheck(log_phase)
+    other.log(log_phase, '5', 'Melting phase start', dateTime, time.time() - t_start)
+    phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     count_paraavo = 0
     if phaseChk == 5:
@@ -210,7 +210,7 @@ if __name__ == '__main__':
             flug, area, gap, photoname = paradetection.para_detection(
                 path_paradete, 320, 240, 200, 10, 120, 1)
             print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-            other.save_log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
+            other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
             paraavoidance.parachute_avoidance(flug, gap)
             time.sleep(1)
             if flug == -1 or flug == 0:
@@ -226,8 +226,8 @@ if __name__ == '__main__':
     #######--------------------------panorama--------------------------#######
 
     print('#####-----panorama shooting start-----#####')
-    other.save_log(log_phase, '6', 'panorama shooting phase start', dateTime, time.time() - t_start)
-    phaseChk = other.phaseCheck(log_phase)
+    other.log(log_phase, '6', 'panorama shooting phase start', dateTime, time.time() - t_start)
+    phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     if phaseChk == 6:
         t_start_panorama = time.time()  # プログラムの開始時刻
@@ -251,7 +251,7 @@ if __name__ == '__main__':
         flug, area, gap, photoname = paradetection.para_detection(
             path_paradete, 320, 240, 200, 10, 120, 1)
         print(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-        other.save_log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
+        other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.GPSdata_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
         time.sleep(1)
         if flug == -1 or flug == 0:
@@ -260,8 +260,8 @@ if __name__ == '__main__':
     #######--------------------------gps--------------------------#######
 
     print('#####-----gps run start-----#####')
-    other.save_log(log_phase, '7', 'GPSrun phase start', dateTime, time.time() - t_start)
-    phaseChk = other.phaseCheck(log_phase)
+    other.log(log_phase, '7', 'GPSrun phase start', dateTime, time.time() - t_start)
+    phaseChk = other.phase(log_phase)
     print(f'Phase:\t{phaseChk}')
     if phaseChk == 7:
         gpsrunning.drive(lon2, lat2, th_distance, t_adj_gps, log_gpsrunning)
@@ -274,8 +274,8 @@ if __name__ == '__main__':
     ######------------------photo running---------------------##########
     try:
         print('#####-----photo run start-----#####')
-        other.save_log(log_phase, '8', 'image run phase start', dateTime, time.time() - t_start)
-        phaseChk = other.phaseCheck(log_phase)
+        other.log(log_phase, '8', 'image run phase start', dateTime, time.time() - t_start)
+        phaseChk = other.phase(log_phase)
         print(f'Phase:\t{phaseChk}')
         if phaseChk == 8:
             magx_off, magy_off = calibration.cal(40, -40, 60)
@@ -292,8 +292,8 @@ if __name__ == '__main__':
         if con == 'n':
             exit()
         print('#####-----panorama composition-----#####')
-        other.save_log(log_phase, '9', 'panorama composition phase start', dateTime, time.time() - t_start)
-        phaseChk = other.phaseCheck(log_phase)
+        other.log(log_phase, '9', 'panorama composition phase start', dateTime, time.time() - t_start)
+        phaseChk = other.phase(log_phase)
         print(f'Phase:\t{phaseChk}')
         if phaseChk == 9:
             # Create a panoramic photo
