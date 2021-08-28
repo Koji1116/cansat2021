@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../sensor')
 import time
 
 from parts.sensor.envirionmental import bme280
