@@ -3,7 +3,8 @@ import numpy as np
 
 # from parts.sensor.camera import capture
 
-from ..sensor.camera import capture
+from sensor.camera import capture
+
 
 def get_center(contour):
     """

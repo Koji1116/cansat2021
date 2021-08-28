@@ -1,7 +1,7 @@
 from gpiozero import Motor
 import time
 
-from parts.detection import stuck
+import stuck
 
 
 def setup():

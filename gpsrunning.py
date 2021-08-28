@@ -1,15 +1,14 @@
 import datetime
 import time
 
-from parts.calibration import calibration
-from parts.detection import stuck
-from parts.sensor.gps import gps_navigate
-from parts.sensor.gps import gps
-from parts.sensor.axis import acc, mag, bmc050
-from parts.sensor.motor import motor
-from parts.sensor.communication import xbee
-from parts.other import other
-
+import calibration
+import stuck
+from sensor.gps import gps_navigate
+from sensor.gps import gps
+from sensor.axis import acc, mag, bmc050
+from sensor.motor import motor
+from sensor.communication import xbee
+import other
 
 
 def angle_goal(magx_off, magy_off, lon2, lat2):

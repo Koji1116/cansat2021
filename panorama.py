@@ -6,14 +6,13 @@ import time
 import shutil
 import random
 
-from parts.calibration import calibration
-from parts.sensor.camera import capture
-from parts.sensor.motor import motor
-from parts.sensor.axis import bmc050
-from parts.detection import paraavoidance
-from parts.detection import paradetection
-from parts.other import other
-
+import calibration
+from sensor.camera import capture
+from sensor.motor import motor
+from sensor.axis import bmc050
+import paraavoidance
+import paradetection
+import other
 
 
 def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):

@@ -1,68 +1,52 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/envirionmental')
-# sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/illuminance')
-# sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/gps')
-# import BMC050
-# import gps
-import traceback
-import BME280
-import pigpio
-import serial
 import time
 
+from sensor.envirionmental import bme280
 
-
-
-Plandcount = 0
-# GPSlandcount = 0
-# ACClandcount = 0
-pressdata = [0.0, 0.0, 0.0, 0.0]
-# gpsdata = [0.0, 0.0, 0.0, 0.0, 0.0]
-# accdata = [0.0, 0.0, 0.0]
-
-
-def pressdetect_land(anypress):
+def pressdetect_land(thd_press_land):
     """
     気圧情報による着地判定用
     引数はどのくらい気圧が変化したら判定にするかの閾値
     """
-    global presscount_land
-    global pressjudge_land
+    global press_count_land
+    global press_judge_land
     try:
-        pressdata = BME280.bme280_read()
+        pressdata = bme280.bme280_read()
         Prevpress = pressdata[1]
         time.sleep(1)
-        pressdata = BME280.bme280_read()
-        Latestpress = pressdata[1]
-        deltP = abs(Latestpress - Prevpress)
+        pressdata = bme280.bme280_read()
+        latestpress = pressdata[1]
+        delta_p = abs(latestpress - Prevpress)
         if 0.0 in pressdata:
-            print("BME280error!")
-            presscount_land = 0
-            pressjudge_land = 2
-        elif deltP < anypress:
-            presscount_land += 1
-            if presscount_land > 4:
-                pressjudge_land = 1
+            print("bme280error!")
+            press_count_land = 0
+            press_judge_land = 2
+        elif delta_p < thd_press_land:
+            press_count_land += 1
+            if press_count_land > 4:
+                press_judge_land = 1
                 print("presslandjudge")
         else:
-            presscount_land = 0
+            press_count_land = 0
+            press_judge_land = 0
     except:
-        presscount_land = 0
-        pressjudge_land = 2
-    return presscount_land, pressjudge_land
+        press_count_land = 0
+        press_judge_land = 2
+    return press_count_land, press_judge_land
 
 
 if __name__ == "__main__":
     print("Start")
 
-    BME280.bme280_setup()
-    BME280.bme280_calib_param()
+    bme280.bme280_setup()
+    bme280.bme280_calib_param()
+
+    landcount = 0
+    pressdata = [0.0, 0.0, 0.0, 0.0]
 
     while True:
         presslandjudge = 0
-
-        Plandcount, presslandjudge = pressdetect_land(0.1)                                            #調整するところ
-        print(f'count:{Plandcount}\tjudge:{presslandjudge}')
+        landcount, presslandjudge = pressdetect_land(0.1)                                            #調整するところ
+        print(f'count:{landcount}\tjudge:{presslandjudge}')
         if presslandjudge == 1:
             print('Press')
         else:
@@ -162,8 +146,8 @@ if __name__ == "__main__":
 #     print("Start")
 #
 #     gps.openGPS()
-#     BME280.bme280_setup()
-#     BME280.bme280_calib_param()
+#     bme280.bme280_setup()
+#     bme280.bme280_calib_param()
 #     BMC050.bmc050_setup()
 #
 #     while True:

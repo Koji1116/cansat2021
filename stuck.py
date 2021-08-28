@@ -7,11 +7,11 @@ sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/gps')
 import time
 import random
 
-from parts.sensor.communication import xbee
-from parts.sensor.motor import motor
-from parts.sensor.gps import gps_navigate
-from parts.sensor.gps import gps
-from parts.sensor.axis import acc
+from sensor.communication import xbee
+from sensor.motor import motor
+from sensor.gps import gps_navigate
+from sensor.gps import gps
+from sensor.axis import acc
 
 
 def ue_jug():

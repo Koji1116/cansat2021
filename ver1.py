@@ -2,17 +2,21 @@ import time
 import datetime
 import sys
 
-from parts.detection import release, paradetection
-from parts.detection import paraavoidance, land
-from parts.sensor.axis import bmc050
-from parts.sensor.communication import xbee
-from parts.sensor.gps import gps
-from parts.sensor.motor import motor
-from parts.sensor.envirionmental import bme280
-from parts.other import escape, panorama, other
-from parts.run import gpsrunning, photorunning
-from parts.calibration import calibration
-
+import release
+import paradetection
+import land
+import paraavoidance
+from sensor.axis import bmc050
+from sensor.communication import xbee
+from sensor.gps import gps
+from sensor.motor import motor
+from sensor.envirionmental import bme280
+import panorama
+import other
+import escape
+import gpsrunning
+import photorunning
+from . import calibration
 dateTime = datetime.datetime.now()
 
 # variable for timeout

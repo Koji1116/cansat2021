@@ -6,7 +6,7 @@ import time
 import BMC050
 import datetime
 
-from parts.other import other
+import other
 
 MAG_ADDRESS = 0x13
 MAG_REGISTER_ADDRESS = 0x42

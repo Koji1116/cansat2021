@@ -1,6 +1,6 @@
-from parts.other import melt
-from parts.sensor.motor import motor
-from parts.detection import stuck
+import melt
+from sensor.motor import motor
+import stuck
 
 
 def escape(t_melt=3):

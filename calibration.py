@@ -5,12 +5,12 @@ import traceback
 import datetime
 import numpy as np
 
-from parts.sensor.axis import mag
-from parts.sensor.gps import gps
-from parts.sensor.gps import gps_navigate
-from parts.sensor.motor import motor
-from parts.detection import stuck
-from parts.other import other
+from sensor.axis import mag
+from sensor.gps import gps
+from sensor.gps import gps_navigate
+from sensor.motor import motor
+from . import stuck
+from . import other
 
 
 

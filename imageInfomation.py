@@ -5,9 +5,11 @@ sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/motor')
 sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 import cv2
 import numpy as np
-import Capture
 import datetime
 import time
+
+from sensor.camera import capture
+
 
 
 
@@ -194,7 +196,7 @@ if __name__ == "__main__":
         path = f'photostorage/ImageInformation_{dateTime.month}-{dateTime.day}-{dateTime.hour}:{dateTime.minute}:{dateTime.second}-'
         # photoName = 'photostorage/practice13.png'
         while 1:
-            photoName = Capture.Capture(path, 320, 240)
+            photoName = capture.Capture(path, 320, 240)
             goalflug, goalarea, gap, imgname = GoalDetection(photoName, 200, 20, 80, 50)
             print(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}')
             time.sleep(1)

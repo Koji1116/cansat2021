@@ -3,14 +3,14 @@ import cv2
 import sys
 import numpy as np
 
-from parts.detection import stuck
-from parts.calibration import calibration
-from parts.sensor.camera import capture
-from parts.sensor.communication import xbee
-from parts.sensor.axis import mag, bmc050
-from parts.sensor.motor import motor
-from parts.other import other
-from . import gpsrunning
+import stuck
+import calibration
+from sensor.camera import capture
+from sensor.communication import xbee
+from sensor.axis import mag, bmc050
+from sensor.motor import motor
+import other
+import gpsrunning
 
 # 写真内の赤色面積で進時間を決める用　調整必要
 area_short = 59.9

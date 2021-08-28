@@ -2,7 +2,7 @@ from smbus import SMBus
 import time
 import datetime
 
-from parts.other import other
+import other
 
 ACC_ADDRESS = 0x19
 ACC_REGISTER_ADDRESS = 0x02
