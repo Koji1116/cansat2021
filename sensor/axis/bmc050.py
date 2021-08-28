@@ -124,7 +124,7 @@ def mag_dataRead():
                     value[i] = value[i] - 32768
         
         if value == [0.0, 0.0, 0.0]:
-            BMC050_error()
+            bmc050_error()()
         else:
             break
 
