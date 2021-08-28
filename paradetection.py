@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 
-# from parts.sensor.camera import capture
-
 from sensor.camera import capture
 
 

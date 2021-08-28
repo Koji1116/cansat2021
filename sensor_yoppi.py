@@ -1,32 +1,18 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/gps')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/axis')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/envirionmental')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/illuminance')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/communication')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/motor')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/camera')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
-import melt
-import BME280
-import Xbee
-import mag
-import GPS
-import TSL2572
-#import acc 
-import Xbee
-from gpiozero import Motor
+import os
 import time
-import motor
 from smbus import SMBus
 import pigpio
-import picamera
-import Capture
-import os
+
+from sensor.envirionmental import bme280
+from sensor.axis import mag
+from sensor.gps import gps
+from sensor.communication import xbee
+from sensor.motor import motor
+from sensor.camera import capture
 
 pi = pigpio.pi()
 
-meltPin  = 17
+meltPin = 17
 camerapath = '/home/pi/Desktop/Cansat2021ver/test/img_falltest/falltest'
 
 ##### for only acc
@@ -79,16 +65,16 @@ os.system('i2cdetect -y 1')
 print('\n----camera----')
 os.system('vcgencmd get_camera')
 try:
-    Capture.Capture(camerapath)
+    capture.Capture(camerapath)
 except:
     print('error : camera\n')
 
 print('\n---Environment---')
 try:
-    BME280.bme280_setup()
-    BME280.bme280_calib_param()
+    bme280.bme280_setup()
+    bme280.bme280_calib_param()
     for _ in range(5):
-        bme_data = BME280.bme280_read()
+        bme_data = bme280.bme280_read()
         print(bme_data)
         time.sleep(1)
 except:
@@ -145,18 +131,18 @@ except:
 # except:
 #     print('error : TSL2572')
 
-print('---Xbee---')
+print('---xbee---')
 try:
-    Xbee.on()
+    xbee.on()
     for i in range(10):
-        Xbee.str_trans(str(i)+'  : reseive?')
+        xbee.str_trans(str(i)+'  : reseive?')
 except:
-    print('error : Xbee')
+    print('error : xbee')
 
 print('---gps---')
 try:
-    GPS.openGPS()
-    data = GPS.GPSdata_read()
+    gps.openGPS()
+    data = gps.GPSdata_read()
     print(data)
 except:
     print('error : gps')

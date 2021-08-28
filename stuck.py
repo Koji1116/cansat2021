@@ -1,9 +1,3 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/axis')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/motor')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/communication')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/motor')
-sys.path.append('/home/pi/Desktop/Cansat2021ver/sensor/gps')
 import time
 import random
 
@@ -12,7 +6,6 @@ from sensor.motor import motor
 from sensor.gps import gps_navigate
 from sensor.gps import gps
 from sensor.axis import acc
-
 
 def ue_jug():
     ue_count = 0
@@ -111,7 +104,7 @@ def stuck_avoid():
         lat_old, lon_old = gps.location()
         # 0~6
         for i in range(7):
-            stuck.stuck_avoid_move(i)
+            stuck_avoid_move(i)
             lat_new, lon_new = gps.location()
             bool_stuck = stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
             if bool_stuck == True:
@@ -126,9 +119,9 @@ def stuck_avoid():
             break
         # 3,2,1,0
         for i in range(7):
-            stuck.stuck_avoid_move(7 - i)
+            stuck_avoid_move(7 - i)
             lat_new, lon_new = gps.location()
-            bool_stuck = stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
+            bool_stuck = stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
             if bool_stuck == False:
                 # if i == 1 or i == 4 or i == 5:
                 #     print('スタックもう一度引っかからないように避ける')
@@ -141,9 +134,9 @@ def stuck_avoid():
             break
         random = random(0, 6, 7)
         for i in range(7):
-            stuck.stuck_avoid_move(random[i])
+            stuck_avoid_move(random[i])
             lat_new, lon_new = gps.location()
-            bool_stuck = stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
+            bool_stuck = stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
             if bool_stuck == False:
                 # if i == 1 or i == 4 or i == 5:
                 #     print('スタックもう一度引っかからないように避ける')
@@ -164,5 +157,3 @@ if __name__ == '__main__':
         a = int(input('出力入力しろ'))
         b = float(input('時間入力しろ'))
         motor.move(a, a, b)
-        
-    

@@ -2,7 +2,6 @@ import time
 
 from sensor.envirionmental import bme280
 
-
 def pressdetect_release(thd_press_release, t_delta_release):
     '''
     気圧による放出判定
