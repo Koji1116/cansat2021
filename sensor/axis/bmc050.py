@@ -171,7 +171,7 @@ if __name__ == '__main__':
         while 1:
             bmcData = bmc050_read()
             print(bmcData)
-            time.sleep(0.1)
+            time.sleep(0.002)
 
     except KeyboardInterrupt:
         print()
