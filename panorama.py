@@ -246,9 +246,9 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
         print_xbee('##--Composition failed--##')
     path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama/dst', 'jpg')
     cv2.imwrite(path_dst, result)
-    print_xbee('################################################################')
+    print_xbee('###################################################################')
     print_xbee(f'Panorama name:\t{path_dst}')
-    print_xbee('################################################################')
+    print_xbee('###################################################################')
     return path_dst
 
 
