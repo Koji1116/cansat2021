@@ -6,6 +6,27 @@ import os
 
 def picture(path, width=320, height=240):
     """写真を取るための関数"""
+    def dir(path):
+        """
+        /dir/dir/dir/fileの時にfileの前にディレクトリが存在するか調べる関数
+        引数は/dir/dir/dir/fileの形のパス
+        """
+        fd = path.rfind('/')
+        dir = path[:fd]
+
+        is_dir = os.path.isdir(dir)
+        return is_dir
+    def make_dir(path):
+        """
+        dir関数で調べた結果ディレクトリが存在しない場合はそのディレクトリを作成する
+        """
+        if not dir(path):
+            fd = path.rfind('/')
+            directory = path[:fd]
+            os.mkdir(directory)
+            print('******Directory is maked******')
+        else:
+            print('**Directory is exist**')
     def filename(f, ext):
         """
         ファイル名に番号をつけるための関数
@@ -30,6 +51,7 @@ def picture(path, width=320, height=240):
         return f
 
     try:
+        make_dir(path)
         with picamera.PiCamera() as camera:
             camera.rotation = 270
             # 取得した画像の回転
