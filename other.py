@@ -31,8 +31,8 @@ def make_dir(path):
     """
     if not dir(path):
         fd = path.rfind('/')
-        dir = path[:fd]
-        os.mkdir(dir)
+        directory = path[:fd]
+        os.mkdir(directory)
         print('******Directory is maked******')
     else:
         print('**Directory is exist')
