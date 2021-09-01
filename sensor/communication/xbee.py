@@ -27,6 +27,7 @@ def img_trans(string):
 
 
 def str_trans(string):
+    string = str(string)
     ser = serial. Serial(
         port="/dev/ttyAMA0",
         baudrate=57600,

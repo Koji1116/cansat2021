@@ -132,6 +132,7 @@ def azimuth(magx_off, magy_off, n=3):
         magx = magdata[0]
         magy = magdata[1]
         theta = np.append(theta, calibration.angle(magx, magy, magx_off, magy_off))
+    print(theta)
     azimuth = np.average(theta)
     return azimuth
 
