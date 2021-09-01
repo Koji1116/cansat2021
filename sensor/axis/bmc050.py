@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/home/pi/Desktop/Cansat2021ver/other')
 from smbus import SMBus
 import time
 import pigpio
