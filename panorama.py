@@ -128,6 +128,7 @@ def azimuth(magx_off, magy_off, n=3):
     theta = []
 
     for i in range(n):
+        time.sleep(0.03)
         magdata = bmc050.mag_read()
         magx = magdata[0]
         magy = magdata[1]
@@ -166,7 +167,6 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         strength_l_pano = power
         strength_r_pano = power * -1
         motor.move(strength_l_pano, strength_r_pano, t_rotation_pano, ue=False)
-        time.sleep(0.2)
         latestθ = azimuth(magx_off, magy_off)
 
         if preθ >= 300 and latestθ <= 100:
