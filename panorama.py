@@ -125,11 +125,11 @@ def initialize(path_src_panorama):
     dict_angle = [dict_angle1, dict_angle2, dict_angle3]
     return count_panorama, count_stuck, dict_angle
 
-def azimuth(magx_off, magy_off, n=3):
+def azimuth(magx_off, magy_off, n=1):
     theta = []
 
     for i in range(n):
-        time.sleep(0.03)
+        time.sleep(0.02)
         magdata = bmc050.mag_read()
         magx = magdata[0]
         magy = magdata[1]
@@ -151,7 +151,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
     count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
     # Calculate the angle
     _, _, _, magx_off, magy_off, _ = calibration.calculate_offset(mag_mat)
-    time.sleep(0.07)
+    time.sleep(0.05)
     preθ = azimuth(magx_off, magy_off)
     sumθ = 0
 
