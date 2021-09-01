@@ -35,7 +35,7 @@ def make_dir(path):
         os.mkdir(directory)
         print('******Directory is maked******')
     else:
-        print('**Directory is exist')
+        print('**Directory is exist**')
 
 
 def log(path, *data):
@@ -44,6 +44,7 @@ def log(path, *data):
     前半はgit管理でログ作成用
     後半はgit管理外でログ作成用(git操作間違えてもログを残すため)
     """
+    make_dir(path)
     with open(path, 'a') as f:
         for i in range(len(data)):
             if isinstance(data[i], list):
@@ -106,6 +107,8 @@ def phase(path):
 
 
 if __name__ == "__main__":
-    path = '/home/pi/Desktop/cansat2021/log1/phaseLog'
+    import time
+    path = '/home/pi/Desktop/cansat2021/log2/phaseLog'
     print(dir(path))
     make_dir(path)
+    log(path, time.time())
