@@ -106,4 +106,6 @@ def phase(path):
 
 
 if __name__ == "__main__":
-    print(dir('/home/pi/Desktop/cansat2021/log1/phaseLog'))
+    path = '/home/pi/Desktop/cansat2021/log1/phaseLog'
+    print(dir(path))
+    dir(path)
