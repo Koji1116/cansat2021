@@ -124,7 +124,7 @@ def initialize(path_src_panorama):
     dict_angle = [dict_angle1, dict_angle2, dict_angle3]
     return count_panorama, count_stuck, dict_angle
 
-def theta_azimuth(magx_off, magy_off, n):
+def azimuth(magx_off, magy_off, n=3):
     theta = []
 
     for i in range(n):
@@ -148,7 +148,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
     count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
     # Calculate the angle
     _, _, _, magx_off, magy_off, _ = calibration.calculate_offset(mag_mat)
-    preθ = theta_azimuth(magx_off, magy_off)
+    preθ = azimuth(magx_off, magy_off)
     sumθ = 0
 
     # xbee.str_trans('whileスタート preθ:{0}'.format(preθ))
@@ -165,7 +165,8 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         strength_l_pano = power
         strength_r_pano = power * -1
         motor.move(strength_l_pano, strength_r_pano, t_rotation_pano, ue=False)
-        latestθ = theta_azimuth(magx_off, magy_off)
+        time.sleep(0.2)
+        latestθ = azimuth(magx_off, magy_off)
 
         if preθ >= 300 and latestθ <= 100:
             latestθ += 360
@@ -188,7 +189,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
                 paraavoidance.parachute_avoidance(flug, gap)
                 # ----Initialize-----#
                 count_panorama, count_stuck, dict_angle = initialize(path_src_panorama)
-                preθ = theta_azimuth(magx_off, magy_off)
+                preθ = azimuth(magx_off, magy_off)
                 sumθ = 0
                 # xbee.str_trans('whileスタート preθ:{0}'.format(preθ))
                 print_xbee(f'whileスタート　preθ:{preθ}')
