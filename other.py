@@ -108,7 +108,6 @@ def phase(path):
 
 if __name__ == "__main__":
     import time
-    path = '/home/pi/Desktop/cansat2021/log2/phaseLog'
+    path = '/home/pi/Desktop/cansat2021/log3/phaseLog'
     print(dir(path))
-    make_dir(path)
     log(path, time.time())
