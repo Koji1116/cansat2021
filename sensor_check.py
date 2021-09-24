@@ -82,11 +82,11 @@ try:
 except:
     print('error : env')
 
-# print('---melt----')
-# try:
-# 	melt.down()
-# except:
-# 	pi.write(meltPin, 0)
+print('---melt----')
+try:
+	melt.down()
+except:
+	pi.write(meltPin, 0)
 
 
 print('---motor---')
