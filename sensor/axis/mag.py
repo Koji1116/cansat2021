@@ -2,7 +2,7 @@ from smbus import SMBus
 import time
 import datetime
 
-from . import bmc050
+import bmc050
 
 MAG_ADDRESS = 0x13
 MAG_REGISTER_ADDRESS = 0x42
