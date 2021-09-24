@@ -79,6 +79,33 @@ def mag_read():
             break
     return value
 
+def mag_dataRead():
+    # --- Read Mag Data --- #
+    while 1:
+        magData = [0, 0, 0, 0, 0, 0, 0, 0]
+        value = [0.0, 0.0, 0.0]
+        for i in range(8):
+            try:
+                magData[i] = i2c.read_byte_data(
+                    MAG_ADDRESS, MAG_REGISTER_ADDRESS + i)
+            except:
+                pass
+                # print("error")
+
+        for i in range(3):
+            if i != 2:
+                value[i] = ((magData[2*i+1] * 256) + (magData[2*i] & 0xF8)) / 8
+                if value[i] > 4095:
+                    value[i] = value[i] - 8192
+            else:
+                value[i] = ((magData[2*i+1] * 256) | (magData[2*i] & 0xF8)) / 2
+                if value[i] > 16383:
+                    value[i] = value[i] - 32768
+        if value == [0.0, 0.0, 0.0] :
+            BMC050.BMC050_error()
+        else:
+            break
+    return value
 
 
 if __name__ == '__main__':
