@@ -96,9 +96,7 @@ motor.move(20, 20, 2)
 
 print('---mag---')
 try:
-    print(1)
     mag.bmc050_setup()
-    print(2)
     for _ in range(5):
         mag_data = mag.mag_dataread()
         print(mag_data)
