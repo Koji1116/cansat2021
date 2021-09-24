@@ -98,7 +98,7 @@ print('---mag---')
 try:
     mag.bmc050_setup()
     for _ in range(5):
-        mag_data = mag.mag_dataread()
+        mag_data = mag.mag_dataRead()
         print(mag_data)
         time.sleep(0.2)
 except:
