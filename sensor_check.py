@@ -86,7 +86,7 @@ print('---melt----')
 try:
 	melt.down()
 except:
-	pi.write(meltPin, 0)
+	pi.write(meltPin, 1)
 
 
 print('---motor---')
