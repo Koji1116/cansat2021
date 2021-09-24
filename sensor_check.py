@@ -9,6 +9,7 @@ from sensor.gps import gps
 from sensor.communication import xbee
 import motor
 from sensor.camera import take
+import melt
 
 pi = pigpio.pi()
 
@@ -86,7 +87,7 @@ print('---melt----')
 try:
 	melt.down()
 except:
-	pi.write(meltPin, 1)
+	pi.write(meltPin, 0)
 
 
 print('---motor---')
