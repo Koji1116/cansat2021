@@ -223,7 +223,8 @@ if __name__ == '__main__':
     lon2 = 139.9118744
     gps.open_gps()
     gps.open_gps()
-    acc.bmc050_setup()
+    while (acc.bmc050_setup() == False):
+        bmc050.bmc050_off()
     mag.bmc050_setup()
     motor.setup()
 
