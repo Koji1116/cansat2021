@@ -214,7 +214,7 @@ if __name__ == '__main__':
     #######--------------------------Paraavo--------------------------#######
 
     print_xbee('#####-----Para avoid start-----#####')
-    other.log(log_phase, '5', 'Melting phase start',
+    other.log(log_phase, '5', 'Paraavo phase start',
               dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
