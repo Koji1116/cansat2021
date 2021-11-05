@@ -44,8 +44,10 @@ strength_r_pano = -33
 t_rotation_pano = 0.1
 
 # variable for GPSrun
-lat2 = 35.918548
-lon2 = 139.908896
+# lat2 = 35.918548
+# lon2 = 139.908896
+lat2 = 35.9234892
+lon2 = 139.9118744
 
 th_distance = 6.5
 t_adj_gps = 180
@@ -56,20 +58,29 @@ path_photo_imagerun = f'photostorage/ImageGuidance_{dateTime.month}-{dateTime.da
 
 # variable for log
 log_phase = other.filename('/home/pi/Desktop/cansat2021/log/phaseLog', 'txt')
-log_release = other.filename('/home/pi/Desktop/cansat2021/log/releaselog', 'txt')
-log_landing = other.filename('/home/pi/Desktop/cansat2021/log/landingLog', 'txt')
-log_melting = other.filename('/home/pi/Desktop/cansat2021/log/meltingLog', 'txt')
-log_paraavoidance = other.filename('/home/pi/Desktop/cansat2021/log/paraAvoidanceLog', 'txt')
-log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021/log/panoramaLog', 'txt')
-log_gpsrunning = other.filename('/home/pi/Desktop/cansat2021/log/gpsrunningLog', 'txt')
-log_photorunning = other.filename('/home/pi/Desktop/cansat2021/log/photorunning', 'txt')
-log_panoramacom = other.filename('/home/pi/Desktop/cansat2021/log/panoramacomLog', 'txt')
+log_release = other.filename(
+    '/home/pi/Desktop/cansat2021/log/releaselog', 'txt')
+log_landing = other.filename(
+    '/home/pi/Desktop/cansat2021/log/landingLog', 'txt')
+log_melting = other.filename(
+    '/home/pi/Desktop/cansat2021/log/meltingLog', 'txt')
+log_paraavoidance = other.filename(
+    '/home/pi/Desktop/cansat2021/log/paraAvoidanceLog', 'txt')
+log_panoramashooting = other.filename(
+    '/home/pi/Desktop/cansat2021/log/panoramaLog', 'txt')
+log_gpsrunning = other.filename(
+    '/home/pi/Desktop/cansat2021/log/gpsrunningLog', 'txt')
+log_photorunning = other.filename(
+    '/home/pi/Desktop/cansat2021/log/photorunning', 'txt')
+log_panoramacom = other.filename(
+    '/home/pi/Desktop/cansat2021/log/panoramacomLog', 'txt')
 
 # photo path
 path_src_panorama1 = '/home/pi/Desktop/cansat2021/src_panorama1/panoramaShooting'
 path_src_panorama2 = '/home/pi/Desktop/cansat2021/src_panorama2/panoramaShooting'
 path_src_panorama3 = '/home/pi/Desktop/cansat2021/src_panorama3/panoramaShooting'
-path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3)
+path_src_panorama = (path_src_panorama1,
+                     path_src_panorama2, path_src_panorama3)
 path_paradete = '/home/pi/Desktop/cansat2021/photo_paradete/paradete'
 
 
@@ -94,7 +105,8 @@ if __name__ == '__main__':
     try:
         t_start = time.time()
         print_xbee('#####-----Setup Phase start-----#####')
-        other.log(log_phase, "1", "Setup phase", dateTime, time.time() - t_start)
+        other.log(log_phase, "1", "Setup phase",
+                  dateTime, time.time() - t_start)
         phase = other.phase(log_phase)
         if phase == 1:
             print_xbee(f'Phase:\t{phase}')
@@ -109,7 +121,8 @@ if __name__ == '__main__':
 
     #######--------------------------Release--------------------------#######
     print_xbee('#####-----Release Phase start-----#####')
-    other.log(log_phase, "2", "Release Phase Started", dateTime, time.time() - t_start)
+    other.log(log_phase, "2", "Release Phase Started",
+              dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 2:
@@ -118,8 +131,10 @@ if __name__ == '__main__':
         try:
             while time.time() - t_release_start <= t_out_release:
                 print_xbee(f'loop_release\t {i}')
-                press_count_release, press_judge_release = release.pressdetect_release(thd_press_release, t_delta_release)
-                print_xbee(f'count:{press_count_release}\tjudge{press_judge_release}')
+                press_count_release, press_judge_release = release.pressdetect_release(
+                    thd_press_release, t_delta_release)
+                print_xbee(
+                    f'count:{press_count_release}\tjudge{press_judge_release}')
                 other.log(log_release, dateTime, time.time() - t_start, gps.gps_data_read(),
                           bme280.bme280_read(), press_count_release, press_judge_release)
                 if press_judge_release == 1:
@@ -140,28 +155,33 @@ if __name__ == '__main__':
     #######--------------------------Landing--------------------------#######
     try:
         print_xbee('#####-----Landing phase start-----#####')
-        other.log(log_phase, '3', 'Landing phase', dateTime, time.time() - t_start)
+        other.log(log_phase, '3', 'Landing phase',
+                  dateTime, time.time() - t_start)
         phase = other.phase(log_phase)
         print_xbee(f'Phase:\t{phase}')
         if phase == 3:
-            print_xbee(f'Landing Judgement Program Start\t{time.time() - t_start}')
+            print_xbee(
+                f'Landing Judgement Program Start\t{time.time() - t_start}')
             t_land_start = time.time()
             i = 1
             while time.time() - t_land_start <= t_out_land:
                 print_xbee(f"loop_land\t{i}")
-                press_count_release, press_judge_release = land.pressdetect_land(thd_press_land)
-                print_xbee(f'count:{press_count_release}\tjudge{press_judge_release}')
+                press_count_release, press_judge_release = land.pressdetect_land(
+                    thd_press_land)
+                print_xbee(
+                    f'count:{press_count_release}\tjudge{press_judge_release}')
                 if press_judge_release == 1:
                     print_xbee('Landed\n \n')
                     break
                 else:
                     print_xbee('Not Landed\n \n')
-                other.log(log_landing, dateTime, time.time() - t_start, gps.gps_data_read(), bme280.bme280_read())
+                other.log(log_landing, dateTime, time.time() - t_start,
+                          gps.gps_data_read(), bme280.bme280_read())
                 i += 1
             else:
                 print_xbee('Landed Timeout')
             other.log(log_landing, dateTime, time.time() - t_start, gps.gps_data_read(), bme280.bme280_read(),
-                          'Land judge finished')
+                      'Land judge finished')
             print_xbee('######-----Landed-----######\n \n')
     except Exception as e:
         tb = sys.exc_info()[2]
@@ -173,13 +193,16 @@ if __name__ == '__main__':
     #######--------------------------Escape--------------------------#######
 
     print_xbee('#####-----Melting phase start#####')
-    other.log(log_phase, '4', 'Melting phase start', dateTime, time.time() - t_start)
+    other.log(log_phase, '4', 'Melting phase start',
+              dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 4:
-        other.log(log_melting, dateTime, time.time() - t_start, gps.gps_data_read(), "Melting Start")
+        other.log(log_melting, dateTime, time.time() - t_start,
+                  gps.gps_data_read(), "Melting Start")
         escape.escape()
-        other.log(log_melting, dateTime, time.time() - t_start, gps.gps_data_read(), "Melting Finished")
+        other.log(log_melting, dateTime, time.time() - t_start,
+                  gps.gps_data_read(), "Melting Finished")
     print_xbee('########-----Melted-----#######\n \n')
     # except Exception as e:
     #     tb = sys.exc_info()[2]
@@ -191,7 +214,8 @@ if __name__ == '__main__':
     #######--------------------------Paraavo--------------------------#######
 
     print_xbee('#####-----Para avoid start-----#####')
-    other.log(log_phase, '5', 'Melting phase start', dateTime, time.time() - t_start)
+    other.log(log_phase, '5', 'Melting phase start',
+              dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     count_paraavo = 0
@@ -199,8 +223,10 @@ if __name__ == '__main__':
         while count_paraavo < 3:
             flug, area, gap, photoname = paradetection.para_detection(
                 path_paradete, 320, 240, 200, 10, 120, 1)
-            print_xbee(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-            other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
+            print_xbee(
+                f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
+            other.log(log_paraavoidance, dateTime, time.time() -
+                      t_start, gps.gps_data_read(), flug, area, gap, photoname)
             paraavoidance.parachute_avoidance(flug, gap)
             if flug == -1 or flug == 0:
                 count_paraavo += 1
@@ -215,14 +241,17 @@ if __name__ == '__main__':
     #######--------------------------panorama--------------------------#######
 
     print_xbee('#####-----panorama shooting start-----#####')
-    other.log(log_phase, '6', 'panorama shooting phase start', dateTime, time.time() - t_start)
+    other.log(log_phase, '6', 'panorama shooting phase start',
+              dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 6:
         t_start_panorama = time.time()  # プログラムの開始時刻
         time.sleep(3)
-        mag_mat = calibration.magdata_matrix(strength_l_cal, strength_r_cal, number_data)
-        path_src_panorama = panorama.shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
+        mag_mat = calibration.magdata_matrix(
+            strength_l_cal, strength_r_cal, number_data)
+        path_src_panorama = panorama.shooting(
+            t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
         print_xbee(f'runTime_panorama:\t{time.time() - t_start_panorama}')
     print_xbee('#####-----panorama ended-----##### \n \n')
     # except Exception as e:
@@ -234,13 +263,16 @@ if __name__ == '__main__':
 
     ####-----goal-parachute-roverの位置関係の場合のためのパラ回避-----#####
     magx_off, magy_off = calibration.cal(40, -40, 30)
-    gpsrunning.adjust_direction(gpsrunning.angle_goal(magx_off, magy_off, lon2, lat2), magx_off, magy_off, lon2, lat2)
+    gpsrunning.adjust_direction(gpsrunning.angle_goal(
+        magx_off, magy_off, lon2, lat2), magx_off, magy_off, lon2, lat2)
     count_paraavo2 = 0
     while count_paraavo2 < 4:
         flug, area, gap, photoname = paradetection.para_detection(
             path_paradete, 320, 240, 200, 10, 120, 1)
-        print_xbee(f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-        other.log(log_paraavoidance, dateTime, time.time() - t_start, gps.gps_data_read(), flug, area, gap, photoname)
+        print_xbee(
+            f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
+        other.log(log_paraavoidance, dateTime, time.time() - t_start,
+                  gps.gps_data_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
         if flug == -1 or flug == 0:
             count_paraavo2 += 1
@@ -248,7 +280,8 @@ if __name__ == '__main__':
     #######--------------------------gps--------------------------#######
 
     print_xbee('#####-----gps run start-----#####')
-    other.log(log_phase, '7', 'GPSrun phase start', dateTime, time.time() - t_start)
+    other.log(log_phase, '7', 'GPSrun phase start',
+              dateTime, time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 7:
@@ -262,12 +295,14 @@ if __name__ == '__main__':
     ######------------------photo running---------------------##########
     try:
         print_xbee('#####-----photo run start-----#####')
-        other.log(log_phase, '8', 'image run phase start', dateTime, time.time() - t_start)
+        other.log(log_phase, '8', 'image run phase start',
+                  dateTime, time.time() - t_start)
         phase = other.phase(log_phase)
         print_xbee(f'Phase:\t{phase}')
         if phase == 8:
             magx_off, magy_off = calibration.cal(40, -40, 60)
-            photorunning.image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2, th_distance, t_adj_gps, gpsrun=True)
+            photorunning.image_guided_driving(
+                log_photorunning, G_thd, magx_off, magy_off, lon2, lat2, th_distance, t_adj_gps, gpsrun=True)
     except Exception as e:
         tb = sys.exc_info()[2]
         print_xbee("message:{0}".format(e.with_traceback(tb)))
@@ -280,7 +315,8 @@ if __name__ == '__main__':
         if con == 'n':
             exit()
         print_xbee('#####-----panorama composition-----#####')
-        other.log(log_phase, '9', 'panorama composition phase start', dateTime, time.time() - t_start)
+        other.log(log_phase, '9', 'panorama composition phase start',
+                  dateTime, time.time() - t_start)
         phase = other.phase(log_phase)
         print_xbee(f'Phase:\t{phase}')
         if phase == 9:

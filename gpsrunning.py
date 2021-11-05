@@ -69,7 +69,8 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
         time.sleep(1)
     print(f'theta = {theta} \t rotation finished!!!')
 
-def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansat2021ver/log/gpsrunningLog', t_start=0):
+
+def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2021ver/log/gpsrunningLog', t_start=0):
     """
     GPS走行の関数
     統合する場合はprintをXbee.str_transに変更，other.saveLogのコメントアウトを外す
@@ -96,7 +97,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
         print('##--calibration Start--##\n')
         magx_off, magy_off = calibration.cal(40, -40, 30)
         print(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
-            
+
         theta = angle_goal(magx_off, magy_off, lon2, lat2)
         adjust_direction(theta, magx_off, magy_off, lon2, lat2)
 
@@ -108,9 +109,12 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
             lat_new, lon_new = lat1, lon1
             direction = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
             azimuth, goal_distance = direction["azimuth1"], direction["distance"]
-            print(f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
-            xbee.str_trans(f'lat: {lat1}\tlon: {lon1}\tdistance: {direction["distance"]}\ttheta: {theta}')
-            other.log(logpath, datetime.datetime.now(), time.time() - t_start, lat1, lon1, direction['distance'], azimuth)
+            print(
+                f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
+            xbee.str_trans(
+                f'lat: {lat1}\tlon: {lon1}\tdistance: {direction["distance"]}\ttheta: {theta}')
+            other.log(logpath, datetime.datetime.now(), time.time() -
+                      t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 2):
                     pass
@@ -121,7 +125,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
 
             if goal_distance <= thd_distance:
                 break
-            else:                
+            else:
                 for _ in range(50):
                     #theta = angle_goal(magx_off, magy_off)
                     magdata = bmc050.mag_read()
@@ -207,16 +211,16 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath = '/home/pi/Desktop/Cansa
         time.sleep(2)
         lat_new, lon_new = gps.location()
 
-
-
         direction = calibration.calculate_direction(lon2, lat2)
         goal_distance = direction['distance']
         print(f'-----distance: {goal_distance}-----')
 
 
 if __name__ == '__main__':
-    lat2 = 35.918548
-    lon2 = 139.908896
+    # lat2 = 35.918548
+    # lon2 = 139.908896
+    lat2 = 35.9234892
+    lon2 = 139.9118744
     gps.open_gps()
     gps.open_gps()
     acc.bmc050_setup()
