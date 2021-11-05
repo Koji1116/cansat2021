@@ -1,0 +1,11 @@
+-1.9335823059082031	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0410.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0335.jpg	
+-4.93391489982605	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0411.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0336.jpg	
+-7.923701047897339	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0412.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0337.jpg	
+-10.883695602416992	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0413.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0338.jpg	
+-13.863696098327637	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0414.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0339.jpg	
+-16.86364769935608	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0415.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0340.jpg	
+-19.823586225509644	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0416.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0341.jpg	
+-22.813703775405884	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0417.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0342.jpg	
+-26.073854207992554	-1	0.01171875	1000000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0418.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0343.jpg	
+-29.053565502166748	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0419.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0344.jpg	
+-31.99360680580139	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0420.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0345.jpg	
