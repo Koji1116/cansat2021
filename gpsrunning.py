@@ -126,7 +126,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2
             if goal_distance <= thd_distance:
                 break
             else:
-                for _ in range(50):
+                for _ in range(25):
                     #theta = angle_goal(magx_off, magy_off)
                     magdata = bmc050.mag_read()
                     mag_x = magdata[0]
@@ -203,7 +203,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2
                     print(f'angle ----- {theta}')
                     strength_l, strength_r = 70 + adj, 70 - adj - adj_r
                     motor.motor_continue(strength_l, strength_r)
-                    time.sleep(0.02)
+                    time.sleep(0.04)
                     mag_x_old = mag_x
                     mag_y_old = mag_y
             t_stuck_count += 1
