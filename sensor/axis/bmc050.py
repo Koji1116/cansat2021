@@ -161,8 +161,8 @@ def bmc050_error():
     """
     bmc050_off()
     print('------mag error------switch start')
-    bmc050_off()
-    time.sleep(0.1)
+    # bmc050_off()
+    time.sleep(0.2)
     bmc050_setup()
 
 
