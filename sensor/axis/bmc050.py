@@ -15,8 +15,10 @@ i2c = SMBus(1)
 def bmc050_on():
     pi.write(27, 1)
 
+
 def bmc050_off():
     pi.write(27, 0)
+
 
 def bmc050_setup():
     """
@@ -126,9 +128,9 @@ def mag_read():
                 value[i] = ((magData[2*i+1] * 256) | (magData[2*i] & 0xF8)) / 2
                 if value[i] > 16383:
                     value[i] = value[i] - 32768
-        
+
         if value == [0.0, 0.0, 0.0]:
-            bmc050_error()()
+            bmc050_error()
         else:
             break
 
@@ -163,6 +165,7 @@ def bmc050_error():
     time.sleep(0.1)
     bmc050_setup()
 
+
 if __name__ == '__main__':
     try:
         bmc050_setup()
@@ -177,4 +180,4 @@ if __name__ == '__main__':
         print()
     except Exception as e:
         print('fuck')
-        #print(e.message)
+        # print(e.message)
