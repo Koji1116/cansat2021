@@ -70,27 +70,16 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     print(f'theta = {theta} \t rotation finished!!!')
 
 
-def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2021ver/log/gpsrunningLog', t_start=0):
+def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2021ver/log/gpsrunningLog', t_start=0):
     """
     GPS走行の関数
     統合する場合はprintをXbee.str_transに変更，other.saveLogのコメントアウトを外す
     """
     direction = calibration.calculate_direction(lon2, lat2)
     goal_distance = direction['distance']
-    count_bmc050_erro = 0
-    # anan = 0
     while goal_distance >= thd_distance:
         t_stuck_count = 1
         stuck.ue_jug()
-        # if anan == 0:
-        #     pass
-        # else:
-        #     # ------------- calibration -------------#
-        #     # xbee.str_trans('calibration Start')
-        #     print('##--calibration Start--##\n')
-        #     magx_off, magy_off = calibration.cal(40, -40, 30)
-        #     print(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
-        #     anan =1
 
         # ------------- calibration -------------#
         # xbee.str_trans('calibration Start')
@@ -103,7 +92,6 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2
 
         t_cal = time.time()
         lat_old, lon_old = gps.location()
-        mag_x_old, mag_y_old = 0, 0
         while time.time() - t_cal <= t_adj_gps:
             lat1, lon1 = gps.location()
             lat_new, lon_new = lat1, lon1
@@ -127,35 +115,10 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2
                 break
             else:
                 for _ in range(25):
-                    #theta = angle_goal(magx_off, magy_off)
                     magdata = bmc050.mag_read()
                     mag_x = magdata[0]
                     mag_y = magdata[1]
-                    if mag_x == mag_x_old and mag_y == mag_y_old:
-                        count_bmc050_erro += 1
-                        if count_bmc050_erro >= 3:
-                            print('-------mag_x mag_y error-----修復開始')
-                            bmc050.bmc050_error()
-                            magdata = bmc050.mag_read()
-                            mag_x = magdata[0]
-                            mag_y = magdata[1]
-                            count_bmc050_erro = 0
-                    else:
-                        count_bmc050_erro = 0
-                    theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
-                    # if mag_x == mag_x_old and mag_y == mag_y_old:
-                    #     count_bmc050_erro += 1
-                    #     if count_bmc050_erro >= 3:
-                    #         print('-------mag_x mag_y error-----switch start  ')
-                    #         motor.motor_stop(0.5)
-                    #         BMC050.BMC050_error()
-                    #         stuck.ue_jug()
-                    #         magdata = BMC050.mag_dataRead()
-                    #         mag_x = magdata[0]
-                    #         mag_y = magdata[1]
-                    #         count_bmc050_erro = 0
-                    # else:
-                    #     count_bmc050_erro = 0
+                    
                     theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
                     angle_relative = azimuth - theta
                     if angle_relative >= 0:
@@ -204,8 +167,6 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/Cansat2
                     strength_l, strength_r = 70 + adj, 70 - adj - adj_r
                     motor.motor_continue(strength_l, strength_r)
                     time.sleep(0.04)
-                    mag_x_old = mag_x
-                    mag_y_old = mag_y
             t_stuck_count += 1
         motor.deceleration(strength_l, strength_r)
         time.sleep(2)
