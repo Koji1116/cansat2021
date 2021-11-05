@@ -159,9 +159,8 @@ def bmc050_error():
     """
     6軸センサエラー起きたら使う関数
     """
-    bmc050_off()
     print('------mag error------switch start')
-    # bmc050_off()
+    bmc050_off()
     time.sleep(0.2)
     bmc050_setup()
 
