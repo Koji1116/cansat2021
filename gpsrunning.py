@@ -222,10 +222,7 @@ if __name__ == '__main__':
     lat2 = 35.9234892
     lon2 = 139.9118744
     gps.open_gps()
-    gps.open_gps()
-    while (acc.bmc050_setup() == False):
-        bmc050.bmc050_off()
-    mag.bmc050_setup()
+    bmc050.bmc050_setup()
     motor.setup()
 
     drive(lon2, lat2, thd_distance=10, t_adj_gps=60)

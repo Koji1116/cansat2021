@@ -1,13 +1,20 @@
+import other
 from smbus import SMBus
 import time
 import datetime
+import pigpio
+pi = pigpio.pi()
 
-import other
 
 ACC_ADDRESS = 0x19
 ACC_REGISTER_ADDRESS = 0x02
 
 i2c = SMBus(1)
+
+
+def bmc050_on():
+    pi.write(27, 1)
+
 
 def bmc050_setup():
     """
@@ -15,6 +22,8 @@ def bmc050_setup():
     """
     # --- BMC050Setup --- #
     # Initialize ACC
+    bmc050_on()
+
     try:
         i2c.write_byte_data(ACC_ADDRESS, 0x0F, 0x03)
         time.sleep(0.1)
@@ -33,6 +42,7 @@ def bmc050_setup():
         i2c.write_byte_data(ACC_ADDRESS, 0x11, 0x00)
         time.sleep(0.1)
         return False
+
 
 def acc_read():
     """
@@ -62,13 +72,15 @@ if __name__ == '__main__':
         startTime = time.time()
         while 1:
             accData = acc_read()
-            norm = (accData[0]^2 + accData[1]^2 + accData[2]^2) ** 0.5
-            print(f'x:{accData[0]}\ty:{accData[1]}\tz:{accData[2]}\tnorm:{norm}')
-            other.log('BMC050test', datetime.datetime.now(), startTime - time.time(), accData[0], accData[1], accData[2])
+            norm = (accData[0] ^ 2 + accData[1] ^ 2 + accData[2] ^ 2) ** 0.5
+            print(
+                f'x:{accData[0]}\ty:{accData[1]}\tz:{accData[2]}\tnorm:{norm}')
+            other.log('BMC050test', datetime.datetime.now(), startTime -
+                      time.time(), accData[0], accData[1], accData[2])
             time.sleep(1)
 
     except KeyboardInterrupt:
         print()
     except Exception as e:
         print('fuck')
-        #print(e.message)
+        # print(e.message)
