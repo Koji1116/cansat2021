@@ -9,6 +9,8 @@ from sensor.communication import xbee
 import calibration
 import stuck
 import other
+
+
 def angle_goal(magx_off, magy_off, lon2, lat2):
     """
     ゴールとの相対角度を算出する関数
@@ -28,6 +30,7 @@ def angle_goal(magx_off, magy_off, lon2, lat2):
         angle_relative = angle_relative if angle_relative >= -180 else angle_relative + 360
     return angle_relative
 
+
 def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     """
     方向調整
@@ -36,8 +39,8 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     while 1:
         print('ゴールとの角度theta = ' + str(theta) + '---回転調整開始！')
         stuck.ue_jug()
-        
-        if 45 < theta <= 180 :
+
+        if 45 < theta <= 180:
             motor.motor_continue(an, -an)
         elif -180 < theta < -45:
             motor.motor_continue(-an, an)
@@ -47,7 +50,7 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
         elif -45 <= theta <= 0:
             motor.motor_continue(-an, an)
             break
-        
+
         theta = angle_goal(magx_off, magy_off, lon2, lat2)
         print('Calculated angle_relative: {theta}')
         time.sleep(0.03)
@@ -55,6 +58,8 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
 
 if __name__ == "__main__":
     lon2, lat2 = 139.908898, 35.918548
+    lat2 = 35.9212680
+    lon2 = 139.9109584
     stuck.ue_jug()
 
     # ------------- calibration -------------#
