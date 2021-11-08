@@ -105,7 +105,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
                       t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 ##↑何秒おきにスタックジャッジするかを決める##
-                if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 2):
+                if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 1.8):
                     pass
                 else:
                     stuck.stuck_avoid()
