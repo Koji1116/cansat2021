@@ -47,7 +47,7 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     #     motor.deceleration(an, -an)
     # elif -45 <= theta <= 0:
     #     motor.motor_continue(-an, an)
-    
+
     # theta = angle_goal(magx_off, magy_off, lon2, lat2)
     # print('Calculated angle_relative: {theta}')
     # time.sleep(0.03)
@@ -120,7 +120,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
                       t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 ##↑何秒おきにスタックジャッジするかを決める##
-                if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 1.8):
+                if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 4):
                     pass
                 else:
                     stuck.stuck_avoid()
@@ -134,7 +134,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
                     magdata = bmc050.mag_read()
                     mag_x = magdata[0]
                     mag_y = magdata[1]
-                    
+
                     theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
                     angle_relative = azimuth - theta
                     if angle_relative >= 0:
