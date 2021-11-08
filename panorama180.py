@@ -333,7 +333,11 @@ if __name__ == "__main__":
     path_src_panorama1 = '/home/pi/Desktop/Cansat2021ver/src_panorama1/panoramaShooting'
     path_src_panorama2 = '/home/pi/Desktop/Cansat2021ver/src_panorama2/panoramaShooting'
     path_src_panorama3 = '/home/pi/Desktop/Cansat2021ver/src_panorama3/panoramaShooting'
-    path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3)
+    path_src_panorama4 = '/home/pi/Desktop/Cansat2021ver/src_panorama4/panoramaShooting'
+    path_src_panorama5 = '/home/pi/Desktop/Cansat2021ver/src_panorama5/panoramaShooting'
+    path_src_panorama6 = '/home/pi/Desktop/Cansat2021ver/src_panorama6/panoramaShooting'
+    path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
+                        path_src_panorama4, path_src_panorama5, path_src_panorama6)
     path_dst_panoraam = '/home/pi/Desktop/Cansat2021ver/dst_panorama'
     path_paradete = '/home/pi/Desktop/Cansat2021ver/photostorage/paradete'
     log_panoramashooting = other.filename('/home/pi/Desktop/Cansat2021ver/log/panoramaLog', 'txt')
