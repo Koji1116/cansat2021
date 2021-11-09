@@ -57,6 +57,12 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     t_big = 0.2
     force = 35
     while 30 < theta <= 180 or -180 < theta < -30:
+        if stuck_count >= 16:
+            ##方向調整が不可能な場合はスタックしたとみなして、もう一度キャリブレーションからスタート##
+            print("####can't ajdust direction######")
+            stuck.stuck_avoid()
+            magx_off, magy_off = calibration.cal(40, -40, 30)
+            stuck_count = -1
         if stuck_count % 7 == 0:
             print('Increase output')
             force += 10
@@ -196,8 +202,9 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
 if __name__ == '__main__':
     # lat2 = 35.918548
     # lon2 = 139.908896
-    lat2 = 35.9234892
-    lon2 = 139.9118744
+    # lat2 = 35.9234892
+    # lon2 = 139.9118744
+    lat2, lon2 = 35.921247, 139.910953
     gps.open_gps()
     bmc050.bmc050_setup()
     motor.setup()
