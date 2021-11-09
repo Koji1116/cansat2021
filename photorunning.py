@@ -175,6 +175,7 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
         count_short_l = 0
         count_short_r = 0
         adj_short = 0
+        auto_count  = 0
         while 1:
             stuck.ue_jug()
             path_photo = '/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-'
@@ -182,11 +183,16 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
             goalflug, goalarea, gap, imgname, imgname2 = goal_detection(photoName, 50)
             print_xbee(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
             other.log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
-            if goalflug == 1:
-                break
+            if auto_count >= 10 and goalarea >0.00001:
+                ##赤色が見つからなかった時用に##
+                print_xbee("small red found run")
+                adjustment_mag(40, 1.1, magx_off, magy_off)
+                auto_count = 0
+                
             if goalflug == -1 or goalflug == 1000:
                 print_xbee('Nogoal detected')
                 motor.move(40, -40, 0.1)
+                auto_count += 1
             elif goalarea <= area_long:
                 if -100 <= gap and gap <= -65:
                     print_xbee('Turn left')
