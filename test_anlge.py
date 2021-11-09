@@ -60,6 +60,7 @@ if __name__ == "__main__":
     lon2, lat2 = 139.908898, 35.918548
     lat2 = 35.9212680
     lon2 = 139.9109584
+    motor.setup()
     stuck.ue_jug()
 
     # ------------- calibration -------------#
