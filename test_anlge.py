@@ -38,7 +38,6 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     an = input("出力どうする")
     while 1:
         print('ゴールとの角度theta = ' + str(theta) + '---回転調整開始！')
-        stuck.ue_jug()
 
         if 45 < theta <= 180:
             motor.motor_continue(an, -an)
