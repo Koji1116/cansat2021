@@ -127,22 +127,7 @@ def adjustment_mag(strength, t, magx_off, magy_off):
         magdata = mag.mag_read()
         mag_x = magdata[0]
         mag_y = magdata[1]
-        if mag_x == mag_x_old and mag_y == mag_y_old:
-            count_bmc050_erro += 1
-            if count_bmc050_erro >= 3:
-                print_xbee('-------mag_x mag_y error-----修復開始')
-                bmc050.bmc050_error()
-                magdata = bmc050.mag_read()
-                print_xbee('-------mag_x mag_y error----switch start')
-                motor.motor_stop(0.5)
-                bmc050.BMC050_error()
-                stuck.ue_jug()
-                magdata = bmc050.mag_read()
-                mag_x = magdata[0]
-                mag_y = magdata[1]
-                count_bmc050_erro = 0
-        else:
-            count_bmc050_erro = 0
+
         theta = calibration.angle(mag_x, mag_y, magx_off, magy_off)
         angle_relative = theta_old - theta
         if angle_relative >= 0:
@@ -164,6 +149,7 @@ def adjustment_mag(strength, t, magx_off, magy_off):
             else:
                 adj = strength_adj * -0.4
         print_xbee(f'angle ----- {angle_relative}')
+        print("3#)")
         strength_l, strength_r = strength_adj + adj, strength_adj - adj + 5
         print_xbee(f'motor power:\t{strength_l}\t{strength_r}')
         motor.motor_continue(strength_l, strength_r)
