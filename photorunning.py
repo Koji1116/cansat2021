@@ -115,7 +115,6 @@ def goal_detection(imgpath: str, G_thd: float):
 
 def adjustment_mag(strength, t, magx_off, magy_off):
     print("1")
-    count_bmc050_erro = 0
     t_start = time.time()
     magdata = mag.mag_read()
     mag_x_old = magdata[0]
@@ -178,7 +177,7 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
                 f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
             other.log(log_photorunning, t_start - time.time(),
                       goalflug, goalarea, gap, imgname, imgname2)
-            if auto_count >= 10 and goalarea > 0.001:
+            if auto_count >= 10 and goalarea > 0.01:
                 ##赤色が見つからなかった時用に##
                 print_xbee("small red found run")
                 adjustment_mag(40, 1.1, magx_off, magy_off)
