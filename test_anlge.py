@@ -69,4 +69,4 @@ if __name__ == "__main__":
     print(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
 
     theta = angle_goal(magx_off, magy_off, lon2, lat2)
-    adjust_direction(magx_off, magy_off, lon2, lat2)
+    adjust_direction(theta, magx_off, magy_off, lon2, lat2)
