@@ -261,7 +261,7 @@ if __name__ == "__main__":
         # Initialize
         lat2 = 35.9236093
         lon2 = 139.9118821
-        G_thd = 80
+        G_thd = 60
         log_photorunning = '/home/pi/Desktop/Cansat2021ver/log/photorunning_practice.txt'
         motor.setup()
 
