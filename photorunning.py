@@ -158,7 +158,7 @@ def adjustment_mag(strength, t, magx_off, magy_off):
         mag_y_old = mag_y
         theta_old = calibration.angle(mag_x_old, mag_y_old, magx_off, magy_off)
     print("123")
-    strength_l, strength_r = 20
+    strength_l, strength_r = 20, 20
     motor.deceleration(strength_l, strength_r)
 
 
