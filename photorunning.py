@@ -37,7 +37,8 @@ def get_center(contour):
 
 
 def mosaic(src, ratio):
-    small = cv2.resize(src, None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+    small = cv2.resize(src, None, fx=ratio, fy=ratio,
+                       interpolation=cv2.INTER_NEAREST)
     return cv2.resize(small, src.shape[:2][::-1], interpolation=cv2.INTER_NEAREST)
 
 
@@ -62,12 +63,14 @@ def goal_detection(imgpath: str, G_thd: float):
         img_hsv = cv2.cvtColor(img_mosaic, cv2.COLOR_BGR2HSV)
 
         # 最小外接円を描いた写真の保存先
-        path_detection = other.filename('/home/pi/Desktop/Cansat2021ver/detected/Detected-', 'jpg')
+        path_detection = other.filename(
+            '/home/pi/Desktop/Cansat2021ver/detected/Detected-', 'jpg')
 
         red_min = np.array([120, 120, 120], np.uint8)
         red_max = np.array([255, 255, 255], np.uint8)
         mask = cv2.inRange(img_hsv, red_min, red_max)
-        contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, hierarchy = cv2.findContours(
+            mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         max_area = 0
         max_area_contour = -1
@@ -111,12 +114,14 @@ def goal_detection(imgpath: str, G_thd: float):
 
 
 def adjustment_mag(strength, t, magx_off, magy_off):
+    print("1")
     count_bmc050_erro = 0
     t_start = time.time()
     magdata = mag.mag_read()
     mag_x_old = magdata[0]
     mag_y_old = magdata[1]
     theta_old = calibration.angle(mag_x_old, mag_y_old, magx_off, magy_off)
+    print("2")
     while time.time() - t_start <= t:
         strength_adj = strength
         magdata = mag.mag_read()
@@ -175,20 +180,23 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
         count_short_l = 0
         count_short_r = 0
         adj_short = 0
-        auto_count  = 0
+        auto_count = 0
         while 1:
             stuck.ue_jug()
             path_photo = '/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-'
             photoName = take.picture(path_photo)
-            goalflug, goalarea, gap, imgname, imgname2 = goal_detection(photoName, 50)
-            print_xbee(f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
-            other.log(log_photorunning, t_start - time.time(), goalflug, goalarea, gap, imgname, imgname2)
-            if auto_count >= 10 and goalarea >0.00001:
+            goalflug, goalarea, gap, imgname, imgname2 = goal_detection(
+                photoName, 50)
+            print_xbee(
+                f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
+            other.log(log_photorunning, t_start - time.time(),
+                      goalflug, goalarea, gap, imgname, imgname2)
+            if auto_count >= 10 and goalarea > 0.00001:
                 ##赤色が見つからなかった時用に##
                 print_xbee("small red found run")
                 adjustment_mag(40, 1.1, magx_off, magy_off)
                 auto_count = 0
-                
+
             if goalflug == -1 or goalflug == 1000:
                 print_xbee('Nogoal detected')
                 motor.move(40, -40, 0.1)
@@ -271,7 +279,8 @@ if __name__ == "__main__":
         print_xbee('##--calibration end--##')
 
         # Image Guide
-        image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2, thd_distance=5, t_adj_gps=60)
+        image_guided_driving(log_photorunning, G_thd, magx_off,
+                             magy_off, lon2, lat2, thd_distance=5, t_adj_gps=60)
 
     except KeyboardInterrupt:
         print_xbee('stop')
