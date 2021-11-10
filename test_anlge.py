@@ -35,7 +35,7 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     """
     方向調整
     """
-    an = input("出力どうする")
+    an = int(input("出力どうする"))
     while 1:
         print('ゴールとの角度theta = ' + str(theta) + '---回転調整開始！')
 
