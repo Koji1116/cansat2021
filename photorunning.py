@@ -115,12 +115,12 @@ def goal_detection(imgpath: str, G_thd: float):
 
 def adjustment_mag(strength, t, magx_off, magy_off):
     print("1")
-    t_start = time.time()
+    
     magdata = mag.mag_read()
     mag_x_old = magdata[0]
     mag_y_old = magdata[1]
     theta_old = calibration.angle(mag_x_old, mag_y_old, magx_off, magy_off)
-
+    t_start = time.time()  
     while time.time() - t_start <= t:
         print("4")
         strength_adj = strength
