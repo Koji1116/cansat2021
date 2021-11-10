@@ -179,7 +179,7 @@ def image_guided_driving(log_photorunning, G_thd, magx_off, magy_off, lon2, lat2
                 f'goalflug:{goalflug}\tgoalarea:{goalarea}%\tgap:{gap}\timagename:{imgname}\timagename2:{imgname2}')
             other.log(log_photorunning, t_start - time.time(),
                       goalflug, goalarea, gap, imgname, imgname2)
-            if auto_count >= 10 and goalarea > 0.01 and goalarea != 1000 and goalflug != 1000:
+            if auto_count >= 5 and goalarea > 0.01 and goalarea != 1000 and goalflug != 1000:
 
                 ##赤色が見つからなかった時用に##
                 print_xbee("small red found run")
