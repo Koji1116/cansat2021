@@ -53,7 +53,7 @@ th_distance = 6.5
 t_adj_gps = 180
 
 # variable for photorun
-G_thd = 80
+G_thd = 60
 path_photo_imagerun = f'photostorage/ImageGuidance_{dateTime.month}-{dateTime.day}-{dateTime.hour}-{dateTime.minute}'
 
 # variable for log
