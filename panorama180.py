@@ -345,7 +345,7 @@ if __name__ == "__main__":
     
     for i in range(0, 6):
         other.make_dir("path_src_panorama"+str(i))
-    other.make_dir(path_src_panorama)
+    #other.make_dir(path_src_panorama)
     other.make_dir(path_dst_panorama)
     mag_mat = calibration.magdata_matrix(40, -40, 30)
     t_rotation_pano = 0.1
