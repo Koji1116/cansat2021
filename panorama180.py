@@ -282,7 +282,7 @@ def shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_pan
         print_xbee('\n')
         print_xbee('\n')
         other.log(log_panoramashooting, datetime.datetime.now(), sumθ, latestθ, preθ2, deltaθ)
-        time.sleep(0.2)
+        time.sleep(0.1)
     return srcdir
 
 
