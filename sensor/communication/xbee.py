@@ -1,6 +1,6 @@
 import io
 from PIL import Image
-from .. import other
+from ... import other
 import serial
 import pigpio
 

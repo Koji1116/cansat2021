@@ -58,6 +58,7 @@ def str_receive():
     received = ser.read()
     received_str = received.decode()
     return received_str
+
 def print_xbee(word, com=True):
     """
     printによる出力とxbeeによる送信を一緒に行うための関数
