@@ -296,7 +296,7 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
     dstext:パノラマ写真の拡張子
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
-    resultcount = len(glob.glob1('/home/pi/Desktop/Cansat2021ver/dst_panorama', '*' + dstext))
+    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021ver/dst_panorama', '*' + dstext))
     print_xbee(f'srcfilecount:\t{srcfilecount}')
     print_xbee(f'resultcount:\t{resultcount}')
 
@@ -330,17 +330,17 @@ if __name__ == "__main__":
     bmc050.bmc050_setup()
     motor.setup()
     xbee.on()
-    path_src_panorama1 = '/home/pi/Desktop/Cansat2021ver/src_panorama1/panoramaShooting'
-    path_src_panorama2 = '/home/pi/Desktop/Cansat2021ver/src_panorama2/panoramaShooting'
-    path_src_panorama3 = '/home/pi/Desktop/Cansat2021ver/src_panorama3/panoramaShooting'
-    path_src_panorama4 = '/home/pi/Desktop/Cansat2021ver/src_panorama4/panoramaShooting'
-    path_src_panorama5 = '/home/pi/Desktop/Cansat2021ver/src_panorama5/panoramaShooting'
-    path_src_panorama6 = '/home/pi/Desktop/Cansat2021ver/src_panorama6/panoramaShooting'
+    path_src_panorama1 = '/home/pi/Desktop/cansat2021ver/src_panorama1/panoramaShooting'
+    path_src_panorama2 = '/home/pi/Desktop/cansat2021ver/src_panorama2/panoramaShooting'
+    path_src_panorama3 = '/home/pi/Desktop/cansat2021ver/src_panorama3/panoramaShooting'
+    path_src_panorama4 = '/home/pi/Desktop/cansat2021ver/src_panorama4/panoramaShooting'
+    path_src_panorama5 = '/home/pi/Desktop/cansat2021ver/src_panorama5/panoramaShooting'
+    path_src_panorama6 = '/home/pi/Desktop/cansat2021ver/src_panorama6/panoramaShooting'
     path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
                         path_src_panorama4, path_src_panorama5, path_src_panorama6)
-    path_dst_panoraam = '/home/pi/Desktop/Cansat2021ver/dst_panorama'
-    path_paradete = '/home/pi/Desktop/Cansat2021ver/photostorage/paradete'
-    log_panoramashooting = other.filename('/home/pi/Desktop/Cansat2021ver/log/panoramaLog', 'txt')
+    path_dst_panoraam = '/home/pi/Desktop/cansat2021ver/dst_panorama'
+    path_paradete = '/home/pi/Desktop/cansat2021ver/photostorage/paradete'
+    log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021ver/log/panoramaLog', 'txt')
 
     mag_mat = calibration.magdata_matrix(40, -40, 60)
     t_rotation_pano = 0.1
