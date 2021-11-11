@@ -336,15 +336,18 @@ if __name__ == "__main__":
     path_src_panorama4 = '/home/pi/Desktop/cansat2021ver/src_panorama4/panoramaShooting'
     path_src_panorama5 = '/home/pi/Desktop/cansat2021ver/src_panorama5/panoramaShooting'
     path_src_panorama6 = '/home/pi/Desktop/cansat2021ver/src_panorama6/panoramaShooting'
-    for i in range(0, 6):
-        other.make_dir("path_src_panorama"+i)
+    
     path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
                         path_src_panorama4, path_src_panorama5, path_src_panorama6)
-    path_dst_panoraam = '/home/pi/Desktop/cansat2021ver/dst_panorama'
+    path_dst_panorama = '/home/pi/Desktop/cansat2021ver/dst_panorama'
     path_paradete = '/home/pi/Desktop/cansat2021ver/photostorage/paradete'
     log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021ver/log/panoramaLog', 'txt')
-
-    mag_mat = calibration.magdata_matrix(40, -40, 60)
+    
+    for i in range(0, 6):
+        other.make_dir("path_src_panorama"+i)
+    other.make_dir(path_src_panorama)
+    other.make_dir(path_dst_panorama)
+    mag_mat = calibration.magdata_matrix(40, -40, 30)
     t_rotation_pano = 0.1
     t_start = time.time()
     srcdir = shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
