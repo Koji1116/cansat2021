@@ -127,12 +127,12 @@ def check(dict_angle, path_src_panorama):
     print_xbee(f'number_photo6:\t{number_photos6}')
 
     # Find a directory/file_name with 12 photos
-    srcdir = path_src_panorama1 if number_photos1 == 12 else srcdir
-    srcdir = path_src_panorama2 if number_photos2 == 12 else srcdir
-    srcdir = path_src_panorama3 if number_photos3 == 12 else srcdir
-    srcdir = path_src_panorama4 if number_photos4 == 12 else srcdir
-    srcdir = path_src_panorama5 if number_photos5 == 12 else srcdir
-    srcdir = path_src_panorama6 if number_photos6 == 12 else srcdir
+    srcdir = path_src_panorama1 if number_photos1 == 6 else srcdir
+    srcdir = path_src_panorama2 if number_photos2 == 6 else srcdir
+    srcdir = path_src_panorama3 if number_photos3 == 6 else srcdir
+    srcdir = path_src_panorama4 if number_photos4 == 6 else srcdir
+    srcdir = path_src_panorama5 if number_photos5 == 6 else srcdir
+    srcdir = path_src_panorama6 if number_photos6 == 6 else srcdir
 
     # Get the directory name
     rfd = srcdir.rfind('/')
