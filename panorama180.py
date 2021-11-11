@@ -189,12 +189,12 @@ def initialize(path_src_panorama):
     # Initializing variables
     count_panorama = 0
     count_stuck = 0
-    dict_angle1 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
-    dict_angle2 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
-    dict_angle3 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
-    dict_angle4 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
-    dict_angle5 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
-    dict_angle6 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False, 8: False, 9: False, 10: False, 11: False, 12: False}
+    dict_angle1 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
+    dict_angle2 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
+    dict_angle3 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
+    dict_angle4 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
+    dict_angle5 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
+    dict_angle6 = {1: False, 2: False, 3: False, 4: False, 5: False, 6: False}
     dict_angle = [dict_angle1, dict_angle2, dict_angle3, dict_angle4, dict_angle5, dict_angle6]
     return count_panorama, count_stuck, dict_angle
 
