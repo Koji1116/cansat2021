@@ -173,26 +173,26 @@ def bmc050_error():
 
 
 if __name__ == '__main__':
-    # try:
-    #     bmc050_setup()
-    #     time.sleep(0.2)
-    #     t_start = time.time()
-    #     while 1:
-    #         bmcData = bmc050_read()
-    #         print(bmcData)
-    #         time.sleep(0.01)
+    try:
+        bmc050_setup()
+        time.sleep(0.2)
+        t_start = time.time()
+        while 1:
+            bmcData = bmc050_read()
+            print(bmcData)
+            time.sleep(0.01)
 
-    # except KeyboardInterrupt:
-    #     print()
-    # except Exception as e:
-    #     print('fuck')
-    #     # print(e.message)
-    while 1:
-        print("on")
-        bmc050_on()
-        os.system('i2cdetect -y 1') 
-        time.sleep(3)
-        print("off")
-        bmc050_off()
-        os.system('i2cdetect -y 1') 
-        time.sleep(3)
+    except KeyboardInterrupt:
+        print()
+    except Exception as e:
+        print('fuck')
+        # print(e.message)
+    # while 1:
+    #     print("on")
+    #     bmc050_on()
+    #     os.system('i2cdetect -y 1') 
+    #     time.sleep(3)
+    #     print("off")
+    #     bmc050_off()
+    #     os.system('i2cdetect -y 1') 
+    #     time.sleep(3)
