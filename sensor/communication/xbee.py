@@ -71,8 +71,14 @@ def off():
 
 
 if __name__ == '__main__':
+    img1 ='/home/pi/Desktop/Cansat2021ver/dst_panorama/0.jpg'
+
     on()
     other.print_xbee("abc")
+    img_string = image_to_byte(img1)
+    img_trans(img_string)
+
+    
     
     # a = input('何送る？')
     # img1 = "/home/pi/Desktop/cansat2021ver/dst_panorama/"+ a +".jpg"
