@@ -1,5 +1,6 @@
 import io
 from PIL import Image
+import other
 import serial
 import pigpio
 
@@ -69,14 +70,9 @@ def off():
 
 if __name__ == '__main__':
     on()
-    a = input('何送る？')
-    # str_trans('HELLO!')
-    img1 = "/home/pi/Desktop/Cansat2021ver/dst_panorama/"+ a +".jpg"
-    # img_string = convert_string(img1)
-    img_string = image_to_byte(img1)
-
-    # # img_trans(img_string)
-    # img1 = "/home/pi/Desktop/Cansat2021ver/dst_panorama/0.jpg"
-    #         # img_string = Xbee.convert_string(img1)
-    # img_string =ImageToByte(img1)
-    img_trans(img_string)
+    other.print_xbee("abc")
+    
+    # a = input('何送る？')
+    # img1 = "/home/pi/Desktop/cansat2021ver/dst_panorama/"+ a +".jpg"
+    # img_string = image_to_byte(img1)
+    # img_trans(img_string)
