@@ -23,8 +23,8 @@ path_log = '/home/pi/Desktop/cansat2021/log/calibration.txt'
 
 def get_data():
     """
-	MBC050からデータを得る
-	"""
+        MBC050からデータを得る
+        """
     try:
         magData = mag.mag_read()
     except KeyboardInterrupt:
@@ -41,8 +41,8 @@ def get_data():
 
 def get_data_offset(magx_off, magy_off, magz_off):
     """
-	MBC050からオフセットを考慮して磁気データを得る関数
-	"""
+        MBC050からオフセットを考慮して磁気データを得る関数
+        """
     try:
         magData = mag.mag_read()
     except KeyboardInterrupt:
@@ -59,9 +59,9 @@ def get_data_offset(magx_off, magy_off, magz_off):
 
 def magdata_matrix(l, r, n):
     """
-	キャリブレーション用の地磁気データを得るための関数。
-	モータを連続的に動かして回転して地磁気データを得る。
-	"""
+        キャリブレーション用の地磁気データを得るための関数。
+        モータを連続的に動かして回転して地磁気データを得る。
+        """
     try:
         stuck.ue_jug()
         magx, magy, magz = get_data()
@@ -71,8 +71,9 @@ def magdata_matrix(l, r, n):
             magx, magy, magz = get_data()
             print(magx, magy)
             # --- multi dimention matrix ---#
-            magdata = np.append(magdata, np.array([[magx, magy, magz]]), axis=0)
-            time.sleep(0.03)
+            magdata = np.append(magdata, np.array(
+                [[magx, magy, magz]]), axis=0)
+            time.sleep(0.2)
         motor.deceleration(l, r)
     except KeyboardInterrupt:
         print('Interrupt')
@@ -83,8 +84,8 @@ def magdata_matrix(l, r, n):
 
 def magdata_matrix_hand():
     """
-	キャリブレーション用の磁気値を手持ちで得るための関数
-	"""
+        キャリブレーション用の磁気値を手持ちで得るための関数
+        """
     try:
         magx, magy, magz = get_data()
         magdata = np.array([[magx, magy, magz]])
@@ -94,7 +95,8 @@ def magdata_matrix_hand():
             print(f'{i + 1}回目')
             magx, magy, magz = get_data()
             # --- multi dimention matrix ---#
-            magdata = np.append(magdata, np.array([[magx, magy, magz]]), axis=0)
+            magdata = np.append(magdata, np.array(
+                [[magx, magy, magz]]), axis=0)
     except KeyboardInterrupt:
         print('Interrupt')
     except Exception as e:
@@ -104,8 +106,8 @@ def magdata_matrix_hand():
 
 def magdata_matrix_offset(l, r, t, magx_off, magy_off, magz_off):
     """
-	オフセットを考慮したデータセットを取得するための関数
-	"""
+        オフセットを考慮したデータセットを取得するための関数
+        """
     try:
         magx, magy, magz = get_data_offset(magx_off, magy_off, magz_off)
         magdata = np.array([[magx, magy, magz]])
@@ -113,7 +115,8 @@ def magdata_matrix_offset(l, r, t, magx_off, magy_off, magz_off):
             motor(l, r, t)
             magx, magy, magz = get_data_offset(magx_off, magy_off, magz_off)
             # --- multi dimention matrix ---#
-            magdata = np.append(magdata, np.array([[magx, magy, magz]]), axis=0)
+            magdata = np.append(magdata, np.array(
+                [[magx, magy, magz]]), axis=0)
     except KeyboardInterrupt:
         print_xbee('Interrupt')
     except Exception as e:
@@ -145,7 +148,8 @@ def calculate_offset(magdata):
     magz_off = (magz_max + magz_min) / 2
 
     # --- save offset --- #
-    other.log('/home/pi/Desktop/cansat2021/log/calibrationLog.txt', datetime.datetime.now(), magx_off, magy_off)
+    other.log('/home/pi/Desktop/cansat2021/log/calibrationLog.txt',
+              datetime.datetime.now(), magx_off, magy_off)
 
     return magx_array, magy_array, magz_array, magx_off, magy_off, magz_off
 
@@ -206,17 +210,19 @@ if __name__ == "__main__":
         # --- calibration ---#
         magdata_Old = magdata_matrix(l, r, t)
         # --- calculate offset ---#
-        magx_array_Old, magy_array_Old, magz_array_Old, magx_off, magy_off, magz_off = calculate_offset(magdata_Old)
+        magx_array_Old, magy_array_Old, magz_array_Old, magx_off, magy_off, magz_off = calculate_offset(
+            magdata_Old)
         time.sleep(0.1)
         # ----Take magnetic data considering offset----#
-        magdata_new = magdata_matrix_offset(l, r, t, magx_off, magy_off, magz_off)
+        magdata_new = magdata_matrix_offset(
+            l, r, t, magx_off, magy_off, magz_off)
         magx_array_new = magdata_new[:, 0]
         magy_array_new = magdata_new[:, 1]
         magz_array_new = magdata_new[:, 2]
         for i in range(len(magx_array_new)):
-            other.log(path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
+            other.log(
+                path_log, magx_array_Old[i], magy_array_Old[i], magx_array_new[i], magy_array_new[i])
         print_xbee("success")
-
 
     except KeyboardInterrupt:
         print_xbee("Interrupted")
