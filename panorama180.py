@@ -344,7 +344,7 @@ if __name__ == "__main__":
     log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021ver/log/panoramaLog', 'txt')
     
     for i in range(0, 6):
-        other.make_dir("path_src_panorama"+i)
+        other.make_dir("path_src_panorama"+str(i))
     other.make_dir(path_src_panorama)
     other.make_dir(path_dst_panorama)
     mag_mat = calibration.magdata_matrix(40, -40, 30)
