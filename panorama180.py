@@ -65,21 +65,21 @@ def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):
     if switch:
         for i in range(6, 12):
             if 30 * i <= theta and theta <= 10 + 30 * i and not dict_angle4[i + 1]:
-                take.picture(path_src_panorama1, wid, hig)
+                take.picture(path_src_panorama4, wid, hig)
                 dict_angle1[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(6, 12):
             if 10 + 30 * i <= theta and theta <= 20 + 30 * i and not dict_angle5[i + 1]:
-                take.picture(path_src_panorama2, wid, hig)
+                take.picture(path_src_panorama5, wid, hig)
                 dict_angle2[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(6, 12):
             if 20 + 30 * i <= theta and theta <= 30 + 30 * i and not dict_angle6[i + 1]:
-                take.picture(path_src_panorama3, wid, hig)
+                take.picture(path_src_panorama6, wid, hig)
                 dict_angle3[i + 1] = True
                 switch = False
                 break
@@ -296,7 +296,7 @@ def composition(srcdir, srcext='.jpg', dstext='.jpg'):
     dstext:パノラマ写真の拡張子
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
-    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021ver/dst_panorama', '*' + dstext))
+    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama', '*' + dstext))
     print_xbee(f'srcfilecount:\t{srcfilecount}')
     print_xbee(f'resultcount:\t{resultcount}')
 
@@ -330,18 +330,18 @@ if __name__ == "__main__":
     bmc050.bmc050_setup()
     motor.setup()
     xbee.on()
-    path_src_panorama1 = '/home/pi/Desktop/cansat2021ver/src_panorama1/panoramaShooting'
-    path_src_panorama2 = '/home/pi/Desktop/cansat2021ver/src_panorama2/panoramaShooting'
-    path_src_panorama3 = '/home/pi/Desktop/cansat2021ver/src_panorama3/panoramaShooting'
-    path_src_panorama4 = '/home/pi/Desktop/cansat2021ver/src_panorama4/panoramaShooting'
-    path_src_panorama5 = '/home/pi/Desktop/cansat2021ver/src_panorama5/panoramaShooting'
-    path_src_panorama6 = '/home/pi/Desktop/cansat2021ver/src_panorama6/panoramaShooting'
+    path_src_panorama1 = '/home/pi/Desktop/cansat2021/src_panorama1/panoramaShooting'
+    path_src_panorama2 = '/home/pi/Desktop/cansat2021/src_panorama2/panoramaShooting'
+    path_src_panorama3 = '/home/pi/Desktop/cansat2021/src_panorama3/panoramaShooting'
+    path_src_panorama4 = '/home/pi/Desktop/cansat2021/src_panorama4/panoramaShooting'
+    path_src_panorama5 = '/home/pi/Desktop/cansat2021/src_panorama5/panoramaShooting'
+    path_src_panorama6 = '/home/pi/Desktop/cansat2021/src_panorama6/panoramaShooting'
     
     path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
                         path_src_panorama4, path_src_panorama5, path_src_panorama6)
-    path_dst_panorama = '/home/pi/Desktop/cansat2021ver/dst_panorama'
-    path_paradete = '/home/pi/Desktop/cansat2021ver/photostorage/paradete'
-    log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021ver/log/panoramaLog', 'txt')
+    path_dst_panorama = '/home/pi/Desktop/cansat2021/dst_panorama'
+    path_paradete = '/home/pi/Desktop/cansat2021/photostorage/paradete'
+    log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021/log/panoramaLog', 'txt')
     
     for i in range(1, 7):
         other.make_dir("path_src_panorama"+str(i))
