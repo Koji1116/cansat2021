@@ -202,7 +202,7 @@ def calculate_direction(lon2, lat2):
 if __name__ == "__main__":
     motor.setup()
     bmc050_setup()
-    magdata =magdata_matrix(10, -10, 100)
+    magdata =magdata_matrix(40, -40, 1000)
 
 
     # try:
