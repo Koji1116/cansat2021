@@ -325,6 +325,8 @@ if __name__ == '__main__':
             img1 = panorama.composition(path_src_panorama)
             print_xbee(time.time() - t_composition_start)
             # Sending a panoramic photo
+            print_xbee("!!!!!!!panorama composition finish!!!!! After 1min send!!!")
+            time.sleep(60)
             img_string = xbee.image_to_byte(img1)
             xbee.img_trans(img_string)
     except Exception as e:
