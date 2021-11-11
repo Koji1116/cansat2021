@@ -336,6 +336,8 @@ if __name__ == "__main__":
     path_src_panorama4 = '/home/pi/Desktop/cansat2021ver/src_panorama4/panoramaShooting'
     path_src_panorama5 = '/home/pi/Desktop/cansat2021ver/src_panorama5/panoramaShooting'
     path_src_panorama6 = '/home/pi/Desktop/cansat2021ver/src_panorama6/panoramaShooting'
+    for i in range(0, 6):
+        other.make_dir("path_src_panorama"+i)
     path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
                         path_src_panorama4, path_src_panorama5, path_src_panorama6)
     path_dst_panoraam = '/home/pi/Desktop/cansat2021ver/dst_panorama'
