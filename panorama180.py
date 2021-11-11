@@ -66,21 +66,21 @@ def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):
         for i in range(6):
             if 30 * (i+5) <= theta and theta <= 10 + 30 * (i+5) and not dict_angle4[i + 1]:
                 take.picture(path_src_panorama4, wid, hig)
-                dict_angle1[i + 1] = True
+                dict_angle4[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(6):
             if 10 + 30 * (i+5) <= theta and theta <= 20 + 30 * (i+5) and not dict_angle5[i + 1]:
                 take.picture(path_src_panorama5, wid, hig)
-                dict_angle2[i + 1] = True
+                dict_angle5[i + 1] = True
                 switch = False
                 break
     if switch:
         for i in range(6):
             if 20 + 30 * (i+5) <= theta and theta <= 30 + 30 * (i+5) and not dict_angle6[i + 1]:
                 take.picture(path_src_panorama6, wid, hig)
-                dict_angle3[i + 1] = True
+                dict_angle6[i + 1] = True
                 switch = False
                 break
     return [dict_angle1, dict_angle2, dict_angle3, dict_angle4, dict_angle5, dict_angle6]
@@ -88,10 +88,10 @@ def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):
 
 def check(dict_angle, path_src_panorama):
     """
-    12枚の写真が撮影されたかを判断するための関数
+    6枚の写真が撮影されたかを判断するための関数
     shooting内で使用
     戻り値はsrcdir
-    12枚の写真が撮影された場合は，該当するパス(''じゃない)を返す。elseの場合は''を返す。
+    6枚の写真が撮影された場合は，該当するパス(''じゃない)を返す。elseの場合は''を返す。
     """
     srcdir = ''
     # Unpack the dict_angle
