@@ -6,6 +6,7 @@ import datetime
 import numpy as np
 
 from sensor.axis import mag
+from sensor.axis.bmc050 import bmc050_setup
 from sensor.gps import gps
 from sensor.gps import gps_navigate
 from other import print_xbee
@@ -199,6 +200,8 @@ def calculate_direction(lon2, lat2):
 
 
 if __name__ == "__main__":
+    motor.setup()
+    bmc050_setup()
     magdata =magdata_matrix(10, -10, 100)
 
 
