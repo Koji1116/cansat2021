@@ -1,4 +1,5 @@
 from smbus import SMBus
+import os
 import time
 import pigpio
 import datetime
@@ -27,8 +28,7 @@ def bmc050_setup():
     # --- BMC050Setup --- #
     # Initialize ACC
     bmc050_on()
-    # time.sleep(0.1)
-    time.sleep(1)
+    time.sleep(0.1)
     try:
         i2c.write_byte_data(ACC_ADDRESS, 0x0F, 0x03)
         time.sleep(0.1)
@@ -168,22 +168,31 @@ def bmc050_error():
     """
     print('------mag error------switch start')
     bmc050_off()
-    time.sleep(1)##0.2
+    time.sleep(0.1)
     bmc050_setup()
 
 
 if __name__ == '__main__':
-    try:
-        bmc050_setup()
-        time.sleep(0.2)
-        t_start = time.time()
-        while 1:
-            bmcData = bmc050_read()
-            print(bmcData)
-            time.sleep(0.01)
+    # try:
+    #     bmc050_setup()
+    #     time.sleep(0.2)
+    #     t_start = time.time()
+    #     while 1:
+    #         bmcData = bmc050_read()
+    #         print(bmcData)
+    #         time.sleep(0.01)
 
-    except KeyboardInterrupt:
-        print()
-    except Exception as e:
-        print('fuck')
-        # print(e.message)
+    # except KeyboardInterrupt:
+    #     print()
+    # except Exception as e:
+    #     print('fuck')
+    #     # print(e.message)
+    while 1:
+        print("on")
+        bmc050_on()
+        os.system('i2cdetect -y 1') 
+        time.sleep(3)
+        print("off")
+        bmc050_off()
+        os.system('i2cdetect -y 1') 
+        time.sleep(3)
