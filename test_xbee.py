@@ -58,7 +58,13 @@ def str_receive():
     received = ser.read()
     received_str = received.decode()
     return received_str
-
+def print_xbee(word, com=True):
+    """
+    printによる出力とxbeeによる送信を一緒に行うための関数
+    """
+    print(word)
+    if com:
+        xbee.str_trans(word)
 
 def on():
     pi.write(12, 1)
@@ -70,7 +76,7 @@ def off():
 
 if __name__ == '__main__':
     on()
-    other.print_xbee("abc")
+    print_xbee("abc")
     
     # a = input('何送る？')
     # img1 = "/home/pi/Desktop/cansat2021ver/dst_panorama/"+ a +".jpg"
