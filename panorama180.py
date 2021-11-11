@@ -343,9 +343,9 @@ if __name__ == "__main__":
     path_paradete = '/home/pi/Desktop/cansat2021ver/photostorage/paradete'
     log_panoramashooting = other.filename('/home/pi/Desktop/cansat2021ver/log/panoramaLog', 'txt')
     
-    for i in range(0, 6):
+    for i in range(1, 7):
         other.make_dir("path_src_panorama"+str(i))
-    #other.make_dir(path_src_panorama)
+
     other.make_dir(path_dst_panorama)
     mag_mat = calibration.magdata_matrix(40, -40, 30)
     t_rotation_pano = 0.1
