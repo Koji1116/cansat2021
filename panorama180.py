@@ -63,22 +63,22 @@ def shooting_angle(theta, path_src_panorama, dict_angle, wid, hig):
                 switch = False
                 break
     if switch:
-        for i in range(6, 12):
-            if 30 * i <= theta and theta <= 10 + 30 * i and not dict_angle4[i + 1]:
+        for i in range(6):
+            if 30 * (i+5) <= theta and theta <= 10 + 30 * (i+5) and not dict_angle4[i + 1]:
                 take.picture(path_src_panorama4, wid, hig)
                 dict_angle1[i + 1] = True
                 switch = False
                 break
     if switch:
-        for i in range(6, 12):
-            if 10 + 30 * i <= theta and theta <= 20 + 30 * i and not dict_angle5[i + 1]:
+        for i in range(6):
+            if 10 + 30 * (i+5) <= theta and theta <= 20 + 30 * (i+5) and not dict_angle5[i + 1]:
                 take.picture(path_src_panorama5, wid, hig)
                 dict_angle2[i + 1] = True
                 switch = False
                 break
     if switch:
-        for i in range(6, 12):
-            if 20 + 30 * i <= theta and theta <= 30 + 30 * i and not dict_angle6[i + 1]:
+        for i in range(6):
+            if 20 + 30 * (i+5) <= theta and theta <= 30 + 30 * (i+5) and not dict_angle6[i + 1]:
                 take.picture(path_src_panorama6, wid, hig)
                 dict_angle3[i + 1] = True
                 switch = False
