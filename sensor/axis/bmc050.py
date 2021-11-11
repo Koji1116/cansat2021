@@ -1,4 +1,5 @@
 from smbus import SMBus
+import os
 import time
 import pigpio
 import datetime
@@ -167,7 +168,7 @@ def bmc050_error():
     """
     print('------mag error------switch start')
     bmc050_off()
-    time.sleep(0.2)
+    time.sleep(0.1)
     bmc050_setup()
 
 
@@ -186,3 +187,12 @@ if __name__ == '__main__':
     except Exception as e:
         print('fuck')
         # print(e.message)
+    # while 1:
+    #     print("on")
+    #     bmc050_on()
+    #     os.system('i2cdetect -y 1') 
+    #     time.sleep(3)
+    #     print("off")
+    #     bmc050_off()
+    #     os.system('i2cdetect -y 1') 
+    #     time.sleep(3)
