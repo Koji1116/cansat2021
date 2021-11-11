@@ -6,7 +6,7 @@ port = serial.Serial(
 		parity = serial.PARITY_NONE,
 		stopbits = serial.STOPBITS_ONE,
 		bytesize = serial.EIGHTBITS,
-		timeout = 5
+		timeout = 20
 	    )
 
 #現在使用中のチャンネルを確認する関数
