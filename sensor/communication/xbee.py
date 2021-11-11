@@ -1,6 +1,8 @@
+import sys
+sys.path.append('../../')
 import io
 from PIL import Image
-from ... import other
+import other
 import serial
 import pigpio
 
