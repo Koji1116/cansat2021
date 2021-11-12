@@ -1,5 +1,6 @@
 import time
 import random
+from other import print_xbee
 
 from sensor.communication import xbee
 import motor
@@ -45,10 +46,10 @@ def ue_jug():
 def stuck_jug(lat1, lon1, lat2, lon2, thd=1.0):
     data_stuck = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
     if data_stuck['distance'] <= thd:
-        print(str(data_stuck['distance']) + '----スタックした')
+        print_xbee(str(data_stuck['distance']) + '----!!!    stuck   !!!')
         return False
     else:
-        print(str(data_stuck['distance']) + '----スタックしてないよ')
+        print_xbee(str(data_stuck['distance']) + '-----not stucked')
         return True
 
 
@@ -63,44 +64,44 @@ def random(a, b, k):
 
 def stuck_avoid_move(x):
     if x == 0:
-        print('sutck_avoid_move():0')
+        print_xbee('sutck_avoid_move():0')
         motor.move(-100, -100, 5)
         motor.move(-60, -60, 3)
     elif x == 1:
-        print('sutck_avoid_move():1')
+        print_xbee('sutck_avoid_move():1')
         motor.move(40, -40, 1)
         motor.move(100, 100, 5)
         motor.move(60, 60, 3)
     elif x == 2:
-        print('sutck_avoid_move():2')
+        print_xbee('sutck_avoid_move():2')
         motor.move(-100, 100, 2)
         motor.move(100, 100, 5)
 
     elif x == 3:
-        print('sutck_avoid_move():3')
+        print_xbee('sutck_avoid_move():3')
         motor.move(100, -100, 2)
         motor.move(100, 100, 5)
 
     elif x == 4:
-        print('sutck_avoid_move():4')
+        print_xbee('sutck_avoid_move():4')
         motor.move(40, -40, 1)
         motor.move(-80, -100, 5)
         motor.move(-60, -60, 3)
 
     elif x == 5:
-        print('sutck_avoid_move():5')
+        print_xbee('sutck_avoid_move():5')
         motor.move(40, -40, 1)
         motor.move(-100, -80, 5)
         motor.move(-60, -60, 3)
 
     elif x == 6:
-        print('sutck_avoid_move():6')
+        print_xbee('sutck_avoid_move():6')
         motor.move(100, -100, 3)
         motor.move(100, 100, 3)
 
 
 def stuck_avoid():
-    print('スタック回避開始')
+    print_xbee('start stuck  avoid')
     flag = False
     while 1:
         lat_old, lon_old = gps.location()
@@ -110,11 +111,6 @@ def stuck_avoid():
             lat_new, lon_new = gps.location()
             bool_stuck = stuck_jug(lat_old, lon_old, lat_new, lon_new, 1)
             if bool_stuck == True:
-                # if i == 1 or i == 4 or i == 5:
-                #     print('スタックもう一度引っかからないように避ける')
-                #     motor.move(-60, -60, 2)
-                #     motor.move(-60, 60, 0.5)
-                #     motor.move(80, 80, 3)
                 flag = True
                 break
         if flag:
@@ -149,7 +145,7 @@ def stuck_avoid():
                 break
         if flag:
             break
-    print('スタック回避完了')
+    print_xbee('complete stuck avoid')
 
 
 if __name__ == '__main__':
