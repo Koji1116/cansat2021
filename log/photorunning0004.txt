@@ -1,0 +1,13 @@
+-2.6677441596984863	-1	0.03515625	1000000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0441.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0366.jpg	
+-5.7276997566223145	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0442.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0367.jpg	
+-8.737746953964233	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0443.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0368.jpg	
+-11.75782060623169	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0444.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0369.jpg	
+-14.787750720977783	1000	1000	1000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0445.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0370.jpg	
+-18.057700634002686	0	0.17513020833333331	-46.875	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0446.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0371.jpg	
+-24.32773494720459	0	0.13606770833333334	39.375	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0447.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0372.jpg	
+-31.098194122314453	0	0.630859375	42.5	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0448.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0373.jpg	
+-36.76772999763489	-1	0.0234375	1000000	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0449.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0374.jpg	
+-40.47771096229553	0	8.428385416666668	-76.875	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0450.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0375.jpg	
+-45.76946139335632	0	6.438151041666666	16.25	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0451.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0376.jpg	
+-50.657711029052734	0	46.6640625	51.24999999999999	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0452.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0377.jpg	
+-55.447797536849976	1	98.318359375	-1.25	/home/pi/Desktop/Cansat2021ver/photo_imageguide/ImageGuide-0453.jpg	/home/pi/Desktop/Cansat2021ver/detected/Detected-0378.jpg	
