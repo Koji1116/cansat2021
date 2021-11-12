@@ -59,26 +59,26 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     while 30 < theta <= 180 or -180 < theta < -30:
         if stuck_count >= 16:
             ##方向調整が不可能な場合はスタックしたとみなして、もう一度キャリブレーションからスタート##
-            print("####can't ajdust direction######")
+            other.print_xbee("!!!!can't ajdust direction.   start stuck avoid!!!!!")
             stuck.stuck_avoid()
             magx_off, magy_off = calibration.cal(40, -40, 30)
             stuck_count = -1
         if stuck_count % 7 == 0:
-            print('Increase output')
+            other.print_xbee('Increase output')
             force += 10
         if 30 <= theta <= 60:
-            print(f'theta = {theta}\t---rotation_ver1 (stuck:{stuck_count})')
+            other.print_xbee(f'theta = {theta}\t---rotation_ver1 (stuck:{stuck_count})')
             motor.move(force, -force, t_small)
 
         elif 60 < theta <= 180:
-            print(f'theta = {theta}\t---rotation_ver2 (stuck:{stuck_count})')
+            other.print_xbee(f'theta = {theta}\t---rotation_ver2 (stuck:{stuck_count})')
             motor.move(force, -force, t_big)
 
         elif -60 <= theta <= -30:
-            print(f'theta = {theta}\t---rotation_ver3 (stuck:{stuck_count})')
+            other.print_xbee(f'theta = {theta}\t---rotation_ver3 (stuck:{stuck_count})')
             motor.move(-force, force, t_small)
         elif -180 < theta < -60:
-            print(f'theta = {theta}\t---rotation_ver4 (stuck:{stuck_count})')
+            other.print_xbee(f'theta = {theta}\t---rotation_ver4 (stuck:{stuck_count})')
             motor.move(-force, force, t_big)
         else:
             print(f'theta = {theta}')
@@ -88,7 +88,7 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
         theta = angle_goal(magx_off, magy_off, lon2, lat2)
         print('Calculated angle_relative: {theta}')
         time.sleep(1)
-    print(f'theta = {theta} \t rotation finished!!!')
+    other.print_xbee(f'theta = {theta} \t rotation finished!!!')
 
 
 def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2021ver/log/gpsrunningLog', t_start=0):
@@ -104,7 +104,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
 
         # ------------- calibration -------------#
         # xbee.str_trans('calibration Start')
-        print('##--calibration Start--##\n')
+        other.print_xbee('##--calibration Start--##\n')
         magx_off, magy_off = calibration.cal(40, -40, 30)
         print(f'magx_off: {magx_off}\tmagy_off: {magy_off}\n')
 
@@ -118,10 +118,8 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
             lat_new, lon_new = lat1, lon1
             direction = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
             azimuth, goal_distance = direction["azimuth1"], direction["distance"]
-            print(
+            other.print_xbee(
                 f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
-            xbee.str_trans(
-                f'lat: {lat1}\tlon: {lon1}\tdistance: {direction["distance"]}\ttheta: {theta}')
             other.log(logpath, datetime.datetime.now(), time.time() -
                       t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
@@ -196,7 +194,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
 
         direction = calibration.calculate_direction(lon2, lat2)
         goal_distance = direction['distance']
-        print(f'-----distance: {goal_distance}-----')
+        other.print_xbee(f'-----distance: {goal_distance}-----')
 
 
 if __name__ == '__main__':

@@ -23,7 +23,7 @@ dateTime = datetime.datetime.now()
 
 # variable for timeout
 t_out_release = 5
-t_out_land = 5
+t_out_land = 60
 
 # variable for release
 thd_press_release = 0.3
@@ -325,8 +325,9 @@ if __name__ == '__main__':
             img1 = panorama.composition(path_src_panorama)
             print_xbee(time.time() - t_composition_start)
             # Sending a panoramic photo
-            ##画像伝送するために60秒松
-            print_xbee("!!!!!!!panorama composition finish!!!!! After 1min send!!!")
+            # 画像伝送するために60秒松
+            print_xbee(
+                "!!!!!!!panorama composition finish!!!!! After 1min send!!!")
             time.sleep(60)
             img_string = xbee.image_to_byte(img1)
             xbee.img_trans(img_string)
