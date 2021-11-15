@@ -410,7 +410,7 @@ if __name__ == "__main__":
         print_xbee(f'runTime :\t{time.time() - t_start1}')
 
         composition2('/home/pi/Desktop/cansat2021/dst_panorama1/panoramaShooting')
-
+        print_xbee(f'totalTime :\t{time.time() - t_start1}')
 
 
 
