@@ -105,8 +105,8 @@ if __name__ == '__main__':
     try:
         t_start = time.time()
         print_xbee('#####-----Setup Phase start-----#####')
-        # other.log(log_phase, "1", "Setup phase",
-        #           datetime.datetime.now(), time.time() - t_start)
+        other.log(log_phase, "1", "Setup phase",
+                  datetime.datetime.now(), time.time() - t_start)
         phase = other.phase(log_phase)
         if phase == 1:
             print_xbee(f'Phase:\t{phase}')
@@ -121,8 +121,8 @@ if __name__ == '__main__':
 
     #######--------------------------Release--------------------------#######
     print_xbee('#####-----Release Phase start-----#####')
-    # other.log(log_phase, "2", "Release Phase Started",
-    #           datetime.datetime.now(), time.time() - t_start)
+    other.log(log_phase, "2", "Release Phase Started",
+              datetime.datetime.now(), time.time() - t_start)
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 2:
@@ -155,8 +155,8 @@ if __name__ == '__main__':
     #######--------------------------Landing--------------------------#######
     try:
         print_xbee('#####-----Landing phase start-----#####')
-        # other.log(log_phase, '3', 'Landing phase',
-        #           datetime.datetime.now(), time.time() - t_start)
+        other.log(log_phase, '3', 'Landing phase',
+                  datetime.datetime.now(), time.time() - t_start)
         phase = other.phase(log_phase)
         print_xbee(f'Phase:\t{phase}')
         if phase == 3:
@@ -198,11 +198,11 @@ if __name__ == '__main__':
     phase = other.phase(log_phase)
     print_xbee(f'Phase:\t{phase}')
     if phase == 4:
-        other.log(log_melting, datetime.datetime.now(), time.time() - t_start,
-                  gps.gps_data_read(), "Melting Start")
+        # other.log(log_melting, datetime.datetime.now(), time.time() - t_start,
+        #           gps.gps_data_read(), "Melting Start")
         escape.escape()
-        other.log(log_melting, datetime.datetime.now(), time.time() - t_start,
-                  gps.gps_data_read(), "Melting Finished")
+        # other.log(log_melting, datetime.datetime.now(), time.time() - t_start,
+        #           gps.gps_data_read(), "Melting Finished")
     print_xbee('########-----Melted-----#######\n \n')
     # except Exception as e:
     #     tb = sys.exc_info()[2]
@@ -225,8 +225,8 @@ if __name__ == '__main__':
                 path_paradete, 320, 240, 200, 10, 120, 1)
             print_xbee(
                 f'flug:{flug}\tarea:{area}\tgap:{gap}\tphotoname:{photoname}\n \n')
-            other.log(log_paraavoidance, datetime.datetime.now(), time.time() -
-                      t_start, gps.gps_data_read(), flug, area, gap, photoname)
+            # other.log(log_paraavoidance, datetime.datetime.now(), time.time() -
+            #           t_start, gps.gps_data_read(), flug, area, gap, photoname)
             paraavoidance.parachute_avoidance(flug, gap)
             if flug == -1 or flug == 0:
                 count_paraavo += 1
