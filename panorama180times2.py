@@ -427,7 +427,7 @@ if __name__ == "__main__":
         img2_cut = img2[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
 
-        composition2('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting')
+        composition2('/home/pi/Desktop/cansat2021/dst_panorama1/panoramaShooting')
         print_xbee(f'totalTime :\t{time.time() - t_start1}')
 
 
