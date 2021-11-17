@@ -48,7 +48,7 @@ def ue_jug():
 def stuck_jug(lat1, lon1, lat2, lon2, thd=1.0):
     data_stuck = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
     logpath_stuck = other.filename(
-        '/home/pi/Desktop/cansat2021ver/log/stuck', 'txt')
+        '/home/pi/Desktop/cansat2021/log/stuck', 'txt')
     if data_stuck['distance'] <= thd:
         print_xbee(str(data_stuck['distance']) + '----!!!    stuck   !!!')
         other.log(logpath_stuck, datetime.datetime.now(),  lat2, lon2, 1)
