@@ -1,8 +1,12 @@
-from smbus import SMBus
-import os
-import time
-import pigpio
+from ... import motor
+from ..communication import xbee
 import datetime
+import pigpio
+import time
+import os
+from smbus import SMBus
+
+
 pi = pigpio.pi()
 
 ACC_ADDRESS = 0x19
@@ -101,7 +105,7 @@ def acc_read():
             value[i] = (accData[2*i+1] * 16) + (int(accData[2*i] & 0xF0) / 16)
             value[i] = value[i] if value[i] < 2048 else value[i] - 4096
             value[i] = value[i] * 0.0098 * 1
-            
+
         if value == [0.0, 0.0, 0.0]:
             bmc050_error()
         else:
@@ -117,6 +121,7 @@ def mag_read():
     # --- Read Mag Data --- #
     magData = [0, 0, 0, 0, 0, 0, 0, 0]
     value = [0.0, 0.0, 0.0]
+    error = 0
     while 1:
         for i in range(8):
             try:
@@ -137,7 +142,11 @@ def mag_read():
                     value[i] = value[i] - 32768
 
         if value == [0.0, 0.0, 0.0]:
+            if error >= 5:
+                motor.deceleration(20, 20)
+            error += 1
             bmc050_error()
+
         else:
             break
 
@@ -190,9 +199,9 @@ if __name__ == '__main__':
     # while 1:
     #     print("on")
     #     bmc050_on()
-    #     os.system('i2cdetect -y 1') 
+    #     os.system('i2cdetect -y 1')
     #     time.sleep(3)
     #     print("off")
     #     bmc050_off()
-    #     os.system('i2cdetect -y 1') 
+    #     os.system('i2cdetect -y 1')
     #     time.sleep(3)
