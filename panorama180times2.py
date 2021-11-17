@@ -131,8 +131,8 @@ def check(dict_angle, path_src_panorama):
     srcdir1 = path_src_panorama2 if number_photos2 == 6 and srcdir1 == '' else srcdir
     srcdir1 = path_src_panorama3 if number_photos3 == 6 and srcdir1 == '' else srcdir
     srcdir2 = path_src_panorama4 if number_photos4 == 6 else srcdir
-    srcdir2 = path_src_panorama5 if number_photos5 == 6 and srcdir1 == '' else srcdir
-    srcdir2 = path_src_panorama6 if number_photos6 == 6 and srcdir1 == '' else srcdir
+    srcdir2 = path_src_panorama5 if number_photos5 == 6 and srcdir2 == '' else srcdir
+    srcdir2 = path_src_panorama6 if number_photos6 == 6 and srcdir2 == '' else srcdir
 
     # Get the directory name
     rfd1 = srcdir1.rfind('/')
