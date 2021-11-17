@@ -128,11 +128,11 @@ def check(dict_angle, path_src_panorama):
 
     # Find a directory/file_name with 12 photos
     srcdir1 = path_src_panorama1 if number_photos1 == 6 else srcdir
-    srcdir1 = path_src_panorama2 if number_photos2 == 6 else srcdir
-    srcdir1 = path_src_panorama3 if number_photos3 == 6 else srcdir
+    srcdir1 = path_src_panorama2 if number_photos2 == 6 and srcdir1 == '' else srcdir
+    srcdir1 = path_src_panorama3 if number_photos3 == 6 and srcdir1 == '' else srcdir
     srcdir2 = path_src_panorama4 if number_photos4 == 6 else srcdir
-    srcdir2 = path_src_panorama5 if number_photos5 == 6 else srcdir
-    srcdir2 = path_src_panorama6 if number_photos6 == 6 else srcdir
+    srcdir2 = path_src_panorama5 if number_photos5 == 6 and srcdir1 == '' else srcdir
+    srcdir2 = path_src_panorama6 if number_photos6 == 6 and srcdir1 == '' else srcdir
 
     # Get the directory name
     rfd1 = srcdir1.rfind('/')
@@ -342,7 +342,7 @@ def composition2(srcdir, srcext='.jpg', dstext='.jpg'):
     dstext:パノラマ写真の拡張子
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
-    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama', '*' + dstext))
+    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama2', '*' + dstext))
     print_xbee(f'srcfilecount:\t{srcfilecount}')
     print_xbee(f'resultcount:\t{resultcount}')
 
@@ -411,7 +411,7 @@ if __name__ == "__main__":
         print_xbee(f'runTime :\t{time.time() - t_start1}')
 
         rfd1 = path_dst1.rfind('/')
-        dir_src_panorama1 = path_dst1[:rfd4]
+        dir_src_panorama1 = path_dst1[:rfd1]
         shutil.rmtree(dir_src_panorama1)
         os.mkdir(dir_src_panorama1)
 
