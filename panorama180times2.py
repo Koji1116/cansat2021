@@ -423,13 +423,13 @@ if __name__ == "__main__":
         # os.mkdir(dir_src_panorama1)
         
         img1 = cv2.imread(path_dst1, cv2.IMREAD_COLOR)
-        height1, width1= img.shape[:2]
+        height1, width1= img1.shape[:2]
         img1_cut = img1[0 : height1, width1/10 : width1 * 9 / 10]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img1_cut)
 
 
         img2 = cv2.imread(path_dst2, cv2.IMREAD_COLOR)
-        height2, width2= img.shape[:2]
+        height2, width2= img2.shape[:2]
         img2_cut = img2[0 : height1, width1/10 : width1 * 9 / 10]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
 
