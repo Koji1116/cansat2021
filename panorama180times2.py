@@ -424,7 +424,7 @@ if __name__ == "__main__":
 
         img2 = cv2.imread(path_dst2, cv2.IMREAD_COLOR)
         height2, width2= img2.shape[:2]
-        img2_cut = img2[0 : height1, width1/10 : width1 * 9 / 10]
+        img2_cut = img2[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
 
         composition2('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting')
