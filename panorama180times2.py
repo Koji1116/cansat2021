@@ -404,7 +404,7 @@ if __name__ == "__main__":
         print_xbee(f'runTime1 :\t{runTime1}')
 
         t_start2 = time.time()
-        path_dst2 = composition(srcdir[1])
+        path_dst2 = composition2(srcdir[1])
         runTime2 = time.time() - t_start2
         print_xbee(f'runTime2 :\t{runTime2}')
         print_xbee('\n')
