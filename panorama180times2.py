@@ -138,8 +138,8 @@ def check(dict_angle, path_src_panorama):
     rfd1 = srcdir1.rfind('/')
     srcdir1 = srcdir1[:rfd1]
 
-    rfd2 = srcdir1.rfind('/')
-    srcdir2 = srcdir1[:rfd2]
+    rfd2 = srcdir2.rfind('/')
+    srcdir2 = srcdir2[:rfd2]
 
     if srcdir1 and srcdir2:
         srcdir = [srcdir1, srcdir2]
