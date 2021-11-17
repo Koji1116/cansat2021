@@ -204,6 +204,7 @@ def initialize(path_src_panorama):
     dict_angle = [dict_angle1, dict_angle2, dict_angle3, dict_angle4, dict_angle5, dict_angle6]
     return count_panorama, count_stuck, dict_angle
 
+
 def azimuth(magx_off, magy_off, n=1):
     theta = []
 
@@ -398,18 +399,39 @@ if __name__ == "__main__":
     print_xbee(time.time() - t_start)
     if input('Composition y/n \t') == 'y':
         t_start1 = time.time()  # プログラムの開始時刻
-        composition(srcdir[0])
+        path_dst1 = composition(srcdir[0])
         runTime1 = time.time() - t_start1
         print_xbee(f'runTime1 :\t{runTime1}')
 
         t_start2 = time.time()
-        composition(srcdir[1])
+        path_dst2 = composition(srcdir[1])
         runTime2 = time.time() - t_start2
         print_xbee(f'runTime2 :\t{runTime2}')
         print_xbee('\n')
         print_xbee(f'runTime :\t{time.time() - t_start1}')
 
-        composition2('/home/pi/Desktop/cansat2021/dst_panorama1/panoramaShooting')
+        rfd1 = path_dst1.rfind('/')
+        dir_src_panorama1 = path_dst1[:rfd4]
+        shutil.rmtree(dir_src_panorama1)
+        os.mkdir(dir_src_panorama1)
+
+        # rfd2 = path_dst2.rfind('/')
+        # dir_src_panorama1 = path_dst2[:rfd4]
+        # shutil.rmtree(dir_src_panorama1)
+        # os.mkdir(dir_src_panorama1)
+        
+        img1 = cv2.imread(path_dst1, cv2.IMREAD_COLOR)
+        height1, width1= img.shape[:2]
+        img1_cut = img1[0 : height1, width1/10 : width1 * 9 / 10]
+        cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img1_cut)
+
+
+        img2 = cv2.imread(path_dst2, cv2.IMREAD_COLOR)
+        height2, width2= img.shape[:2]
+        img2_cut = img2[0 : height1, width1/10 : width1 * 9 / 10]
+        cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
+
+        composition2('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting')
         print_xbee(f'totalTime :\t{time.time() - t_start1}')
 
 

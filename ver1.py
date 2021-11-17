@@ -12,6 +12,7 @@ import paradetection
 import land
 import paraavoidance
 import panorama
+import panorama180
 import other
 import escape
 import gpsrunning
@@ -46,8 +47,8 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.9211950
-lon2 = 139.9109732
+lat2 = 35.9212099
+lon2 = 139.910800
 
 th_distance = 6.5
 t_adj_gps = 180
@@ -79,8 +80,11 @@ log_panoramacom = other.filename(
 path_src_panorama1 = '/home/pi/Desktop/cansat2021/src_panorama1/panoramaShooting'
 path_src_panorama2 = '/home/pi/Desktop/cansat2021/src_panorama2/panoramaShooting'
 path_src_panorama3 = '/home/pi/Desktop/cansat2021/src_panorama3/panoramaShooting'
-path_src_panorama = (path_src_panorama1,
-                     path_src_panorama2, path_src_panorama3)
+path_src_panorama4 = '/home/pi/Desktop/cansat2021/src_panorama4/panoramaShooting'
+path_src_panorama5 = '/home/pi/Desktop/cansat2021/src_panorama5/panoramaShooting'
+path_src_panorama6 = '/home/pi/Desktop/cansat2021/src_panorama6/panoramaShooting'
+path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
+                     path_src_panorama4, path_src_panorama5, path_src_panorama6)
 path_paradete = '/home/pi/Desktop/cansat2021/photo_paradete/paradete'
 
 
@@ -250,7 +254,7 @@ if __name__ == '__main__':
         time.sleep(3)
         mag_mat = calibration.magdata_matrix(
             strength_l_cal, strength_r_cal, number_data)
-        path_src_panorama = panorama.shooting(
+        path_src_panorama = panorama180.shooting(
             t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
         print_xbee(f'runTime_panorama:\t{time.time() - t_start_panorama}')
     print_xbee('#####-----panorama ended-----##### \n \n')
