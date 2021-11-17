@@ -415,15 +415,6 @@ if __name__ == "__main__":
         print_xbee('\n')
         print_xbee(f'runTime :\t{time.time() - t_start1}')
 
-        rfd1 = path_dst1.rfind('/')
-        dir_src_panorama1 = path_dst1[:rfd1]
-        shutil.rmtree(dir_src_panorama1)
-        os.mkdir(dir_src_panorama1)
-
-        # rfd2 = path_dst2.rfind('/')
-        # dir_src_panorama1 = path_dst2[:rfd4]
-        # shutil.rmtree(dir_src_panorama1)
-        # os.mkdir(dir_src_panorama1)
         
         img1 = cv2.imread(path_dst1 + '', cv2.IMREAD_COLOR)
         height1, width1= img1.shape[:2]
