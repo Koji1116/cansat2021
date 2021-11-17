@@ -65,7 +65,7 @@ def print_xbee(word, com=True):
     """
     print(word)
     if com:
-        xbee.str_trans(word)
+        str_trans(word)
 
 def on():
     pi.write(12, 1)
