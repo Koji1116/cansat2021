@@ -47,8 +47,8 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.9211950
-lon2 = 139.9109732
+lat2 = 35.9212099
+lon2 = 139.910800
 
 th_distance = 6.5
 t_adj_gps = 180
@@ -83,8 +83,8 @@ path_src_panorama3 = '/home/pi/Desktop/cansat2021/src_panorama3/panoramaShooting
 path_src_panorama4 = '/home/pi/Desktop/cansat2021/src_panorama4/panoramaShooting'
 path_src_panorama5 = '/home/pi/Desktop/cansat2021/src_panorama5/panoramaShooting'
 path_src_panorama6 = '/home/pi/Desktop/cansat2021/src_panorama6/panoramaShooting'
-path_src_panorama = (path_src_panorama1,path_src_panorama2, path_src_panorama3,
-                        path_src_panorama4, path_src_panorama5, path_src_panorama6)
+path_src_panorama = (path_src_panorama1, path_src_panorama2, path_src_panorama3,
+                     path_src_panorama4, path_src_panorama5, path_src_panorama6)
 path_paradete = '/home/pi/Desktop/cansat2021/photo_paradete/paradete'
 
 
