@@ -128,11 +128,11 @@ def check(dict_angle, path_src_panorama):
 
     # Find a directory/file_name with 12 photos
     srcdir1 = path_src_panorama1 if number_photos1 == 6 else srcdir
-    srcdir1 = path_src_panorama2 if number_photos2 == 6 and srcdir1 == srcdir else srcdir
-    srcdir1 = path_src_panorama3 if number_photos3 == 6 and srcdir1 == srcdir else srcdir
+    srcdir1 = path_src_panorama2 if number_photos2 == 6 and srcdir1 == srcdir else srcdir1
+    srcdir1 = path_src_panorama3 if number_photos3 == 6 and srcdir1 == srcdir else srcdir1
     srcdir2 = path_src_panorama4 if number_photos4 == 6 else srcdir
-    srcdir2 = path_src_panorama5 if number_photos5 == 6 and srcdir2 == srcdir else srcdir
-    srcdir2 = path_src_panorama6 if number_photos6 == 6 and srcdir2 == srcdir else srcdir
+    srcdir2 = path_src_panorama5 if number_photos5 == 6 and srcdir2 == srcdir else srcdir2
+    srcdir2 = path_src_panorama6 if number_photos6 == 6 and srcdir2 == srcdir else srcdir2
 
     print(f'srcdir1: {srcdir1}')
     print(f'srcdir2: {srcdir2}')
