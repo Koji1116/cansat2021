@@ -4,7 +4,6 @@ import time
 import pigpio
 import datetime
 import motor
-from communication import xbee
 import sys
 import other
 sys.path.append('../')
