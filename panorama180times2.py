@@ -418,7 +418,7 @@ if __name__ == "__main__":
         
         img1 = cv2.imread(path_dst1 + '', cv2.IMREAD_COLOR)
         height1, width1= img1.shape[:2]
-        img1_cut = img1[0 : height1, width1/10 : width1 * 9 / 10]
+        img1_cut = img1[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img1_cut)
 
 
