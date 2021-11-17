@@ -400,13 +400,16 @@ if __name__ == "__main__":
     srcdir = shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
     print_xbee(time.time() - t_start)
     if input('Composition y/n \t') == 'y':
+        shutil.rmtree('/home/pi/Desktop/cansat2021/dst_panorama1')
+        os.mkdir('/home/pi/Desktop/cansat2021/dst_panorama1')
+
         t_start1 = time.time()  # プログラムの開始時刻
         path_dst1 = composition(srcdir[0])
         runTime1 = time.time() - t_start1
         print_xbee(f'runTime1 :\t{runTime1}')
 
         t_start2 = time.time()
-        path_dst2 = composition2(srcdir[1])
+        path_dst2 = composition(srcdir[1])
         runTime2 = time.time() - t_start2
         print_xbee(f'runTime2 :\t{runTime2}')
         print_xbee('\n')
@@ -422,7 +425,7 @@ if __name__ == "__main__":
         # shutil.rmtree(dir_src_panorama1)
         # os.mkdir(dir_src_panorama1)
         
-        img1 = cv2.imread(path_dst1, cv2.IMREAD_COLOR)
+        img1 = cv2.imread(path_dst1 + '', cv2.IMREAD_COLOR)
         height1, width1= img1.shape[:2]
         img1_cut = img1[0 : height1, width1/10 : width1 * 9 / 10]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img1_cut)
