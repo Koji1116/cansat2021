@@ -145,7 +145,7 @@ def mag_read():
                     value[i] = value[i] - 32768
 
         if value == [0.0, 0.0, 0.0]:
-            if error >= 5:
+            if error >= 3:
                 motor.deceleration(20, 20)
             error += 1
             bmc050_error()
