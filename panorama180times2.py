@@ -344,7 +344,7 @@ def composition2(srcdir, srcext='.jpg', dstext='.jpg'):
     dstext:パノラマ写真の拡張子
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
-    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama2', '*' + dstext))
+    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama', '*' + dstext))
     print_xbee(f'srcfilecount:\t{srcfilecount}')
     print_xbee(f'resultcount:\t{resultcount}')
 
@@ -365,7 +365,7 @@ def composition2(srcdir, srcext='.jpg', dstext='.jpg'):
 
     else:
         print_xbee('##--Composition failed--##')
-    path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/dst', 'jpg')
+    path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama/dst', 'jpg')
     cv2.imwrite(path_dst, result)
     print_xbee('###################################################################')
     print_xbee(f'Panorama name:\t{path_dst}')
@@ -400,37 +400,31 @@ if __name__ == "__main__":
     srcdir = shooting(t_rotation_pano, mag_mat, path_src_panorama, path_paradete, log_panoramashooting)
     print_xbee(time.time() - t_start)
     if input('Composition y/n \t') == 'y':
+        shutil.rmtree('/home/pi/Desktop/cansat2021/dst_panorama1')
+        os.mkdir('/home/pi/Desktop/cansat2021/dst_panorama1')
+
         t_start1 = time.time()  # プログラムの開始時刻
         path_dst1 = composition(srcdir[0])
         runTime1 = time.time() - t_start1
         print_xbee(f'runTime1 :\t{runTime1}')
 
         t_start2 = time.time()
-        path_dst2 = composition2(srcdir[1])
+        path_dst2 = composition(srcdir[1])
         runTime2 = time.time() - t_start2
         print_xbee(f'runTime2 :\t{runTime2}')
         print_xbee('\n')
         print_xbee(f'runTime :\t{time.time() - t_start1}')
 
-        rfd1 = path_dst1.rfind('/')
-        dir_src_panorama1 = path_dst1[:rfd1]
-        shutil.rmtree(dir_src_panorama1)
-        os.mkdir(dir_src_panorama1)
-
-        # rfd2 = path_dst2.rfind('/')
-        # dir_src_panorama1 = path_dst2[:rfd4]
-        # shutil.rmtree(dir_src_panorama1)
-        # os.mkdir(dir_src_panorama1)
         
-        img1 = cv2.imread(path_dst1, cv2.IMREAD_COLOR)
+        img1 = cv2.imread(path_dst1 + '', cv2.IMREAD_COLOR)
         height1, width1= img1.shape[:2]
-        img1_cut = img1[0 : height1, width1/10 : width1 * 9 / 10]
+        img1_cut = img1[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img1_cut)
 
 
         img2 = cv2.imread(path_dst2, cv2.IMREAD_COLOR)
         height2, width2= img2.shape[:2]
-        img2_cut = img2[0 : height1, width1/10 : width1 * 9 / 10]
+        img2_cut = img2[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
 
         composition2('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting')
