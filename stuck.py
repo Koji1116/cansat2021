@@ -1,4 +1,5 @@
 import time
+import datetime
 import random
 from other import print_xbee
 
@@ -6,7 +7,8 @@ from sensor.communication import xbee
 import motor
 from sensor.gps import gps_navigate
 from sensor.gps import gps
-from sensor.axis import  bmc050
+from sensor.axis import bmc050
+import other
 
 
 def ue_jug():
@@ -45,11 +47,14 @@ def ue_jug():
 
 def stuck_jug(lat1, lon1, lat2, lon2, thd=1.0):
     data_stuck = gps_navigate.vincenty_inverse(lat1, lon1, lat2, lon2)
+    logpath_stuck = '/home/pi/Desktop/cansat2021ver/log/stuck'
     if data_stuck['distance'] <= thd:
         print_xbee(str(data_stuck['distance']) + '----!!!    stuck   !!!')
+        other.log(logpath_stuck, datetime.datetime.now(),  lat2, lon2, 1)
         return False
     else:
         print_xbee(str(data_stuck['distance']) + '-----not stucked')
+        other.log(logpath_stuck, datetime.datetime.now(),  lat2, lon2, 0)
         return True
 
 
@@ -71,7 +76,6 @@ def stuck_avoid_move(x):
         print_xbee('sutck_avoid_move():1')
         motor.move(40, -40, 1)
         motor.move(100, 100, 5)
-        motor.move(60, 60, 3)
     elif x == 2:
         print_xbee('sutck_avoid_move():2')
         motor.move(-100, 100, 2)
@@ -86,13 +90,11 @@ def stuck_avoid_move(x):
         print_xbee('sutck_avoid_move():4')
         motor.move(40, -40, 1)
         motor.move(-80, -100, 5)
-        motor.move(-60, -60, 3)
 
     elif x == 5:
         print_xbee('sutck_avoid_move():5')
         motor.move(40, -40, 1)
         motor.move(-100, -80, 5)
-        motor.move(-60, -60, 3)
 
     elif x == 6:
         print_xbee('sutck_avoid_move():6')
