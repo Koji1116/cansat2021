@@ -1,10 +1,14 @@
-from ... import motor
-from ..communication import xbee
-import datetime
-import pigpio
-import time
-import os
 from smbus import SMBus
+import os
+import time
+import pigpio
+import datetime
+import motor
+from communication import xbee
+import sys
+import other
+sys.path.append('../')
+# sys.path.append('../communication/')
 
 
 pi = pigpio.pi()
@@ -175,7 +179,7 @@ def bmc050_error():
     """
     6軸センサエラー起きたら使う関数
     """
-    print('------mag error------switch start')
+    other.print_xbee('------mag error------switch start')
     bmc050_off()
     time.sleep(0.1)
     bmc050_setup()
