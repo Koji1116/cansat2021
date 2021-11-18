@@ -315,9 +315,9 @@ if __name__ == '__main__':
 
     #####------------------panorama composition--------------##########
     try:
-        # con = input('continue?y/n\t')
-        # if con == 'n':
-        #     exit()
+        con = input('continue?y/n\t')
+        if con == 'n':
+            exit()
         print_xbee('#####-----panorama composition-----#####')
         other.log(log_phase, '9', 'panorama composition phase start',
                   datetime.datetime.now(), time.time() - t_start)
