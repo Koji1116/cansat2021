@@ -189,7 +189,7 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
                         else:
                             adj = -30
                     print(f'angle ----- {theta}')
-                    strength_l, strength_r = 50 + adj, 50 - adj - adj_r
+                    strength_l, strength_r = 70 + adj, 70 - adj - adj_r
                     motor.motor_continue(strength_l, strength_r)
                     time.sleep(0.04)
             t_stuck_count += 1
