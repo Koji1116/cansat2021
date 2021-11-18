@@ -344,7 +344,7 @@ def composition2(srcdir, srcext='.jpg', dstext='.jpg'):
     dstext:パノラマ写真の拡張子
     """
     srcfilecount = len(glob.glob1(srcdir, '*' + srcext))
-    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama2', '*' + dstext))
+    resultcount = len(glob.glob1('/home/pi/Desktop/cansat2021/dst_panorama', '*' + dstext))
     print_xbee(f'srcfilecount:\t{srcfilecount}')
     print_xbee(f'resultcount:\t{resultcount}')
 
@@ -365,7 +365,7 @@ def composition2(srcdir, srcext='.jpg', dstext='.jpg'):
 
     else:
         print_xbee('##--Composition failed--##')
-    path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/dst', 'jpg')
+    path_dst = other.filename('/home/pi/Desktop/cansat2021/dst_panorama/dst', 'jpg')
     cv2.imwrite(path_dst, result)
     print_xbee('###################################################################')
     print_xbee(f'Panorama name:\t{path_dst}')
@@ -427,7 +427,7 @@ if __name__ == "__main__":
         img2_cut = img2[0 : int(height1), int(width1/8) : int(width1 * 7 / 8)]
         cv2.imwrite(other.filename('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting', 'jpg'), img2_cut)
 
-        composition2('/home/pi/Desktop/cansat2021/dst_panorama1/panoramaShooting')
+        composition2('/home/pi/Desktop/cansat2021/dst_panorama2/panoramaShooting')
         print_xbee(f'totalTime :\t{time.time() - t_start1}')
 
 
