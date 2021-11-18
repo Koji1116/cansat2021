@@ -47,14 +47,14 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.9212099
-lon2 = 139.910800
+lat2 = 35.9207856
+lon2 = 139.9106734
 
 th_distance = 6.5
 t_adj_gps = 180
 
 # variable for photorun
-G_thd = 60
+G_thd = 50
 path_photo_imagerun = f'photostorage/ImageGuidance_{dateTime.month}-{dateTime.day}-{dateTime.hour}-{dateTime.minute}'
 
 # variable for log
@@ -315,9 +315,7 @@ if __name__ == '__main__':
 
     #####------------------panorama composition--------------##########
     try:
-        con = input('continue?y/n\t')
-        if con == 'n':
-            exit()
+
         print_xbee('#####-----panorama composition-----#####')
         other.log(log_phase, '9', 'panorama composition phase start',
                   datetime.datetime.now(), time.time() - t_start)

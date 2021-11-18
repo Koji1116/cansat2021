@@ -59,7 +59,8 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
     while 30 < theta <= 180 or -180 < theta < -30:
         if stuck_count >= 16:
             ##方向調整が不可能な場合はスタックしたとみなして、もう一度キャリブレーションからスタート##
-            other.print_xbee("!!!!can't ajdust direction.   start stuck avoid!!!!!")
+            other.print_xbee(
+                "!!!!can't ajdust direction.   start stuck avoid!!!!!")
             stuck.stuck_avoid()
             magx_off, magy_off = calibration.cal(40, -40, 30)
             stuck_count = -1
@@ -67,18 +68,22 @@ def adjust_direction(theta, magx_off, magy_off, lon2, lat2):
             other.print_xbee('Increase output')
             force += 10
         if 30 <= theta <= 60:
-            other.print_xbee(f'theta = {theta}\t---rotation_ver1 (stuck:{stuck_count})')
+            other.print_xbee(
+                f'theta = {theta}\t---rotation_ver1 (stuck:{stuck_count})')
             motor.move(force, -force, t_small)
 
         elif 60 < theta <= 180:
-            other.print_xbee(f'theta = {theta}\t---rotation_ver2 (stuck:{stuck_count})')
+            other.print_xbee(
+                f'theta = {theta}\t---rotation_ver2 (stuck:{stuck_count})')
             motor.move(force, -force, t_big)
 
         elif -60 <= theta <= -30:
-            other.print_xbee(f'theta = {theta}\t---rotation_ver3 (stuck:{stuck_count})')
+            other.print_xbee(
+                f'theta = {theta}\t---rotation_ver3 (stuck:{stuck_count})')
             motor.move(-force, force, t_small)
         elif -180 < theta < -60:
-            other.print_xbee(f'theta = {theta}\t---rotation_ver4 (stuck:{stuck_count})')
+            other.print_xbee(
+                f'theta = {theta}\t---rotation_ver4 (stuck:{stuck_count})')
             motor.move(-force, force, t_big)
         else:
             print(f'theta = {theta}')
