@@ -125,7 +125,8 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
             azimuth, goal_distance = direction["azimuth1"], direction["distance"]
             other.print_xbee(
                 f'lat: {lat1}\tlon: {lon1}\tdistance: {goal_distance}\tazimuth: {azimuth}\n')
-
+            other.log(logpath, datetime.datetime.now(), time.time() -
+                      t_start, lat1, lon1, direction['distance'], azimuth)
             if t_stuck_count % 8 == 0:
                 ##↑何秒おきにスタックジャッジするかを決める##
                 if stuck.stuck_jug(lat_old, lon_old, lat_new, lon_new, 4):
@@ -192,8 +193,6 @@ def drive(lon2, lat2, thd_distance, t_adj_gps, logpath='/home/pi/Desktop/cansat2
                     motor.motor_continue(strength_l, strength_r)
                     time.sleep(0.04)
             t_stuck_count += 1
-            other.log(logpath, datetime.datetime.now(), time.time() -
-                      t_start, lat1, lon1, direction['distance'], angle_relative)
         motor.deceleration(strength_l, strength_r)
         time.sleep(2)
         lat_new, lon_new = gps.location()
