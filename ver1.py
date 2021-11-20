@@ -23,7 +23,7 @@ import motor
 dateTime = datetime.datetime.now()
 
 # variable for timeout
-t_out_release = 5
+t_out_release = 300
 t_out_land = 60
 
 # variable for release
@@ -47,8 +47,8 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.9210536
-lon2 = 139.9106533
+lat2 = 35.412957
+lon2 = 138.592717
 
 th_distance = 6.5
 t_adj_gps = 180
