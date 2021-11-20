@@ -117,7 +117,7 @@ if __name__ == '__main__':
             setup()
             print_xbee('#####-----Setup Phase ended-----##### \n \n')
             print_xbee('####----wait----#### ')
-            for i in range(10):
+            for i in range(120):
                 print_xbee(i)
                 time.sleep(1)
     except Exception as e:
