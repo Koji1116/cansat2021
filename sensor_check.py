@@ -61,7 +61,14 @@ def acc_data_read():
 
     return value
 
-
+print('---xbee---')
+try:
+    xbee.on()
+    for i in range(10):
+        xbee.str_trans(str(i) + '  : reseive?')
+except:
+    print('error : xbee')
+    
 print('----i2cdetect----')
 os.system('i2cdetect -y 1')
 
