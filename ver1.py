@@ -23,7 +23,7 @@ import motor
 dateTime = datetime.datetime.now()
 
 # variable for timeout
-t_out_release = 300
+t_out_release = 360
 t_out_land = 60
 
 # variable for release
@@ -116,6 +116,10 @@ if __name__ == '__main__':
             print_xbee(f'Phase:\t{phase}')
             setup()
             print_xbee('#####-----Setup Phase ended-----##### \n \n')
+            print_xbee('####----wait----#### ')
+            for i in range(120):
+                print_xbee(i)
+                time.sleep(1)
     except Exception as e:
         tb = sys.exc_info()[2]
         print_xbee("message:{0}".format(e.with_traceback(tb)))
