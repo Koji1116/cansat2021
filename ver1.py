@@ -47,8 +47,8 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.412957
-lon2 = 138.592717
+lat2 = 35.412923
+lon2 = 138.592713
 
 th_distance = 6.5
 t_adj_gps = 180
