@@ -32,13 +32,15 @@ def ue_jug():
             print('上だよ')
             break
         else:
-            xbee.str_trans('Upside-down')
+            xbee.str_trans(f'Upside-down{ue_count}')
             print(f'下だよ{ue_count}')
             print(f'acc: {z}')
             if ue_count > 2:
                 motor.move(30, 30, 0.008, False)
-            elif ue_count > 8:
+            elif ue_count > 4:
                 motor.move(70, 70, 0.008, False)
+            elif ue_count > 6:
+                motor.move(100, 100, 0.05, False)
             else:
                 motor.move(12, 12, 0.2, False)
             time.sleep(2)
@@ -149,6 +151,7 @@ def stuck_avoid():
 
 if __name__ == '__main__':
     motor.setup()
+    ue_jug()
     while 1:
         a = int(input('出力入力しろ'))
         b = float(input('時間入力しろ'))

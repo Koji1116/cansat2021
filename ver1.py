@@ -23,8 +23,8 @@ import motor
 dateTime = datetime.datetime.now()
 
 # variable for timeout
-t_out_release = 360
-t_out_land = 60
+t_out_release = 60
+t_out_land = 30
 
 # variable for release
 thd_press_release = 0.3
@@ -47,8 +47,8 @@ t_rotation_pano = 0.1
 # variable for GPSrun
 # lat2 = 35.918548
 # lon2 = 139.908896
-lat2 = 35.412957
-lon2 = 138.592717
+lat2 = 35.412923
+lon2 = 138.592713
 
 th_distance = 6.5
 t_adj_gps = 180
@@ -117,7 +117,7 @@ if __name__ == '__main__':
             setup()
             print_xbee('#####-----Setup Phase ended-----##### \n \n')
             print_xbee('####----wait----#### ')
-            for i in range(120):
+            for i in range(180):
                 print_xbee(i)
                 time.sleep(1)
     except Exception as e:
@@ -282,8 +282,8 @@ if __name__ == '__main__':
         other.log(log_paraavoidance, datetime.datetime.now(), time.time() - t_start,
                   gps.gps_data_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
-        if flug == -1 or flug == 0:
-            count_paraavo2 += 1
+
+        count_paraavo2 += 1
 
     #######--------------------------gps--------------------------#######
 
