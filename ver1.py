@@ -282,8 +282,8 @@ if __name__ == '__main__':
         other.log(log_paraavoidance, datetime.datetime.now(), time.time() - t_start,
                   gps.gps_data_read(), flug, area, gap, photoname)
         paraavoidance.parachute_avoidance(flug, gap)
-        if flug == -1 or flug == 0:
-            count_paraavo2 += 1
+
+        count_paraavo2 += 1
 
     #######--------------------------gps--------------------------#######
 
