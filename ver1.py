@@ -23,7 +23,7 @@ import motor
 dateTime = datetime.datetime.now()
 
 # variable for timeout
-t_out_release = 60
+t_out_release = 120
 t_out_land = 30
 
 # variable for release
