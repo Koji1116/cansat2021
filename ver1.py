@@ -23,7 +23,7 @@ import motor
 dateTime = datetime.datetime.now()
 
 # variable for timeout
-t_out_release = 10
+t_out_release = 120
 t_out_land = 30
 
 # variable for release
@@ -117,7 +117,7 @@ if __name__ == '__main__':
             setup()
             print_xbee('#####-----Setup Phase ended-----##### \n \n')
             print_xbee('####----wait----#### ')
-            t_wait = 10
+            t_wait = 150
             for i in range(t_wait):
                 print_xbee(t_wait-i)
                 time.sleep(1)
