@@ -1,6 +1,7 @@
 import motor
 import melt
 import stuck
+import time
 
 
 def escape(t_melt=3):
